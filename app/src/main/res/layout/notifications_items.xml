@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_marginHorizontal="@dimen/dp12"
+    android:layout_marginTop="@dimen/dp16">
+    <ImageView
+        android:id="@+id/icon_not"
+        android:layout_width="@dimen/dp66"
+        android:layout_height="@dimen/dp70"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/dp12"
+        android:src="@drawable/notifications_persion_icon"/>
+    <TextView
+        android:layout_toRightOf="@+id/icon_not"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_centerVertical="true"
+        android:text="New Notifications"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:fontFamily="@font/poppins_light"
+        android:layout_alignParentBottom="true"
+        android:text="0 min ago"/>
+
+</RelativeLayout>

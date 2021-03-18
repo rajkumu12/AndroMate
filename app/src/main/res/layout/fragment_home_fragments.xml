@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Ui.Fragments.HomeFragments">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_frag_bg">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:cardBackgroundColor="#B5707070"
+            app:cardCornerRadius="@dimen/dp18"
+            android:layout_marginHorizontal="@dimen/dp40">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dp20"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/dp110"
+                        android:layout_height="@dimen/dp113"
+                        android:gravity="center"
+                        android:background="@drawable/add_macro"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:src="@drawable/plus"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/add_macro"
+                            tools:ignore="SmallSp" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="@dimen/dp110"
+                        android:layout_marginStart="36dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/add_macrowizard"
+                        android:layout_height="@dimen/dp113">
+                        <ImageView
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:src="@drawable/magic_wand"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp10"
+                            android:gravity="center"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/add_macro_nwizard"
+                            tools:ignore="SmallSp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/dp110"
+                        android:layout_height="@dimen/dp113"
+                        android:gravity="center"
+                        android:background="@drawable/export_import"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:src="@drawable/impo_expo"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/export_import"
+                            tools:ignore="SmallSp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="@dimen/dp110"
+                        android:layout_marginStart="36dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/macro_drawer"
+                        android:layout_height="@dimen/dp113">
+                        <ImageView
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:src="@drawable/full_tray"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/macro_drawer"
+                            tools:ignore="SmallSp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/dp110"
+                        android:layout_height="@dimen/dp113"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@drawable/stopwatches">
+                        <ImageView
+                            android:layout_width="33dp"
+                            android:layout_height="33dp"
+                            android:src="@drawable/timer"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:layout_marginTop="@dimen/dp8"
+                            android:text="@string/stopwatches"
+                            tools:ignore="SmallSp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+</FrameLayout>

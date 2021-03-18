@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ui.Activity.NotificationsActivity">
+    <RelativeLayout
+        android:id="@+id/topactionbar_not"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp70"
+        android:background="@drawable/action_bar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/back_icon_id"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_centerVertical="true"
+                android:elevation="8dp"
+                android:layout_marginStart="@dimen/dp12"
+                android:src="@drawable/back_btn"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Notifications"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recy_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topactionbar_not"/>
+
+
+</RelativeLayout>
