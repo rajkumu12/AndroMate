@@ -50,7 +50,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         loadFragment(new HomeFragments());
+        tv_heading.setText("ANDROMATE");
 
+        
         image_hamburger.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(this);
         img_bell.setOnClickListener(this);
@@ -85,6 +87,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         if (id == R.id.navigation_home) {
             fragment = new HomeFragments();
+            tv_heading.setText("ANDROMATE");
         } else if (id == R.id.navigation_macros) {
             fragment = new MacrosFragments();
             tv_heading.setText("Macros");

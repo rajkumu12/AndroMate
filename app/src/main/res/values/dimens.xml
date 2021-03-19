@@ -24,4 +24,9 @@
     <dimen name="dp72">72dp</dimen>
     <dimen name="dp87">87dp</dimen>
     <dimen name="dp33">33dp</dimen>
+    <dimen name="dp30">30dp</dimen>
+    <dimen name="dp26">26dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+    <dimen name="sp15">15sp</dimen>
+    <dimen name="dp14">14dp</dimen>
 </resources>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/application_icon"
+            android:id="@+id/icon_applications"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_applications">
+            <TextView
+                android:id="@+id/tv_applications"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="@string/applications"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_application"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/battery_icon"
+            android:id="@+id/icon_battery"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_battery">
+
+            <TextView
+                android:id="@+id/tv_battery_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/battery_power"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_battery_power"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/phone_icon"
+            android:id="@+id/icon_call"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_call">
+
+            <TextView
+                android:id="@+id/tv_callsms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="Call/SMS"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_callsms"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/connectivity"
+            android:id="@+id/icon_coonectivity"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_coonectivity">
+
+            <TextView
+                android:id="@+id/tv_connectivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="Connectivity"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_connectivity"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/datetime"
+            android:id="@+id/icon_date_time"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_date_time">
+
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="Date/Time"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/device_invention"
+            android:id="@+id/device_invent"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/device_invent">
+
+            <TextView
+                android:id="@+id/tv_device_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="Device Events"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_device_event"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/location"
+            android:id="@+id/icon_location"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_location">
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="Location"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/sensors"
+            android:id="@+id/icon_sensors"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_sensors">
+
+            <TextView
+                android:id="@+id/tv_sensors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="Sensors"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_sensors"
+                android:layout_width="match_parent"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+        <ImageView
+            android:layout_width="@dimen/dp14"
+            android:layout_height="@dimen/dp14"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="@dimen/dp24"
+            android:src="@drawable/userinput"
+            android:id="@+id/icon_userinput"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp20"
+            android:layout_toRightOf="@id/icon_userinput">
+
+            <TextView
+                android:id="@+id/tv_userInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                android:text="User Input"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recy_user_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>

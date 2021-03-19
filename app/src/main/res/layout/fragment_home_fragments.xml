@@ -30,6 +30,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/lly_add_macro"
                         android:layout_width="@dimen/dp110"
                         android:layout_height="@dimen/dp113"
                         android:gravity="center"
