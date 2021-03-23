@@ -1,14 +1,281 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:layout_marginBottom="50dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/dp12"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Ui.Fragments.SettingsFragments">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sp16"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Ignore Battery Optimisations"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_light"
+                android:textSize="@dimen/sp12"
+                android:layout_marginEnd="@dimen/dp26"
+                android:layout_marginTop="@dimen/dp8"
+                android:fontFamily="@font/poppins_regular"
+                android:text="This can help to perform more reliably on Android 6.0+
+if you see issues."/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Dark mode"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/sp12"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Enable or disable dark mode"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:checked="false"
+                    app:track="@drawable/switchselector"
+                    android:layout_alignParentEnd="true"/>
+                
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Enable Root Features"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/sp12"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:layout_toLeftOf="@+id/chbx"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Show features that only work when root access
+is available"/>
+
+               <CheckBox
+                   android:layout_width="@dimen/dp30"
+                   android:layout_height="@dimen/dp24"
+                   android:id="@+id/chbx"
+                   android:checked="true"
+                  android:layout_marginTop="@dimen/dp8"
+                   android:layout_marginEnd="@dimen/dp12"
+                   android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Experimental Features"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/sp12"
+                    android:layout_toLeftOf="@+id/chbx1"
+                    android:layout_marginEnd="@dimen/dp24"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Enable this option to show experimental features
+that are under development."/>
+
+                <CheckBox
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp24"
+                    android:id="@+id/chbx1"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp12"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Add Macro Wizard Mode"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/sp12"
+                    android:layout_toLeftOf="@+id/chbx2"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_marginEnd="@dimen/dp24"
+                    android:text="When adding a new macro from the macro list
+you will be taken through all steps to build a new
+macro."/>
+
+                <CheckBox
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp24"
+                    android:id="@+id/chbx2"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp12"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="What's new"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/sp12"
+                    android:layout_toLeftOf="@+id/chbx3"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp24"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="A dialog will be displayed highlighting the key
+changes."/>
+
+                <CheckBox
+                    android:layout_width="@dimen/dp30"
+                    android:layout_height="@dimen/dp24"
+                    android:id="@+id/chbx3"
+                    android:checked="true"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp12"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginHorizontal="@dimen/dp12"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp16"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Edit Categories"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray_light"
+                android:textSize="@dimen/sp12"
+                android:layout_marginEnd="@dimen/dp26"
+                android:layout_marginTop="@dimen/dp8"
+                android:fontFamily="@font/poppins_regular"
+                android:text="TEdit the list of macro categories"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>    </ScrollView>

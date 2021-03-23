@@ -12,6 +12,9 @@ import android.widget.LinearLayout;
 
 import com.andromate.R;
 import com.andromate.Ui.Activity.AddMacroActivity;
+import com.andromate.Ui.Activity.AddMacroActivity_second;
+import com.andromate.Ui.Activity.ExportInport_Activity;
+import com.andromate.Ui.Activity.StopawatchActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +23,9 @@ import com.andromate.Ui.Activity.AddMacroActivity;
 public class HomeFragments extends Fragment implements View.OnClickListener {
 
     LinearLayout lly_add_macro;
+    LinearLayout lly_stopwatch;
+    LinearLayout lly_export_import;
+    LinearLayout lly_macro_wizard;
 
     public HomeFragments() {
         // Required empty public constructor
@@ -44,9 +50,15 @@ public class HomeFragments extends Fragment implements View.OnClickListener {
         View view=inflater.inflate(R.layout.fragment_home_fragments, container, false);
 
         lly_add_macro=view.findViewById(R.id.lly_add_macro);
+        lly_stopwatch=view.findViewById(R.id.lly_stopwatch);
+        lly_export_import=view.findViewById(R.id.lly_expo_impo);
+        lly_macro_wizard=view.findViewById(R.id.lly_addmacrowizard);
 
 
         lly_add_macro.setOnClickListener(this);
+        lly_stopwatch.setOnClickListener(this);
+        lly_export_import.setOnClickListener(this);
+        lly_macro_wizard.setOnClickListener(this);
         return view;
     }
 
@@ -56,6 +68,12 @@ public class HomeFragments extends Fragment implements View.OnClickListener {
 
         if (id==R.id.lly_add_macro){
             startActivity(new Intent(getContext(), AddMacroActivity.class));
+        }else if (id==R.id.lly_stopwatch){
+            startActivity(new Intent(getContext(), StopawatchActivity.class));
+        }else if (id==R.id.lly_expo_impo){
+            startActivity(new Intent(getContext(), ExportInport_Activity.class));
+        }else if (id==R.id.lly_addmacrowizard){
+            startActivity(new Intent(getContext(), AddMacroActivity_second.class));
         }
     }
 }

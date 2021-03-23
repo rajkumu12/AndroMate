@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            app:cardBackgroundColor="#B5707070"
+            app:cardBackgroundColor="#70707070"
             app:cardCornerRadius="@dimen/dp18"
-            android:layout_marginHorizontal="@dimen/dp40">
+            android:layout_marginHorizontal="@dimen/dp26">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,22 +31,22 @@
 
                     <LinearLayout
                         android:id="@+id/lly_add_macro"
-                        android:layout_width="@dimen/dp110"
-                        android:layout_height="@dimen/dp113"
+                        android:layout_width="@dimen/dp120"
+                        android:layout_height="@dimen/dp130"
                         android:gravity="center"
                         android:background="@drawable/add_macro"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="33dp"
-                            android:layout_height="33dp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:src="@drawable/plus"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10"
+                            android:textSize="@dimen/sp14"
                             android:fontFamily="@font/poppins_regular"
                             android:layout_marginTop="@dimen/dp8"
                             android:text="@string/add_macro"
@@ -55,22 +55,24 @@
 
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="@dimen/dp110"
+                        android:id="@+id/lly_addmacrowizard"
+                        android:layout_width="@dimen/dp120"
+                        android:layout_height="@dimen/dp130"
                         android:layout_marginStart="36dp"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:background="@drawable/add_macrowizard"
-                        android:layout_height="@dimen/dp113">
+                        >
                         <ImageView
-                            android:layout_width="33dp"
-                            android:layout_height="33dp"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/magic_wand"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10"
+                            android:textSize="@dimen/sp14"
                             android:gravity="center"
                             android:fontFamily="@font/poppins_regular"
                             android:layout_marginTop="@dimen/dp8"
@@ -88,43 +90,45 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp110"
-                        android:layout_height="@dimen/dp113"
+                        android:id="@+id/lly_expo_impo"
+                        android:layout_width="@dimen/dp120"
+                        android:layout_height="@dimen/dp130"
                         android:gravity="center"
                         android:background="@drawable/export_import"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="33dp"
-                            android:layout_height="33dp"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/impo_expo"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10"
+                            android:textSize="@dimen/sp14"
                             android:fontFamily="@font/poppins_regular"
                             android:layout_marginTop="@dimen/dp8"
                             android:text="@string/export_import"
                             tools:ignore="SmallSp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="@dimen/dp110"
+                        android:layout_width="@dimen/dp120"
+                        android:layout_height="@dimen/dp130"
                         android:layout_marginStart="36dp"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:background="@drawable/macro_drawer"
-                        android:layout_height="@dimen/dp113">
+                       >
                         <ImageView
-                            android:layout_width="33dp"
-                            android:layout_height="33dp"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/full_tray"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10"
+                            android:textSize="@dimen/sp14"
                             android:fontFamily="@font/poppins_regular"
                             android:layout_marginTop="@dimen/dp8"
                             android:text="@string/macro_drawer"
@@ -140,21 +144,22 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="@dimen/dp110"
-                        android:layout_height="@dimen/dp113"
+                        android:id="@+id/lly_stopwatch"
+                        android:layout_width="@dimen/dp120"
+                        android:layout_height="@dimen/dp130"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:background="@drawable/stopwatches">
                         <ImageView
-                            android:layout_width="33dp"
-                            android:layout_height="33dp"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/timer"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10"
+                            android:textSize="@dimen/sp14"
                             android:fontFamily="@font/poppins_regular"
                             android:layout_marginTop="@dimen/dp8"
                             android:text="@string/stopwatches"

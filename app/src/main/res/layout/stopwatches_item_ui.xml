@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/dp16"
+    android:elevation="4dp"
+    android:layout_margin="@dimen/dp4"
+    app:cardBackgroundColor="@color/golden"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp55"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.35">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp12"
+                android:src="@drawable/playbtn"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.65">
+            <ImageView
+                android:id="@+id/watch"
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp12"
+                android:src="@drawable/watch_icon"/>
+            <TextView
+                android:layout_toRightOf="@+id/watch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vinod Kumar"
+                android:layout_marginStart="@dimen/dp4"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/sp12"/>
+            <TextView
+                android:layout_toLeftOf="@+id/img_cross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/dp20"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="@dimen/sp12"/>
+
+            <ImageView
+                android:id="@+id/img_cross"
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp12"
+                android:src="@drawable/cross"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:gravity="center"
+        android:background="#19000000">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(Not used)"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+</LinearLayout>
+</androidx.cardview.widget.CardView>

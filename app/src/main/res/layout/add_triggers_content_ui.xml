@@ -23,7 +23,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_applications">
             <TextView
                 android:id="@+id/tv_applications"
@@ -58,7 +58,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_battery">
 
             <TextView
@@ -95,7 +95,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_call">
 
             <TextView
@@ -131,7 +131,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_coonectivity">
 
             <TextView
@@ -167,7 +167,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_date_time">
 
             <TextView
@@ -203,7 +203,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/device_invent">
 
             <TextView
@@ -239,7 +239,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_location">
 
             <TextView
@@ -275,7 +275,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_sensors">
 
             <TextView
@@ -311,7 +311,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp20"
+            android:layout_marginHorizontal="@dimen/dp8"
             android:layout_toRightOf="@id/icon_userinput">
 
             <TextView

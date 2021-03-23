@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Androidmade">
-        <activity android:name=".Ui.Activity.Add_triggersActivity"></activity>
+        <activity android:name=".Ui.Activity.AddMacroActivity_second"></activity>
+        <activity android:name=".Ui.Activity.ExportInport_Activity" />
+        <activity android:name=".Ui.Activity.StopawatchActivity" />
+        <activity android:name=".Ui.Activity.AddConstraintsActivity" />
+        <activity android:name=".Ui.Activity.AddAction" />
+        <activity android:name=".Ui.Activity.Add_triggersActivity" />
         <activity android:name=".Ui.Activity.AddMacroActivity" />
         <activity android:name=".Ui.Activity.NotificationsActivity" />
         <activity android:name=".Ui.Activity.HomeActivity" />

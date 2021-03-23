@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/dp40"
     android:background="@drawable/home_frag_bg"
     tools:context=".Ui.Activity.AddMacroActivity">
     <RelativeLayout
@@ -42,12 +43,13 @@
                     android:paddingLeft="@dimen/dp12"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white_light"
-                    android:textSize="@dimen/dp12"
+                    android:textSize="@dimen/dp14"
                     android:layout_marginHorizontal="@dimen/dp18"
                     android:layout_gravity="center_vertical"
                     android:hint="@string/enter_macro_name"
                     android:background="@drawable/ic_rectangle_lm"/>
             </LinearLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -87,12 +89,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginHorizontal="36dp"
+            android:layout_marginHorizontal="26dp"
             app:cardBackgroundColor="#BA707070"
             app:cardCornerRadius="@dimen/dp18">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
                 android:layout_gravity="center"
@@ -100,9 +102,10 @@
 
                 <LinearLayout
                     android:id="@+id/lly_trigger"
-                    android:layout_width="224dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/dp113"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dp26"
                     android:layout_marginTop="@dimen/dp24"
                     android:background="@drawable/trigger_icon"
                     android:orientation="vertical">
@@ -114,8 +117,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="@dimen/dp33"
-                            android:layout_height="@dimen/dp33"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/plus" />
 
                         <TextView
@@ -125,7 +128,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="@string/triggers"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10" />
+                            android:textSize="@dimen/sp14" />
                     </LinearLayout>
 
                     <View
@@ -145,11 +148,11 @@
                             android:gravity="center"
                             android:text="Battery Temperature &lt;= 300"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10" />
+                            android:textSize="@dimen/sp12" />
 
                         <TextView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="@dimen/dp8"
@@ -164,9 +167,11 @@
 
 
                 <LinearLayout
-                    android:layout_width="224dp"
-                    android:layout_height="@dimen/dp113"
+                    android:id="@+id/action_ui"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp120"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dp26"
                     android:layout_marginTop="@dimen/dp24"
                     android:background="@drawable/action_bg"
                     android:orientation="vertical">
@@ -178,8 +183,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="@dimen/dp33"
-                            android:layout_height="@dimen/dp33"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/plus" />
 
                         <TextView
@@ -189,7 +194,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="Action"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10" />
+                            android:textSize="@dimen/sp14" />
                     </LinearLayout>
 
                     <View
@@ -210,7 +215,7 @@
                             android:gravity="center"
                             android:text="No Actions"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10" />
+                            android:textSize="@dimen/sp12" />
 
                         <TextView
                             android:layout_width="24dp"
@@ -230,9 +235,11 @@
 
 
                 <LinearLayout
-                    android:layout_width="224dp"
-                    android:layout_height="@dimen/dp113"
+                    android:id="@+id/lly_constraints"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp120"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/dp26"
                     android:layout_marginTop="@dimen/dp24"
                     android:layout_marginBottom="@dimen/dp24"
                     android:background="@drawable/constraints"
@@ -245,8 +252,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="@dimen/dp33"
-                            android:layout_height="@dimen/dp33"
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
                             android:src="@drawable/plus" />
 
                         <TextView
@@ -256,7 +263,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:text="@string/constraints"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10" />
+                            android:textSize="@dimen/sp14" />
                     </LinearLayout>
 
                     <View
@@ -277,7 +284,7 @@
                             android:gravity="center"
                             android:text="No Constraints"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/sp10" />
+                            android:textSize="@dimen/sp12" />
 
                         <TextView
                             android:layout_width="24dp"
@@ -314,6 +321,7 @@
             app:cardCornerRadius="@dimen/dp30">
 
             <ImageView
+                android:id="@+id/add_macro"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_gravity="center"

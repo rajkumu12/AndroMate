@@ -20,7 +20,7 @@
             android:layout_alignParentBottom="true">
 
                 <ImageView
-                    android:id="@+id/back_icon_addmacros"
+                    android:id="@+id/back_icon_trigger"
                     android:layout_width="@dimen/dp20"
                     android:layout_height="@dimen/dp20"
                     android:layout_centerVertical="true"
@@ -34,15 +34,15 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/sp15"
+                    android:textSize="@dimen/sp16"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Add Trigger"/>
                 <ImageView
 
-                    android:layout_width="@dimen/dp12"
+                    android:layout_width="@dimen/dp18"
                     android:layout_height="@dimen/dp16"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp30"
+                    android:layout_marginRight="@dimen/dp20"
                     android:layout_toLeftOf="@id/search"
                     android:src="@drawable/question_icon"/>
 
@@ -50,11 +50,10 @@
                     android:id="@+id/search"
                     android:layout_marginRight="@dimen/dp30"
                     android:layout_toLeftOf="@id/menu"
-                    android:layout_width="@dimen/dp12"
+                    android:layout_width="@dimen/dp18"
                     android:layout_centerVertical="true"
                     android:layout_height="@dimen/dp16"
                     android:src="@drawable/search_icon"/>
-
                 <ImageView
                     android:id="@+id/menu"
                     android:layout_width="@dimen/dp12"
@@ -63,10 +62,6 @@
                     android:layout_marginRight="@dimen/dp12"
                     android:layout_centerVertical="true"
                     android:src="@drawable/three_dot"/>
-
-
-
-
 
         </RelativeLayout>
     </RelativeLayout>
