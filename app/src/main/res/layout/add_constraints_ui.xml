@@ -7,6 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dp50"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -50,13 +51,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp30">
+
             <ImageView
-                android:layout_width="@dimen/dp14"
-                android:layout_height="@dimen/dp14"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="@dimen/dp24"
-                android:src="@drawable/bell_icon"
                 android:id="@+id/icon_bell"
+                android:layout_width="11dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="@dimen/dp24"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/bell_icon"
                 app:tint="@color/black" />
 
             <RelativeLayout
@@ -175,7 +177,7 @@
                 android:layout_toRightOf="@id/device_state">
 
                 <TextView
-                    android:id="@+id/tv_device_event"
+                    android:id="@+id/tv_device_state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -274,16 +276,16 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="@dimen/dp24"
                 android:src="@drawable/userinput"
-                android:id="@+id/icon_userinput"/>
+                android:id="@+id/icon_speake"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp8"
-                android:layout_toRightOf="@id/icon_userinput">
+                android:layout_toRightOf="@id/icon_speake">
 
                 <TextView
-                    android:id="@+id/tv_userInput"
+                    android:id="@+id/tv_speaker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
@@ -291,7 +293,7 @@
                     android:textSize="@dimen/sp14"
                     android:text="Screen and Speaker"/>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recy_user_input"
+                    android:id="@+id/recy_speaker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false"

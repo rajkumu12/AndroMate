@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.andromate.R;
 import com.andromate.Ui.Adapters.MacroAdapter;
@@ -20,7 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 public class AddMacroActivity_second extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
-    ImageView back_to;
+    RelativeLayout back_to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

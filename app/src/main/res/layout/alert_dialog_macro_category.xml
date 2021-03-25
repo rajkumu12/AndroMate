@@ -25,8 +25,24 @@
         android:layout_centerHorizontal="true"
         android:text="Select Category"/>
 
+
+    <View
+        android:id="@+id/v1"
+        android:layout_below="@+id/tv_ti"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp12"
+        android:background="#7E707070"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_below="@+id/v1">
+
+
    <LinearLayout
-       android:layout_below="@+id/tv_ti"
+
        android:layout_width="match_parent"
        android:layout_marginTop="@dimen/dp24"
        android:layout_marginBottom="@dimen/dp24"
@@ -40,9 +56,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -59,9 +79,11 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -78,9 +100,14 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -97,9 +124,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -116,9 +147,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -135,9 +170,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -154,9 +193,11 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -173,9 +214,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -192,9 +237,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -211,9 +260,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
 
            <TextView
                android:layout_width="wrap_content"
@@ -231,9 +284,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -250,9 +307,13 @@
            android:layout_marginHorizontal="@dimen/dp16"
            android:orientation="horizontal">
 
-           <CheckBox
-               android:layout_width="@dimen/dp26"
-               android:layout_height="@dimen/dp24"/>
+           <androidx.appcompat.widget.AppCompatCheckBox
+               android:layout_width="@dimen/dp24"
+               android:layout_height="@dimen/dp24"
+               android:layout_marginEnd="@dimen/dp12"
+               android:layout_centerVertical="true"
+               android:layout_alignParentEnd="true"
+               android:button="@drawable/checkboxselector"/>
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -263,8 +324,14 @@
                android:text="Uncategorized"/>
        </LinearLayout>
 
-   </LinearLayout>
-
+   </LinearLayout> </ScrollView>
+    <View
+        android:id="@+id/v2"
+        android:layout_above="@+id/lly_oool"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp12"
+        android:background="#7E707070"/>
 
     <LinearLayout
         android:id="@+id/lly_oool"

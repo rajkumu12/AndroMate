@@ -10,13 +10,14 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.andromate.R;
 import com.bumptech.glide.load.data.FileDescriptorLocalUriFetcher;
 
 public class ExportInport_Activity extends AppCompatActivity implements View.OnClickListener{
 
-    ImageView img_back;
+    RelativeLayout img_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

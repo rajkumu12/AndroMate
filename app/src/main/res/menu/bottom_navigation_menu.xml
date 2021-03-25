@@ -5,23 +5,27 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/home"
+        android:enabled="true"
         android:title="Home" />
 
 
     <item
         android:id="@+id/navigation_macros"
         android:icon="@drawable/macros_icon"
+        android:enabled="true"
         android:title="Macros" />
 
 
     <item
         android:id="@+id/navigation_templates"
         android:icon="@drawable/templates_icon"
+        android:enabled="true"
         android:title="Templates" />
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/setting_icon"
+        android:enabled="true"
         android:title="Settings" />
 
 </menu>

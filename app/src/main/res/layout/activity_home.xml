@@ -29,14 +29,19 @@
                 android:layout_height="50dp"
                 android:layout_alignParentBottom="true">
 
-                <ImageView
+                <RelativeLayout
                     android:id="@+id/hamburger_icon"
-                    android:layout_width="@dimen/dp20"
-                    android:layout_height="@dimen/dp20"
-                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/dp45"
+                    android:layout_height="@dimen/dp45"
                     android:elevation="8dp"
-                    android:layout_marginStart="@dimen/dp12"
-                    android:src="@drawable/hamburger_icon"/>
+                    android:layout_marginStart="@dimen/dp12">
+                    <ImageView
+                        android:layout_width="@dimen/dp20"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/hamburger_icon"/>
+                </RelativeLayout>
+
                 <TextView
                     android:id="@+id/tv_heading"
                     android:layout_width="wrap_content"

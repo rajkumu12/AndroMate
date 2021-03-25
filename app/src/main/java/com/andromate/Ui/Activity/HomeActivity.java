@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andromate.R;
@@ -29,11 +30,12 @@ import com.andromate.Ui.Fragments.SettingsFragments;
 import com.andromate.Ui.Fragments.TemplatesFragments;
 import com.andromate.Ui.On;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,BottomNavigationView.OnNavigationItemSelectedListener {
     public static BottomNavigationView navigation;
     DrawerLayout drawerLayout;
-    ImageView image_hamburger;
+    RelativeLayout image_hamburger;
     ImageView img_bell;
     TextView tv_heading;
 
@@ -64,7 +66,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         loadFragment(new HomeFragments());
         tv_heading.setText("ANDROMATE");
-
         
         image_hamburger.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(this);
@@ -86,7 +87,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(HomeActivity.this,NotificationsActivity.class));
         }else if (id==R.id.nvd_invite_friend){
             loadFragment(new InviteFragment());
-            tv_heading.setText("Invite friends");
+            tv_heading.setText("Invite friend");
             drawerLayout.closeDrawer(Gravity.START);
         }
 

@@ -15,13 +15,15 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andromate.R;
 
 public class AddMacroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imageView_back,add_macro;
+    ImageView add_macro;
+    RelativeLayout imageView_back;
     LinearLayout lly_trigger;
     LinearLayout lly_action;
     LinearLayout lly_constraints;

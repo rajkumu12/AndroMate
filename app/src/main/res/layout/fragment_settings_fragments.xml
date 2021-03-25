@@ -72,12 +72,16 @@ if you see issues."/>
                     android:fontFamily="@font/poppins_regular"
                     android:text="Enable or disable dark mode"/>
 
-                <androidx.appcompat.widget.SwitchCompat
-                    android:layout_width="45dp"
-                    android:layout_height="40dp"
+                <ToggleButton
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
                     android:layout_marginEnd="@dimen/dp8"
                     android:checked="false"
-                    app:track="@drawable/switchselector"
+                    android:button="@null"
+                    android:textOff=""
+                    android:textOn=""
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/switchselector"
                     android:layout_alignParentEnd="true"/>
                 
             </RelativeLayout>
@@ -113,14 +117,15 @@ if you see issues."/>
                     android:text="Show features that only work when root access
 is available"/>
 
-               <CheckBox
-                   android:layout_width="@dimen/dp30"
-                   android:layout_height="@dimen/dp24"
-                   android:id="@+id/chbx"
-                   android:checked="true"
-                  android:layout_marginTop="@dimen/dp8"
-                   android:layout_marginEnd="@dimen/dp12"
-                   android:layout_alignParentEnd="true"/>
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/chbx"
+                    android:layout_width="@dimen/dp28"
+                    android:layout_height="@dimen/dp28"
+                    android:layout_marginEnd="@dimen/dp12"
+                    android:layout_centerVertical="true"
+                    android:checked="true"
+                    android:layout_alignParentEnd="true"
+                    android:button="@drawable/checkboxselector"/>
 
             </RelativeLayout>
 
@@ -156,13 +161,14 @@ is available"/>
                     android:text="Enable this option to show experimental features
 that are under development."/>
 
-                <CheckBox
-                    android:layout_width="@dimen/dp30"
-                    android:layout_height="@dimen/dp24"
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/chbx1"
-                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_width="@dimen/dp28"
+                    android:layout_height="@dimen/dp28"
                     android:layout_marginEnd="@dimen/dp12"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:button="@drawable/checkboxselector"/>
 
             </RelativeLayout>
 
@@ -199,13 +205,14 @@ that are under development."/>
 you will be taken through all steps to build a new
 macro."/>
 
-                <CheckBox
-                    android:layout_width="@dimen/dp30"
-                    android:layout_height="@dimen/dp24"
-                    android:id="@+id/chbx2"
-                    android:layout_marginTop="@dimen/dp8"
-                    android:layout_marginEnd="@dimen/dp12"
-                    android:layout_alignParentEnd="true"/>
+                <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/chbx2"
+                android:layout_width="@dimen/dp28"
+                android:layout_height="@dimen/dp28"
+                android:layout_marginEnd="@dimen/dp12"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:button="@drawable/checkboxselector"/>
 
             </RelativeLayout>
 
@@ -241,14 +248,15 @@ macro."/>
                     android:text="A dialog will be displayed highlighting the key
 changes."/>
 
-                <CheckBox
-                    android:layout_width="@dimen/dp30"
-                    android:layout_height="@dimen/dp24"
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/chbx3"
-                    android:checked="true"
-                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_width="@dimen/dp28"
+                    android:layout_height="@dimen/dp28"
                     android:layout_marginEnd="@dimen/dp12"
-                    android:layout_alignParentEnd="true"/>
+                    android:layout_centerVertical="true"
+                    android:checked="true"
+                    android:layout_alignParentEnd="true"
+                    android:button="@drawable/checkboxselector"/>
 
             </RelativeLayout>
 

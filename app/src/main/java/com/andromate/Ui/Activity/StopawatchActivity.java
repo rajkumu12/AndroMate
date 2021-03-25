@@ -31,7 +31,7 @@ import java.util.List;
 
 public class StopawatchActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView back_stopwatch;
+    RelativeLayout back_stopwatch;
     ImageView alert_open;
     List<StopWatches_Model>stopwatcharraylist;
     RecyclerView recy_stopwatch;

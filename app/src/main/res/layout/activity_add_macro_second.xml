@@ -17,16 +17,20 @@
             android:layout_height="50dp"
             android:orientation="horizontal"
             android:layout_alignParentBottom="true">
-
-            <ImageView
+            <RelativeLayout
+                android:layout_width="@dimen/dp45"
+                android:layout_height="@dimen/dp45"
                 android:id="@+id/back_create_macro"
-                android:layout_width="@dimen/dp20"
-                android:layout_height="@dimen/dp20"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:elevation="8dp"
-                android:layout_marginStart="@dimen/dp12"
-                android:src="@drawable/back_btn"/>
+                >
+                <ImageView
+                    android:layout_width="@dimen/dp20"
+                    android:layout_height="@dimen/dp20"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:elevation="8dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/back_btn"/>
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"

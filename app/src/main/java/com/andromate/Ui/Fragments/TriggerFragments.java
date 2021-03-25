@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andromate.CustomColors;
@@ -55,6 +56,8 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
     ImageView img_application, img_battery,img_call,img_connectivity,img_date_and_time,
             img_deviceevent,img_location,img_sensors,img_userinpot;
 
+    RelativeLayout rly_application, rly_battery,rly_call,rly_connectivity,rly_date_and_time,
+            rly_deviceevent,rly_location,rly_sensors,rly_userinpot;
     public TriggerFragments() {
         // Required empty public constructor
     }
@@ -151,24 +154,24 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
 
     private void load_connectivity() {
         connectivitylist=new ArrayList<>();
-        connectivitylist.add(new TriggerItemModel("Android Wear",R.drawable.call_active));
-        connectivitylist.add(new TriggerItemModel("Bluetooth Event",R.drawable.call_ended));
+        connectivitylist.add(new TriggerItemModel("Android Wear",R.drawable.android_wear));
+        connectivitylist.add(new TriggerItemModel("Bluetooth Event",R.drawable.bluetooth_event));
         connectivitylist.add(new TriggerItemModel("Data Connectivity\n" +
-                "Change",R.drawable.call_incoming));
+                "Change",R.drawable.data_connectivity_change));
         connectivitylist.add(new TriggerItemModel("Headphones Insert/\n" +
-                "Remove",R.drawable.call_missed));
+                "Remove",R.drawable.headphones_inserts_remove));
         connectivitylist.add(new TriggerItemModel("Hotspot Enabled/\n" +
-                "Disabled",R.drawable.call_outgoing));
-        connectivitylist.add(new TriggerItemModel("IP Address Change",R.drawable.dial_number));
-        connectivitylist.add(new TriggerItemModel("Mobile Service Status",R.drawable.sms_received));
+                "Disabled",R.drawable.hotspot_enable));
+        connectivitylist.add(new TriggerItemModel("IP Address Change",R.drawable.iip_address));
+        connectivitylist.add(new TriggerItemModel("Mobile Service Status",R.drawable.mobile_service_enable));
         connectivitylist.add(new TriggerItemModel("Roaming Started/\n" +
-                "Stopped",R.drawable.call_active));
+                "Stopped",R.drawable.roaming_enamble));
         connectivitylist.add(new TriggerItemModel("USB Device Connect/\n" +
-                "Disconnect",R.drawable.call_ended));
-        connectivitylist.add(new TriggerItemModel("VPN State Change",R.drawable.call_incoming));
-        connectivitylist.add(new TriggerItemModel("Webhook (Url)",R.drawable.call_missed));
-        connectivitylist.add(new TriggerItemModel("Wifi SSID Transition",R.drawable.call_outgoing));
-        connectivitylist.add(new TriggerItemModel("Wifi State Change",R.drawable.dial_number));
+                "Disconnect",R.drawable.usb_device_connected));
+        connectivitylist.add(new TriggerItemModel("VPN State Change",R.drawable.vpn_state_change));
+        connectivitylist.add(new TriggerItemModel("Webhook (Url)",R.drawable.webhook));
+        connectivitylist.add(new TriggerItemModel("Wifi SSID Transition",R.drawable.wifi_sssid));
+        connectivitylist.add(new TriggerItemModel("Wifi State Change",R.drawable.wifi_state_change));
 
 
 
@@ -183,11 +186,12 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
 
     private void load_dateandtime() {
         date_and_timelist=new ArrayList<>();
-        date_and_timelist.add(new TriggerItemModel("Calendar Event",R.drawable.call_active));
-        date_and_timelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.call_ended));
-        date_and_timelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.call_incoming));
-        date_and_timelist.add(new TriggerItemModel("Regular Interval",R.drawable.call_missed));
-        date_and_timelist.add(new TriggerItemModel("Stopwatch",R.drawable.call_outgoing));
+        date_and_timelist.add(new TriggerItemModel("Calendar Event",R.drawable.calendar_event));
+        date_and_timelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.day_month));
+        date_and_timelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.day_timer));
+        date_and_timelist.add(new TriggerItemModel("Regular Interval",R.drawable.regular_interval));
+        date_and_timelist.add(new TriggerItemModel("Stopwatch",R.drawable.stopwatches_icon));
+
 
 
 
@@ -204,28 +208,28 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
     private void load_device_event() {
         deviceevent_list=new ArrayList<>();
         deviceevent_list.add(new TriggerItemModel("Airplane Mode\n" +
-                "Changed",R.drawable.call_active));
-        deviceevent_list.add(new TriggerItemModel("Auto Rotate Changed",R.drawable.call_ended));
-        deviceevent_list.add(new TriggerItemModel("Autosync Changed",R.drawable.call_incoming));
-        deviceevent_list.add(new TriggerItemModel("Clipboard Changed",R.drawable.call_active));
-        deviceevent_list.add(new TriggerItemModel("Daydream On/Off",R.drawable.call_ended));
-        deviceevent_list.add(new TriggerItemModel("Device Bootr",R.drawable.call_incoming));
+                "Changed",R.drawable.airplane));
+        deviceevent_list.add(new TriggerItemModel("Auto Rotate Changed",R.drawable.auto_rotate));
+        deviceevent_list.add(new TriggerItemModel("Autosync Changed",R.drawable.async_changed));
+        deviceevent_list.add(new TriggerItemModel("Clipboard Changed",R.drawable.clipboard_change));
+        deviceevent_list.add(new TriggerItemModel("Daydream On/Off",R.drawable.daydrem));
+        deviceevent_list.add(new TriggerItemModel("Device Boot",R.drawable.device_boot));
         deviceevent_list.add(new TriggerItemModel("Device Docked/\n" +
-                "Undocked",R.drawable.call_active));
-        deviceevent_list.add(new TriggerItemModel("Failed Login Attempt",R.drawable.call_ended));
+                "Undocked",R.drawable.device_docked));
+        deviceevent_list.add(new TriggerItemModel("Failed Login Attempt",R.drawable.failed_to_login));
         deviceevent_list.add(new TriggerItemModel("GPS Enabled/\n" +
-                "Disabled",R.drawable.call_incoming));
-        deviceevent_list.add(new TriggerItemModel("Intent Received",R.drawable.call_active));
-        deviceevent_list.add(new TriggerItemModel("Logcat Message",R.drawable.call_ended));
-        deviceevent_list.add(new TriggerItemModel("Music/Sound Playing",R.drawable.call_incoming));
-        deviceevent_list.add(new TriggerItemModel("Notification",R.drawable.call_active));
+                "Disabled",R.drawable.location_gps));
+        deviceevent_list.add(new TriggerItemModel("Intent Received",R.drawable.intent_received));
+        deviceevent_list.add(new TriggerItemModel("Logcat Message",R.drawable.logcat_manager));
+        deviceevent_list.add(new TriggerItemModel("Music/Sound Playing",R.drawable.music));
+        deviceevent_list.add(new TriggerItemModel("Notification",R.drawable.bell_icon));
         deviceevent_list.add(new TriggerItemModel("Priority Mode/Do Not\n" +
-                "Disturb",R.drawable.call_ended));
-        deviceevent_list.add(new TriggerItemModel("SIM Card Change",R.drawable.call_incoming));
-        deviceevent_list.add(new TriggerItemModel("Screen On/Off",R.drawable.call_active));
-        deviceevent_list.add(new TriggerItemModel("Screen Unlocked",R.drawable.call_ended));
+                "Disturb",R.drawable.donot_disturb));
+        deviceevent_list.add(new TriggerItemModel("SIM Card Change",R.drawable.simcard_change));
+        deviceevent_list.add(new TriggerItemModel("Screen On/Off",R.drawable.screen_on_0ff));
+        deviceevent_list.add(new TriggerItemModel("Screen Unlocked",R.drawable.screen_unlock));
         deviceevent_list.add(new TriggerItemModel("Silent Mode Enabled/\n" +
-                "DIsabled",R.drawable.call_incoming));
+                "DIsabled",R.drawable.silent_mode));
 
 
 
@@ -243,11 +247,11 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
 
     private void load_location_list() {
         locationlist=new ArrayList<>();
-        locationlist.add(new TriggerItemModel("Cell Tower Change",R.drawable.call_active));
-        locationlist.add(new TriggerItemModel("Geofence Trigger",R.drawable.call_ended));
-        locationlist.add(new TriggerItemModel("Location Trigger",R.drawable.call_incoming));
-        locationlist.add(new TriggerItemModel("Sunset/Sunrise",R.drawable.call_active));
-        locationlist.add(new TriggerItemModel("Weather",R.drawable.call_ended));
+        locationlist.add(new TriggerItemModel("Cell Tower Change",R.drawable.cell_tower_change));
+        locationlist.add(new TriggerItemModel("Geofence Trigger",R.drawable.cell_tower_change));
+        locationlist.add(new TriggerItemModel("Location Trigger",R.drawable.locations));
+        locationlist.add(new TriggerItemModel("Sunset/Sunrise",R.drawable.sunrise));
+        locationlist.add(new TriggerItemModel("Weather",R.drawable.weather));
 
         TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(getContext(),locationlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(getContext(),2);
@@ -261,12 +265,12 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
 
     private void load_sensor_list() {
         sensorslist=new ArrayList<>();
-        sensorslist.add(new TriggerItemModel("Activity Recognition",R.drawable.call_active));
-        sensorslist.add(new TriggerItemModel("Flip Device",R.drawable.call_ended));
-        sensorslist.add(new TriggerItemModel("Light Sensor",R.drawable.call_incoming));
-        sensorslist.add(new TriggerItemModel("Proximity Sensor",R.drawable.call_active));
-        sensorslist.add(new TriggerItemModel("Screen Orientation",R.drawable.call_ended));
-        sensorslist.add(new TriggerItemModel("Shake Device",R.drawable.call_ended));
+        sensorslist.add(new TriggerItemModel("Activity Recognition",R.drawable.activity_recognition));
+        sensorslist.add(new TriggerItemModel("Flip Device",R.drawable.flip_devices));
+        sensorslist.add(new TriggerItemModel("Light Sensor",R.drawable.light_sensor));
+        sensorslist.add(new TriggerItemModel("Proximity Sensor",R.drawable.proximity));
+        sensorslist.add(new TriggerItemModel("Screen Orientation",R.drawable.screen_orientation));
+        sensorslist.add(new TriggerItemModel("Shake Device",R.drawable.shake_device));
 
         TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(getContext(),sensorslist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(getContext(),2);
@@ -279,23 +283,23 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
 
     private void load_userlist() {
         userinpot_list=new ArrayList<>();
-        userinpot_list.add(new TriggerItemModel("Fingerprint Gesture",R.drawable.call_active));
-        userinpot_list.add(new TriggerItemModel("Floating Button",R.drawable.call_active));
+        userinpot_list.add(new TriggerItemModel("Fingerprint Gesture",R.drawable.finger_print_gesture));
+        userinpot_list.add(new TriggerItemModel("Floating Button",R.drawable.floating_buttons));
         userinpot_list.add(new TriggerItemModel("Home Button Long\n" +
-                "Press",R.drawable.call_active));
+                "Press",R.drawable.home_buttom_long));
         userinpot_list.add(new TriggerItemModel("Media Button\n" +
-                "Pressed",R.drawable.call_active));
-        userinpot_list.add(new TriggerItemModel("Media Button V2",R.drawable.call_active));
-        userinpot_list.add(new TriggerItemModel("Shortcut Launched",R.drawable.call_active));
-        userinpot_list.add(new TriggerItemModel("Swipe Screen",R.drawable.call_active));
+                "Pressed",R.drawable.media_button_pressed));
+        userinpot_list.add(new TriggerItemModel("Media Button V2",R.drawable.mdia_pressed_v_t));
+        userinpot_list.add(new TriggerItemModel("Shortcut Launched",R.drawable.shortcut_launched));
+        userinpot_list.add(new TriggerItemModel("Swipe Screen",R.drawable.swipe_screen));
         userinpot_list.add(new TriggerItemModel("Volume Button Long \n" +
-                "Press",R.drawable.call_active));
+                "Press",R.drawable.volume_white));
         userinpot_list.add(new TriggerItemModel("Volume Button\n" +
-                "Pressed",R.drawable.call_active));
-        userinpot_list.add(new TriggerItemModel("Widget Button",R.drawable.call_active));
+                "Pressed",R.drawable.volume_white));
+        userinpot_list.add(new TriggerItemModel("Widget Button",R.drawable.widgets));
 
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(getContext(),sensorslist);
+        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(getContext(),userinpot_list);
         GridLayoutManager layoutManager2 = new GridLayoutManager(getContext(),2);
         recyclerView_userinpot_list.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -328,7 +332,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
         textView_userinpot=view.findViewById(R.id.tv_userInput);
 
 
-        img_application=view.findViewById(R.id.icon_applications);
+       img_application=view.findViewById(R.id.icon_applications);
         img_battery=view.findViewById(R.id.icon_battery);
         img_call=view.findViewById(R.id.icon_call);
         img_connectivity=view.findViewById(R.id.icon_coonectivity);
@@ -338,7 +342,15 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
         img_sensors=view.findViewById(R.id.icon_sensors);
         img_userinpot=view.findViewById(R.id.icon_userinput);
 
-
+        rly_application=view.findViewById(R.id.rly_applicationd);
+        rly_battery=view.findViewById(R.id.rly_battery);
+        rly_call=view.findViewById(R.id.rly_call);
+        rly_connectivity=view.findViewById(R.id.rly_coonectivity);
+        rly_date_and_time=view.findViewById(R.id.rly_date_time);
+        rly_deviceevent=view.findViewById(R.id.rly_device_invent);
+        rly_location=view.findViewById(R.id.rly_location);
+        rly_sensors=view.findViewById(R.id.rly_sensors);
+        rly_userinpot=view.findViewById(R.id.rly_userinput);
 
 
         textView_application.setOnClickListener(this);
@@ -351,7 +363,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
         textView_sensors.setOnClickListener(this);
         textView_userinpot.setOnClickListener(this);
 
-        img_application.setOnClickListener(this);
+      /*  img_application.setOnClickListener(this);
         img_battery.setOnClickListener(this);
         img_call.setOnClickListener(this);
         img_connectivity.setOnClickListener(this);
@@ -360,8 +372,16 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
         img_location.setOnClickListener(this);
         img_sensors.setOnClickListener(this);
         img_userinpot.setOnClickListener(this);
-
-
+*/
+        rly_application.setOnClickListener(this);
+        rly_battery.setOnClickListener(this);
+        rly_call.setOnClickListener(this);
+        rly_connectivity.setOnClickListener(this);
+        rly_date_and_time.setOnClickListener(this);
+        rly_deviceevent.setOnClickListener(this);
+        rly_location.setOnClickListener(this);
+        rly_sensors.setOnClickListener(this);
+        rly_userinpot.setOnClickListener(this);
 
     }
 
@@ -372,7 +392,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_application.setVisibility(View.GONE);
             recyclerView_application.setVisibility(View.VISIBLE);
             img_application.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_applications){
+        }else if (id==R.id.rly_applicationd){
             textView_application.setVisibility(View.VISIBLE);
             recyclerView_application.setVisibility(View.GONE);
             img_application.setColorFilter(CustomColors.black);
@@ -380,7 +400,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_battery.setVisibility(View.GONE);
             recyclerView_battery.setVisibility(View.VISIBLE);
             img_battery.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_battery){
+        }else if (id==R.id.rly_battery){
             textView_battery.setVisibility(View.VISIBLE);
             recyclerView_battery.setVisibility(View.GONE);
             img_battery.setColorFilter(CustomColors.black);
@@ -388,7 +408,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_call.setVisibility(View.GONE);
             recyclerView_call_list.setVisibility(View.VISIBLE);
             img_call.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_call){
+        }else if (id==R.id.rly_call){
             textView_call.setVisibility(View.VISIBLE);
             recyclerView_call_list.setVisibility(View.GONE);
             img_call.setColorFilter(CustomColors.black);
@@ -396,7 +416,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_connectivity.setVisibility(View.GONE);
             recyclerView_connectivitylist.setVisibility(View.VISIBLE);
             img_connectivity.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_coonectivity){
+        }else if (id==R.id.rly_coonectivity){
             textView_connectivity.setVisibility(View.VISIBLE);
             recyclerView_connectivitylist.setVisibility(View.GONE);
             img_connectivity.setColorFilter(CustomColors.black);
@@ -404,7 +424,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_date_and_time.setVisibility(View.GONE);
             recyclerView_date_and_timelist.setVisibility(View.VISIBLE);
             img_date_and_time.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_date_time){
+        }else if (id==R.id.rly_date_time){
             textView_date_and_time.setVisibility(View.VISIBLE);
             recyclerView_date_and_timelist.setVisibility(View.GONE);
             img_date_and_time.setColorFilter(CustomColors.black);
@@ -412,7 +432,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_deviceevent.setVisibility(View.GONE);
             recyclerView_deviceevent_list.setVisibility(View.VISIBLE);
             img_deviceevent.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.device_invent){
+        }else if (id==R.id.rly_device_invent){
             textView_deviceevent.setVisibility(View.VISIBLE);
             recyclerView_deviceevent_list.setVisibility(View.GONE);
             img_deviceevent.setColorFilter(CustomColors.black);
@@ -420,7 +440,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_location.setVisibility(View.GONE);
             recyclerView_locationlist.setVisibility(View.VISIBLE);
             img_location.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_location){
+        }else if (id==R.id.rly_location){
             textView_location.setVisibility(View.VISIBLE);
             recyclerView_locationlist.setVisibility(View.GONE);
             img_location.setColorFilter(CustomColors.black);
@@ -428,7 +448,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_sensors.setVisibility(View.GONE);
             recyclerView_sensorslist.setVisibility(View.VISIBLE);
             img_sensors.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_sensors){
+        }else if (id==R.id.rly_sensors){
             textView_sensors.setVisibility(View.VISIBLE);
             recyclerView_sensorslist.setVisibility(View.GONE);
             img_sensors.setColorFilter(CustomColors.black);
@@ -436,7 +456,7 @@ public class TriggerFragments extends Fragment implements View.OnClickListener{
             textView_userinpot.setVisibility(View.GONE);
             recyclerView_userinpot_list.setVisibility(View.VISIBLE);
             img_userinpot.setColorFilter(CustomColors.golden);
-        }else if (id==R.id.icon_userinput){
+        }else if (id==R.id.rly_userinput){
             textView_userinpot.setVisibility(View.VISIBLE);
             recyclerView_userinpot_list.setVisibility(View.GONE);
             img_userinpot.setColorFilter(CustomColors.black);

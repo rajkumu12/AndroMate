@@ -7,11 +7,11 @@
     <string name="home">Home</string>
     <string name="help">Help</string>
     <string name="blog">Blog</string>
-    <string name="invite_friends">Invite Friends</string>
+    <string name="invite_friends">Invite Friend</string>
     <string name="rate">Rate</string>
     <string name="privacy_policy">Privacy policy</string>
-    <string name="add_macro">Add macro</string>
-    <string name="add_macro_nwizard">add macro\nwizard</string>
+    <string name="add_macro">Add Macro</string>
+    <string name="add_macro_nwizard">Add Macro\nWizard</string>
     <string name="export_import">Export/Import</string>
     <string name="macro_drawer">Macro Drawer</string>
     <string name="mobile_number">Mobile Number</string>

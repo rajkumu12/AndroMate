@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.andromate.CustomColors;
 import com.andromate.Model.NotificationsModel;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
@@ -38,6 +39,7 @@ public class TriggerItemsAdapters extends RecyclerView.Adapter<TriggerItemsAdapt
             TriggerItemModel triggerItemModel=arrayList.get(position);
 
             holder.imageView.setImageResource(triggerItemModel.getImage());
+            holder.imageView.setColorFilter(CustomColors.white);
             holder.tv_title.setText(triggerItemModel.getTitle());
 
 

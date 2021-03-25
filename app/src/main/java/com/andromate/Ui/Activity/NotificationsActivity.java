@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.andromate.Model.NotificationsModel;
 import com.andromate.R;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 public class NotificationsActivity extends AppCompatActivity {
     RecyclerView recyclerView_notifications;
     private ArrayList<NotificationsModel> notificationslist;
-    ImageView img_back;
+    RelativeLayout img_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
