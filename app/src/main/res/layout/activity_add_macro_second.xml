@@ -20,6 +20,8 @@
             <RelativeLayout
                 android:layout_width="@dimen/dp45"
                 android:layout_height="@dimen/dp45"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:id="@+id/back_create_macro"
                 >
                 <ImageView

@@ -58,6 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp16"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/dp12"
@@ -65,6 +67,8 @@
             android:text="CANCEL"/>
         <TextView
             android:id="@+id/tv_ok"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sp16"

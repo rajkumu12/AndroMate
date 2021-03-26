@@ -12,20 +12,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/application_icon"
-            android:id="@+id/icon_applications"/>
+        android:layout_marginTop="@dimen/dp24">
+        <RelativeLayout
+            android:id="@+id/rly_applicationd"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/application_icon"
+                android:id="@+id/icon_applications"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_applications">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_applicationd">
             <TextView
                 android:id="@+id/tv_applic"
                 android:layout_width="wrap_content"
@@ -47,20 +59,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/camera"
-            android:id="@+id/Camera_Photo"/>
+        android:layout_marginTop="@dimen/dp20">
+
+        <RelativeLayout
+            android:id="@+id/rly_Camera_Photo"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:layout_centerInParent="true"
+                android:src="@drawable/camera"
+                android:id="@+id/Camera_Photo"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/Camera_Photo">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_Camera_Photo">
             <TextView
                 android:id="@+id/tv_camera_photo"
                 android:layout_width="wrap_content"
@@ -82,20 +108,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/loopicon"
-            android:id="@+id/icon_loop"/>
+        android:layout_marginTop="@dimen/dp20">
+        <RelativeLayout
+            android:id="@+id/rly_loop"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp24"
+                android:layout_height="@dimen/dp24"
+                android:src="@drawable/loopicon"
+                android:id="@+id/icon_loop"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_loop">
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rly_loop">
             <TextView
                 android:id="@+id/tv_loop_icons"
                 android:layout_width="wrap_content"
@@ -117,20 +155,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/connectivity"
-            android:id="@+id/icon_connectivity"/>
+        android:layout_marginTop="@dimen/dp20">
+        <RelativeLayout
+            android:id="@+id/rly_connectivity"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp18"
+                android:layout_height="@dimen/dp18"
+                android:src="@drawable/connectivity"
+                android:id="@+id/icon_connectivity"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_connectivity">
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rly_connectivity">
             <TextView
                 android:id="@+id/tv_connectivity"
                 android:layout_width="wrap_content"
@@ -152,20 +202,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/datetime"
-            android:id="@+id/icon_date_time"/>
+        android:layout_marginTop="@dimen/dp20">
+        <RelativeLayout
+            android:id="@+id/rly_date_time"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/datetime"
+                android:id="@+id/icon_date_time"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_date_time">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_date_time">
             <TextView
                 android:id="@+id/tv_date_time"
                 android:layout_width="wrap_content"
@@ -187,20 +249,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/device_action"
-            android:id="@+id/icon_device_action"/>
+        android:layout_marginTop="@dimen/dp20">
+
+        <RelativeLayout
+            android:id="@+id/rly_device_action"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/device_action"
+                android:id="@+id/icon_device_action"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_device_action">
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rly_device_action">
             <TextView
                 android:id="@+id/tv_device_action"
                 android:layout_width="wrap_content"
@@ -221,21 +296,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/setting_icon"
-            android:id="@+id/icon_device_setting"
-            app:tint="@color/black" />
+        android:layout_marginTop="@dimen/dp20">
+
+        <RelativeLayout
+            android:id="@+id/rly_device_setting"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:src="@drawable/setting_icon"
+                android:id="@+id/icon_device_setting"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_device_setting">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_device_setting">
             <TextView
                 android:id="@+id/tv_device_setting"
                 android:layout_width="wrap_content"
@@ -256,20 +344,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/files_icon"
-            android:id="@+id/icon_files"/>
+        android:layout_marginTop="@dimen/dp20">
+
+        <RelativeLayout
+            android:id="@+id/rly_files"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:src="@drawable/files_icon"
+                android:id="@+id/icon_files"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_files">
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rly_files">
             <TextView
                 android:id="@+id/tv_files"
                 android:layout_width="wrap_content"
@@ -293,20 +394,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/location"
-            android:id="@+id/icon_location"/>
+        android:layout_marginTop="@dimen/dp20">
+        <RelativeLayout
+            android:id="@+id/rly_location"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/location"
+                android:id="@+id/icon_location"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_location">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_location">
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
@@ -328,20 +441,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/loggingt"
-            android:id="@+id/icon_logging"/>
+        android:layout_marginTop="@dimen/dp20">
+
+        <RelativeLayout
+            android:id="@+id/rly_logging"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/loggingt"
+                android:id="@+id/icon_logging"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_logging">
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/rly_logging">
             <TextView
                 android:id="@+id/tv_logging"
                 android:layout_width="wrap_content"
@@ -363,20 +489,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/youtube_vid"
-            android:id="@+id/icon_media"/>
+        android:layout_marginTop="@dimen/dp20">
+        <RelativeLayout
+            android:id="@+id/rly_media"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/youtube_vid"
+                android:id="@+id/icon_media"/>
+        </RelativeLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_media">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_media">
             <TextView
                 android:id="@+id/tv_media"
                 android:layout_width="wrap_content"
@@ -397,20 +536,33 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp16"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/messaging"
-            android:id="@+id/icon_messaging"/>
+        android:layout_marginTop="@dimen/dp20">
+        <RelativeLayout
+            android:id="@+id/rly_messaging"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+
+            <ImageView
+                android:id="@+id/icon_messaging"
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp16"
+                android:src="@drawable/messaging" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_messaging">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_messaging">
             <TextView
                 android:id="@+id/tv_messaging"
                 android:layout_width="wrap_content"
@@ -432,20 +584,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/bell_icon"
-            android:id="@+id/icon_bell_not"
-            app:tint="@color/black" />
+        <RelativeLayout
+            android:id="@+id/rly_bell_not"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:src="@drawable/bell_icon"
+                android:id="@+id/icon_bell_not"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_bell_not">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_bell_not">
             <TextView
                 android:id="@+id/tv_notifications"
                 android:layout_width="wrap_content"
@@ -467,19 +631,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/phone_icon"
-            android:id="@+id/icon_phone"/>
+        <RelativeLayout
+            android:id="@+id/rly_phone"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:src="@drawable/phone_icon"
+                android:id="@+id/icon_phone"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_phone">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_phone">
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
@@ -501,19 +677,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/screen"
-            android:id="@+id/icon_screen2"/>
+        <RelativeLayout
+            android:id="@+id/rly_screen2"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:gravity="center"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:src="@drawable/screen"
+                android:id="@+id/icon_screen2"/>
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_screen2">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_screen2">
             <TextView
                 android:id="@+id/tv_screen"
                 android:layout_width="wrap_content"
@@ -537,19 +725,33 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp8"
         android:layout_marginTop="@dimen/dp30">
-        <ImageView
-            android:layout_width="@dimen/dp14"
-            android:layout_height="@dimen/dp14"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/dp24"
-            android:src="@drawable/volume"
-            android:id="@+id/icon_volume"/>
+
+        <RelativeLayout
+            android:id="@+id/rly_volume"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:elevation="@dimen/dp8"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/dp16">
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:src="@drawable/volume"
+                android:id="@+id/icon_volume"/>
+        </RelativeLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp8"
-            android:layout_toRightOf="@id/icon_volume">
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_toRightOf="@id/rly_volume">
             <TextView
                 android:id="@+id/tv_volume"
                 android:layout_width="wrap_content"

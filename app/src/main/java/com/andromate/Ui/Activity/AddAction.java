@@ -66,6 +66,10 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
     ImageView img_application, img_cameraphoto, img_ondition, img_connectivity, img_datetime,
             img_deviceaction, img_devicesetting, img_files, img_locations, img_logging, img_media, img_messaging, img_notifications, img_phone, img_screen, img_volume;
 
+
+    RelativeLayout rly_application, rly_cameraphoto, rly_ondition, rly_connectivity, rly_datetime,
+            rly_deviceaction, rly_devicesetting, rly_files, rly_locations, rly_logging, rly_media, rly_messaging, rly_notifications, rly_phone, rly_screen, rly_volume;
+
     RelativeLayout imageView_back;
 
     @Override
@@ -493,6 +497,27 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         img_phone = findViewById(R.id.icon_phone);
         img_screen = findViewById(R.id.icon_screen2);
         img_volume = findViewById(R.id.icon_volume);
+
+
+
+        rly_application = findViewById(R.id.rly_applicationd);
+        rly_cameraphoto = findViewById(R.id.rly_Camera_Photo);
+        rly_ondition = findViewById(R.id.rly_loop);
+        rly_connectivity = findViewById(R.id.rly_connectivity);
+        rly_datetime = findViewById(R.id.rly_date_time);
+        rly_deviceaction = findViewById(R.id.rly_device_action);
+        rly_devicesetting = findViewById(R.id.rly_device_setting);
+        rly_files = findViewById(R.id.rly_files);
+        rly_locations = findViewById(R.id.rly_location);
+        rly_logging = findViewById(R.id.rly_logging);
+        rly_media = findViewById(R.id.rly_media);
+        rly_messaging = findViewById(R.id.rly_messaging);
+        rly_notifications = findViewById(R.id.rly_bell_not);
+        rly_phone = findViewById(R.id.rly_phone);
+        rly_screen = findViewById(R.id.rly_screen2);
+        rly_volume = findViewById(R.id.rly_volume);
+
+
         ;
 
 
@@ -516,7 +541,7 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         tv_volume.setOnClickListener(this);
 
 
-        img_application.setOnClickListener(this);
+      /*  img_application.setOnClickListener(this);
         img_cameraphoto.setOnClickListener(this);
         img_ondition.setOnClickListener(this);
         img_connectivity.setOnClickListener(this);
@@ -531,7 +556,26 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         img_notifications.setOnClickListener(this);
         img_phone.setOnClickListener(this);
         img_screen.setOnClickListener(this);
-        img_volume.setOnClickListener(this);
+        img_volume.setOnClickListener(this);*/
+
+
+
+        rly_application.setOnClickListener(this);
+        rly_cameraphoto.setOnClickListener(this);
+        rly_ondition.setOnClickListener(this);
+        rly_connectivity.setOnClickListener(this);
+        rly_datetime.setOnClickListener(this);
+        rly_deviceaction.setOnClickListener(this);
+        rly_devicesetting.setOnClickListener(this);
+        rly_files.setOnClickListener(this);
+        rly_locations.setOnClickListener(this);
+        rly_logging.setOnClickListener(this);
+        rly_media.setOnClickListener(this);
+        rly_messaging.setOnClickListener(this);
+        rly_notifications.setOnClickListener(this);
+        rly_phone.setOnClickListener(this);
+        rly_screen.setOnClickListener(this);
+        rly_volume.setOnClickListener(this);
 
 
     }
@@ -626,52 +670,52 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
             case R.id.tv_volume:
                 showexpnded(tv_volume, recyclerView_volume, img_volume);
                 break;
-            case R.id.icon_applications:
+            case R.id.rly_applicationd:
                 hideexpnded(tv_application, recyclerView_application, img_application);
                 break;
-            case R.id.Camera_Photo:
+            case R.id.rly_Camera_Photo:
                 hideexpnded(tv_cameraphoto, recyclerView_cameraphoto, img_cameraphoto);
                 break;
-            case R.id.icon_loop:
+            case R.id.rly_loop:
                 hideexpnded(tv_ondition, recyclerView_ondition, img_ondition);
                 break;
-            case R.id.icon_connectivity:
+            case R.id.rly_connectivity:
                 hideexpnded(tv_connectivity, recyclerViewc_connectivity, img_connectivity);
                 break;
-            case R.id.icon_date_time:
+            case R.id.rly_date_time:
                 hideexpnded(tv_datetime, recyclerView_datetime, img_datetime);
                 break;
-            case R.id.icon_device_action:
+            case R.id.rly_device_action:
                 hideexpnded(tv_deviceaction, recyclerView_deviceaction, img_deviceaction);
                 break;
-            case R.id.icon_device_setting:
+            case R.id.rly_device_setting:
                 hideexpnded(tv_devicesetting, recyclerView_devicesetting, img_devicesetting);
                 break;
-            case R.id.icon_files:
+            case R.id.rly_files:
                 hideexpnded(tv_files, recyclerView_files, img_files);
                 break;
-            case R.id.icon_location:
+            case R.id.rly_location:
                 hideexpnded(tv_locations, recyclerView_locations, img_locations);
                 break;
-            case R.id.icon_logging:
+            case R.id.rly_logging:
                 hideexpnded(tv_logging, recyclerView_logging, img_logging);
                 break;
-            case R.id.icon_media:
+            case R.id.rly_media:
                 hideexpnded(tv_media, recyclerViewc_media, img_media);
                 break;
-            case R.id.icon_messaging:
+            case R.id.rly_messaging:
                 hideexpnded(tv_messaging, recyclerView_messaging, img_messaging);
                 break;
-            case R.id.icon_bell_not:
+            case R.id.rly_bell_not:
                 hideexpnded(tv_notifications, recyclerView_notifications, img_notifications);
                 break;
-            case R.id.icon_phone:
+            case R.id.rly_phone:
                 hideexpnded(tv_phone, recyclerView_phone, img_phone);
                 break;
-            case R.id.icon_screen2:
+            case R.id.rly_screen2:
                 hideexpnded(tv_screen, recyclerView_screenlist, img_screen);
                 break;
-            case R.id.icon_volume:
+            case R.id.rly_volume:
                 hideexpnded(tv_volume, recyclerView_volume, img_volume);
                 break;
             default:

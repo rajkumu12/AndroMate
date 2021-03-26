@@ -13,9 +13,11 @@
 
    <include layout="@layout/add_constraints_ui"/>
    <androidx.cardview.widget.CardView
-       android:layout_width="@dimen/dp60"
-       android:layout_height="@dimen/dp60"
+       android:layout_width="@dimen/dp50"
+       android:layout_height="@dimen/dp50"
        app:cardBackgroundColor="@color/white"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground"
        android:outlineAmbientShadowColor="@color/theme_color"
        android:outlineSpotShadowColor="@color/theme_color"
        android:layout_gravity="center_horizontal"

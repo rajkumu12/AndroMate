@@ -14,8 +14,8 @@
     <!-- TODO: Update blank fragment layout -->
    <include layout="@layout/add_triggers_content_ui"/>
     <androidx.cardview.widget.CardView
-        android:layout_width="@dimen/dp60"
-        android:layout_height="@dimen/dp60"
+        android:layout_width="@dimen/dp50"
+        android:layout_height="@dimen/dp50"
         app:cardBackgroundColor="@color/white"
         android:outlineAmbientShadowColor="@color/theme_color"
         android:outlineSpotShadowColor="@color/theme_color"

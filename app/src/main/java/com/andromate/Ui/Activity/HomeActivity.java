@@ -39,7 +39,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ImageView img_bell;
     TextView tv_heading;
 
-    LinearLayout lly_nav_invite;
+    LinearLayout lly_nav_invite,lly_home;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         navigation = findViewById(R.id.bottom_navigation);
         img_bell = findViewById(R.id.notifications_bell);
         lly_nav_invite = findViewById(R.id.nvd_invite_friend);
+        lly_home = findViewById(R.id.nvd_home);
         tv_heading=findViewById(R.id.tv_heading);
 
 
@@ -71,6 +74,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         navigation.setOnNavigationItemSelectedListener(this);
         img_bell.setOnClickListener(this);
         lly_nav_invite.setOnClickListener(this);
+        lly_home.setOnClickListener(this);
     }
 
     @SuppressLint({"WrongConstant", "SetTextI18n"})
@@ -88,6 +92,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }else if (id==R.id.nvd_invite_friend){
             loadFragment(new InviteFragment());
             tv_heading.setText("Invite friend");
+            drawerLayout.closeDrawer(Gravity.START);
+        }else if (id==R.id.nvd_home){
+            loadFragment(new HomeFragments());
+            tv_heading.setText("Home");
+            navigation.setSelectedItemId(R.id.navigation_home);
             drawerLayout.closeDrawer(Gravity.START);
         }
 

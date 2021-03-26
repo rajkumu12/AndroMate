@@ -265,6 +265,8 @@ changes."/>
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp30"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginHorizontal="@dimen/dp12"
             android:orientation="vertical">
             <TextView

@@ -64,6 +64,8 @@
            android:layout_height="wrap_content"
            android:layout_marginStart="@dimen/dp20"
            android:layout_marginTop="30dp"
+           android:clickable="true"
+           android:foreground="?android:attr/selectableItemBackground"
            android:gravity="center"
            android:padding="@dimen/dp4"
            android:orientation="horizontal">
@@ -88,6 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp20"
             android:layout_marginTop="30dp"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:padding="@dimen/dp4"
             android:orientation="horizontal">
@@ -114,6 +118,8 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="@dimen/dp4"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal">
 
             <ImageView
@@ -137,6 +143,8 @@
             android:layout_marginStart="@dimen/dp20"
             android:layout_marginTop="30dp"
             android:padding="@dimen/dp4"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -162,6 +170,8 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="@dimen/dp4"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal">
 
             <ImageView
@@ -186,6 +196,8 @@
             android:layout_marginTop="30dp"
             android:gravity="center"
             android:padding="@dimen/dp4"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:orientation="horizontal">
 
             <ImageView

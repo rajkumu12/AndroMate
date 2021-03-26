@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andromate.CustomColors;
@@ -50,6 +51,9 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
             tv__phone, tv_sensor, tv_screen_speaker;
     ImageView img_battery_power, img_notification, img_connectivity, img_datetime, img_devicestate,
             img_phone, img_sensor, img_screen_speaker;
+
+    RelativeLayout rly_battery_power, rly_notification, rly_connectivity, rly_datetime, rly_devicestate,
+            rly_phone, rly_sensor, rly_screen_speaker;
 
     public ConstraintsFrag() {
         // Required empty public constructor
@@ -288,7 +292,15 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
         img_phone =view. findViewById(R.id.icon_phone);
         img_sensor =view. findViewById(R.id.icon_sensors);
         img_screen_speaker = view.findViewById(R.id.icon_speake);
-        ;
+
+        rly_battery_power  =view.findViewById(R.id.rly_battery);
+        rly_notification = view.findViewById(R.id.rly_bell);
+        rly_connectivity =view.findViewById(R.id.rly_coonectivity);
+        rly_datetime = view.findViewById(R.id.rly_date_time);
+        rly_devicestate =view.findViewById(R.id.rly_device_state);
+        rly_phone =view.findViewById(R.id.rly_phone);
+        rly_sensor =view.findViewById(R.id.rly_sensors);
+        rly_screen_speaker =view.findViewById(R.id.rly_speake);
 
 
         tv_battery_power.setOnClickListener(this);
@@ -301,14 +313,23 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
         tv_screen_speaker.setOnClickListener(this);
 
 
-        img_battery_power.setOnClickListener(this);
+        /*img_battery_power.setOnClickListener(this);
         img_notification.setOnClickListener(this);
         img_connectivity.setOnClickListener(this);
         img_datetime.setOnClickListener(this);
         img_devicestate.setOnClickListener(this);
         img_phone.setOnClickListener(this);
         img_sensor.setOnClickListener(this);
-        img_screen_speaker.setOnClickListener(this);
+        img_screen_speaker.setOnClickListener(this);*/
+
+        rly_battery_power.setOnClickListener(this);
+        rly_notification.setOnClickListener(this);
+        rly_connectivity.setOnClickListener(this);
+        rly_datetime.setOnClickListener(this);
+        rly_devicestate.setOnClickListener(this);
+        rly_phone.setOnClickListener(this);
+        rly_sensor.setOnClickListener(this);
+        rly_screen_speaker.setOnClickListener(this);
     }
 
     @Override
@@ -339,28 +360,28 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
             case R.id.tv_speaker:
                 showexpnded(tv_screen_speaker, recyclerView_screen_speaker, img_screen_speaker);
                 break;
-            case R.id.icon_battery:
+            case R.id.rly_battery:
                 hideexpnded(tv_battery_power, recyclerView_battery_power, img_battery_power);
                 break;
-            case R.id.icon_bell:
+            case R.id.rly_bell:
                 hideexpnded(tv_notification, recyclerView_notification, img_notification);
                 break;
-            case R.id.icon_coonectivity:
+            case R.id.rly_coonectivity:
                 hideexpnded(tv_connectivity, recyclerView_connectivity, img_connectivity);
                 break;
-            case R.id.icon_date_time:
+            case R.id.rly_date_time:
                 hideexpnded(tv_datetime, recyclerViewc_datetime, img_datetime);
                 break;
-            case R.id.device_state:
+            case R.id.rly_device_state:
                 hideexpnded(tv_devicestate, recyclerView_devicestate, img_devicestate);
                 break;
-            case R.id.icon_phone:
+            case R.id.rly_phone:
                 hideexpnded(tv__phone, recyclerView_phone, img_phone);
                 break;
-            case R.id.icon_sensors:
+            case R.id.rly_sensors:
                 hideexpnded(tv_sensor,recyclerView_sensor,img_sensor);
                 break;
-            case R.id.icon_speake:
+            case R.id.rly_speake:
                 hideexpnded(tv_screen_speaker, recyclerView_screen_speaker, img_screen_speaker);
                 break;
 
@@ -371,13 +392,11 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
     void showexpnded(TextView tv_hide, RecyclerView recyclerView_show,
                      ImageView imageView_colored) {
 
-
         tv_hide.setVisibility(View.GONE);
         recyclerView_show.setVisibility(View.VISIBLE);
         imageView_colored.setColorFilter(CustomColors.golden);
 
     }
-
     void hideexpnded(TextView tv_show, RecyclerView recyclerView_hide,
                      ImageView imageView_revert) {
 

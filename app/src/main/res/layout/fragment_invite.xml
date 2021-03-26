@@ -70,6 +70,8 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 app:cardElevation="6dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:outlineSpotShadowColor="@color/theme_color"
                 android:outlineAmbientShadowColor="@color/theme_color"
                 android:layout_marginTop="@dimen/dp20">
@@ -116,6 +118,8 @@
                     <ImageView
                         android:layout_width="33dp"
                         android:layout_height="33dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:src="@drawable/whatsapp"/>
 
                 </LinearLayout>
@@ -127,6 +131,8 @@
                     android:layout_weight="1.2">
                     <ImageView
                         android:layout_width="33dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:layout_height="33dp"
                         android:src="@drawable/fb"/>
                 </LinearLayout>
@@ -139,6 +145,8 @@
                     <ImageView
                         android:layout_width="33dp"
                         android:layout_height="33dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:src="@drawable/insta"/>
                 </LinearLayout>
 
@@ -150,6 +158,8 @@
                     <ImageView
                         android:layout_width="33dp"
                         android:layout_height="33dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:src="@drawable/twitter"/>
                 </LinearLayout>
 
@@ -159,6 +169,8 @@
                 android:layout_width="@dimen/dp87"
                 android:layout_marginTop="@dimen/dp16"
                 android:layout_height="@dimen/dp33"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_gravity="center"
                 android:src="@drawable/playstoreicon"/>
 

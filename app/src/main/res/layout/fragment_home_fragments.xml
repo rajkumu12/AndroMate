@@ -34,6 +34,8 @@
                         android:layout_width="@dimen/dp120"
                         android:layout_height="@dimen/dp130"
                         android:gravity="center"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:background="@drawable/add_macro"
                         android:orientation="vertical">
 
@@ -59,6 +61,8 @@
                         android:layout_width="@dimen/dp120"
                         android:layout_height="@dimen/dp130"
                         android:layout_marginStart="36dp"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:background="@drawable/add_macrowizard"
@@ -94,6 +98,8 @@
                         android:layout_width="@dimen/dp120"
                         android:layout_height="@dimen/dp130"
                         android:gravity="center"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:background="@drawable/export_import"
                         android:orientation="vertical">
                         <ImageView
@@ -116,6 +122,8 @@
                         android:layout_height="@dimen/dp130"
                         android:layout_marginStart="36dp"
                         android:gravity="center"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:orientation="vertical"
                         android:background="@drawable/macro_drawer"
                        >
@@ -148,6 +156,8 @@
                         android:layout_width="@dimen/dp120"
                         android:layout_height="@dimen/dp130"
                         android:gravity="center"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:orientation="vertical"
                         android:background="@drawable/stopwatches">
                         <ImageView
