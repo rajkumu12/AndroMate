@@ -40,7 +40,7 @@
             android:layout_toRightOf="@id/rly_applicationd">
             <TextView
                 android:id="@+id/tv_applic"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -89,7 +89,7 @@
             android:layout_toRightOf="@id/rly_Camera_Photo">
             <TextView
                 android:id="@+id/tv_camera_photo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -136,7 +136,7 @@
             android:layout_toRightOf="@id/rly_loop">
             <TextView
                 android:id="@+id/tv_loop_icons"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -183,7 +183,7 @@
             android:layout_toRightOf="@id/rly_connectivity">
             <TextView
                 android:id="@+id/tv_connectivity"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -230,7 +230,7 @@
             android:layout_toRightOf="@id/rly_date_time">
             <TextView
                 android:id="@+id/tv_date_time"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -278,7 +278,7 @@
             android:layout_toRightOf="@id/rly_device_action">
             <TextView
                 android:id="@+id/tv_device_action"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -326,7 +326,7 @@
             android:layout_toRightOf="@id/rly_device_setting">
             <TextView
                 android:id="@+id/tv_device_setting"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -373,7 +373,7 @@
             android:layout_toRightOf="@id/rly_files">
             <TextView
                 android:id="@+id/tv_files"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -422,7 +422,7 @@
             android:layout_toRightOf="@id/rly_location">
             <TextView
                 android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -470,7 +470,7 @@
             android:layout_toRightOf="@id/rly_logging">
             <TextView
                 android:id="@+id/tv_logging"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -518,7 +518,7 @@
             android:layout_toRightOf="@id/rly_media">
             <TextView
                 android:id="@+id/tv_media"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -565,7 +565,7 @@
             android:layout_toRightOf="@id/rly_messaging">
             <TextView
                 android:id="@+id/tv_messaging"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -612,7 +612,7 @@
             android:layout_toRightOf="@id/rly_bell_not">
             <TextView
                 android:id="@+id/tv_notifications"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -658,7 +658,7 @@
             android:layout_toRightOf="@id/rly_phone">
             <TextView
                 android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -704,7 +704,7 @@
             android:layout_toRightOf="@id/rly_screen2">
             <TextView
                 android:id="@+id/tv_screen"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -754,7 +754,7 @@
             android:layout_toRightOf="@id/rly_volume">
             <TextView
                 android:id="@+id/tv_volume"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"

@@ -38,7 +38,7 @@
             android:layout_toRightOf="@id/rly_applicationd">
             <TextView
                 android:id="@+id/tv_applications"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_centerVertical="true"
@@ -88,7 +88,7 @@
 
             <TextView
                 android:id="@+id/tv_battery_power"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/battery_power"
@@ -137,7 +137,7 @@
 
             <TextView
                 android:id="@+id/tv_callsms"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -186,7 +186,7 @@
 
             <TextView
                 android:id="@+id/tv_connectivity"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -235,7 +235,7 @@
 
             <TextView
                 android:id="@+id/tv_date_time"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -284,7 +284,7 @@
 
             <TextView
                 android:id="@+id/tv_device_event"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -333,7 +333,7 @@
 
             <TextView
                 android:id="@+id/tv_location"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -381,7 +381,7 @@
 
             <TextView
                 android:id="@+id/tv_sensors"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
@@ -429,7 +429,7 @@
 
             <TextView
                 android:id="@+id/tv_userInput"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"

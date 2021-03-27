@@ -195,10 +195,10 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
 
     private void load_dateandtime() {
         date_and_timelist=new ArrayList<>();
-        date_and_timelist.add(new TriggerItemModel("Calendar Event",R.drawable.calendar_event));
-        date_and_timelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.day_month));
-        date_and_timelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.day_timer));
-        date_and_timelist.add(new TriggerItemModel("Regular Interval",R.drawable.regular_interval));
+        date_and_timelist.add(new TriggerItemModel("Calendar Event",R.drawable.datetime));
+        date_and_timelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.datetime));
+        date_and_timelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.datetime));
+        date_and_timelist.add(new TriggerItemModel("Regular Interval",R.drawable.datetime));
         date_and_timelist.add(new TriggerItemModel("Stopwatch",R.drawable.stopwatches_icon));
 
 
@@ -410,73 +410,135 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
           recyclerView_application.setVisibility(View.VISIBLE);
           img_application.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_applicationd){
-          textView_application.setVisibility(View.VISIBLE);
-          recyclerView_application.setVisibility(View.GONE);
-          img_application.setColorFilter(CustomColors.black);
+          if (textView_application.getVisibility()==View.VISIBLE){
+              textView_application.setVisibility(View.GONE);
+              recyclerView_application.setVisibility(View.VISIBLE);
+              img_application.setColorFilter(CustomColors.golden);
+          }else {
+              textView_application.setVisibility(View.VISIBLE);
+              recyclerView_application.setVisibility(View.GONE);
+              img_application.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_battery_power){
           textView_battery.setVisibility(View.GONE);
           recyclerView_battery.setVisibility(View.VISIBLE);
           img_battery.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_battery){
-          textView_battery.setVisibility(View.VISIBLE);
-          recyclerView_battery.setVisibility(View.GONE);
-          img_battery.setColorFilter(CustomColors.black);
+          if (textView_battery.getVisibility()==View.VISIBLE){
+              textView_battery.setVisibility(View.GONE);
+              recyclerView_battery.setVisibility(View.VISIBLE);
+              img_battery.setColorFilter(CustomColors.golden);
+          }else {
+              textView_battery.setVisibility(View.VISIBLE);
+              recyclerView_battery.setVisibility(View.GONE);
+              img_battery.setColorFilter(CustomColors.black);
+          }
       }else if (id==R.id.tv_callsms){
           textView_call.setVisibility(View.GONE);
           recyclerView_call_list.setVisibility(View.VISIBLE);
           img_call.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_call){
-          textView_call.setVisibility(View.VISIBLE);
-          recyclerView_call_list.setVisibility(View.GONE);
-          img_call.setColorFilter(CustomColors.black);
+          if (textView_call.getVisibility()==View.VISIBLE){
+              textView_call.setVisibility(View.GONE);
+              recyclerView_call_list.setVisibility(View.VISIBLE);
+              img_call.setColorFilter(CustomColors.golden);
+          }else {
+              textView_call.setVisibility(View.VISIBLE);
+              recyclerView_call_list.setVisibility(View.GONE);
+              img_call.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_connectivity){
           textView_connectivity.setVisibility(View.GONE);
           recyclerView_connectivitylist.setVisibility(View.VISIBLE);
           img_connectivity.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_coonectivity){
-          textView_connectivity.setVisibility(View.VISIBLE);
-          recyclerView_connectivitylist.setVisibility(View.GONE);
-          img_connectivity.setColorFilter(CustomColors.black);
+          if (textView_connectivity.getVisibility()==View.VISIBLE){
+              textView_connectivity.setVisibility(View.GONE);
+              recyclerView_connectivitylist.setVisibility(View.VISIBLE);
+              img_connectivity.setColorFilter(CustomColors.golden);
+          }else {
+              textView_connectivity.setVisibility(View.VISIBLE);
+              recyclerView_connectivitylist.setVisibility(View.GONE);
+              img_connectivity.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_date_time){
           textView_date_and_time.setVisibility(View.GONE);
           recyclerView_date_and_timelist.setVisibility(View.VISIBLE);
           img_date_and_time.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_date_time){
-          textView_date_and_time.setVisibility(View.VISIBLE);
-          recyclerView_date_and_timelist.setVisibility(View.GONE);
-          img_date_and_time.setColorFilter(CustomColors.black);
+          if (textView_date_and_time.getVisibility()==View.VISIBLE){
+              textView_date_and_time.setVisibility(View.GONE);
+              recyclerView_date_and_timelist.setVisibility(View.VISIBLE);
+              img_date_and_time.setColorFilter(CustomColors.golden);
+          }else {
+              textView_date_and_time.setVisibility(View.VISIBLE);
+              recyclerView_date_and_timelist.setVisibility(View.GONE);
+              img_date_and_time.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_device_event){
           textView_deviceevent.setVisibility(View.GONE);
           recyclerView_deviceevent_list.setVisibility(View.VISIBLE);
           img_deviceevent.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_device_invent){
-          textView_deviceevent.setVisibility(View.VISIBLE);
-          recyclerView_deviceevent_list.setVisibility(View.GONE);
-          img_deviceevent.setColorFilter(CustomColors.black);
+          if (textView_deviceevent.getVisibility()==View.VISIBLE){
+              textView_deviceevent.setVisibility(View.GONE);
+              recyclerView_deviceevent_list.setVisibility(View.VISIBLE);
+              img_deviceevent.setColorFilter(CustomColors.golden);
+          }else {
+              textView_deviceevent.setVisibility(View.VISIBLE);
+              recyclerView_deviceevent_list.setVisibility(View.GONE);
+              img_deviceevent.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_location){
           textView_location.setVisibility(View.GONE);
           recyclerView_locationlist.setVisibility(View.VISIBLE);
           img_location.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_location){
-          textView_location.setVisibility(View.VISIBLE);
-          recyclerView_locationlist.setVisibility(View.GONE);
-          img_location.setColorFilter(CustomColors.black);
+          if (textView_location.getVisibility()==View.VISIBLE){
+              textView_location.setVisibility(View.GONE);
+              recyclerView_locationlist.setVisibility(View.VISIBLE);
+              img_location.setColorFilter(CustomColors.golden);
+          }else {
+              textView_location.setVisibility(View.VISIBLE);
+              recyclerView_locationlist.setVisibility(View.GONE);
+              img_location.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_sensors){
           textView_sensors.setVisibility(View.GONE);
           recyclerView_sensorslist.setVisibility(View.VISIBLE);
           img_sensors.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_sensors){
-          textView_sensors.setVisibility(View.VISIBLE);
-          recyclerView_sensorslist.setVisibility(View.GONE);
-          img_sensors.setColorFilter(CustomColors.black);
+          if (textView_sensors.getVisibility()==View.VISIBLE){
+              textView_sensors.setVisibility(View.GONE);
+              recyclerView_sensorslist.setVisibility(View.VISIBLE);
+              img_sensors.setColorFilter(CustomColors.golden);
+          }else {
+              textView_sensors.setVisibility(View.VISIBLE);
+              recyclerView_sensorslist.setVisibility(View.GONE);
+              img_sensors.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.tv_userInput){
           textView_userinpot.setVisibility(View.GONE);
           recyclerView_userinpot_list.setVisibility(View.VISIBLE);
           img_userinpot.setColorFilter(CustomColors.golden);
       }else if (id==R.id.rly_userinput){
-          textView_userinpot.setVisibility(View.VISIBLE);
-          recyclerView_userinpot_list.setVisibility(View.GONE);
-          img_userinpot.setColorFilter(CustomColors.black);
+          if (textView_userinpot.getVisibility()==View.VISIBLE){
+              textView_userinpot.setVisibility(View.GONE);
+              recyclerView_userinpot_list.setVisibility(View.VISIBLE);
+              img_userinpot.setColorFilter(CustomColors.golden);
+          }else {
+              textView_userinpot.setVisibility(View.VISIBLE);
+              recyclerView_userinpot_list.setVisibility(View.GONE);
+              img_userinpot.setColorFilter(CustomColors.black);
+          }
+
       }else if (id==R.id.back_icon_trigger){
           finish();
       }

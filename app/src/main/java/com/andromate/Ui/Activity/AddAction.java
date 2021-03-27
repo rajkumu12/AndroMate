@@ -206,10 +206,10 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
 
     private void loaddatetime() {
         datetimelist = new ArrayList<>();
-        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.calendar_event));
-        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.day_month));
-        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.day_timer));
-        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.regular_interval));
+        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.datetime));
         datetimelist.add(new TriggerItemModel("Stopwatch",R.drawable.stopwatches_icon));
 
 
@@ -318,7 +318,7 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
 
     private void loadlogging() {
         logginglist = new ArrayList<>();
-        logginglist.add(new TriggerItemModel("Calender-Add Event", R.drawable.calendar_event));
+        logginglist.add(new TriggerItemModel("Calender-Add Event", R.drawable.datetime));
         logginglist.add(new TriggerItemModel("Clear Log", R.drawable.call_ended));
         logginglist.add(new TriggerItemModel("Log Event", R.drawable.call_incoming));
         logginglist.add(new TriggerItemModel("Open Macrodroid Log", R.drawable.call_active));
@@ -671,52 +671,126 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
                 showexpnded(tv_volume, recyclerView_volume, img_volume);
                 break;
             case R.id.rly_applicationd:
-                hideexpnded(tv_application, recyclerView_application, img_application);
+                if (tv_application.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_application, recyclerView_application, img_application);
+                }else {
+                    hideexpnded(tv_application, recyclerView_application, img_application);
+                }
                 break;
             case R.id.rly_Camera_Photo:
-                hideexpnded(tv_cameraphoto, recyclerView_cameraphoto, img_cameraphoto);
+                if (tv_cameraphoto.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_cameraphoto, recyclerView_cameraphoto, img_cameraphoto);
+                }else {
+                    hideexpnded(tv_cameraphoto, recyclerView_cameraphoto, img_cameraphoto);
+                }
                 break;
             case R.id.rly_loop:
-                hideexpnded(tv_ondition, recyclerView_ondition, img_ondition);
+                if (tv_ondition.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_ondition, recyclerView_ondition, img_ondition);
+                }else {
+                    hideexpnded(tv_ondition, recyclerView_ondition, img_ondition);
+                }
                 break;
             case R.id.rly_connectivity:
-                hideexpnded(tv_connectivity, recyclerViewc_connectivity, img_connectivity);
+                if (tv_connectivity.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_connectivity, recyclerViewc_connectivity, img_connectivity);
+                }else {
+                    hideexpnded(tv_connectivity, recyclerViewc_connectivity, img_connectivity);
+                }
                 break;
             case R.id.rly_date_time:
-                hideexpnded(tv_datetime, recyclerView_datetime, img_datetime);
+                if (tv_datetime.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_datetime, recyclerView_datetime, img_datetime);
+                }else {
+                    hideexpnded(tv_datetime, recyclerView_datetime, img_datetime);
+                }
+
                 break;
             case R.id.rly_device_action:
-                hideexpnded(tv_deviceaction, recyclerView_deviceaction, img_deviceaction);
+                if (tv_deviceaction.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_deviceaction, recyclerView_deviceaction, img_deviceaction);
+                }else {
+                    hideexpnded(tv_deviceaction, recyclerView_deviceaction, img_deviceaction);
+                }
+
                 break;
             case R.id.rly_device_setting:
-                hideexpnded(tv_devicesetting, recyclerView_devicesetting, img_devicesetting);
+                if (tv_devicesetting.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_devicesetting, recyclerView_devicesetting, img_devicesetting);
+                }else {
+                    hideexpnded(tv_devicesetting, recyclerView_devicesetting, img_devicesetting);
+                }
+
                 break;
             case R.id.rly_files:
-                hideexpnded(tv_files, recyclerView_files, img_files);
+                if (tv_files.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_files, recyclerView_files, img_files);
+                }else {
+                    hideexpnded(tv_files, recyclerView_files, img_files);
+                }
+
                 break;
             case R.id.rly_location:
-                hideexpnded(tv_locations, recyclerView_locations, img_locations);
+                if (tv_locations.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_locations, recyclerView_locations, img_locations);
+                }else {
+                    hideexpnded(tv_locations, recyclerView_locations, img_locations);
+                }
+
                 break;
             case R.id.rly_logging:
-                hideexpnded(tv_logging, recyclerView_logging, img_logging);
+                if (tv_logging.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_logging, recyclerView_logging, img_logging);
+                }else {
+                    hideexpnded(tv_logging, recyclerView_logging, img_logging);
+                }
                 break;
             case R.id.rly_media:
-                hideexpnded(tv_media, recyclerViewc_media, img_media);
+                if (tv_media.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_media, recyclerViewc_media, img_media);
+                }else {
+                    hideexpnded(tv_media, recyclerViewc_media, img_media);
+                }
+
                 break;
             case R.id.rly_messaging:
-                hideexpnded(tv_messaging, recyclerView_messaging, img_messaging);
+                if (tv_messaging.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_messaging, recyclerView_messaging, img_messaging);
+                }else {
+                    hideexpnded(tv_messaging, recyclerView_messaging, img_messaging);
+                }
+
                 break;
             case R.id.rly_bell_not:
-                hideexpnded(tv_notifications, recyclerView_notifications, img_notifications);
+                if (tv_notifications.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_notifications, recyclerView_notifications, img_notifications);
+                }else {
+                    hideexpnded(tv_notifications, recyclerView_notifications, img_notifications);
+                }
+
                 break;
             case R.id.rly_phone:
-                hideexpnded(tv_phone, recyclerView_phone, img_phone);
+                if (tv_phone.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_phone, recyclerView_phone, img_phone);
+                }else {
+                    hideexpnded(tv_phone, recyclerView_phone, img_phone);
+                }
                 break;
             case R.id.rly_screen2:
-                hideexpnded(tv_screen, recyclerView_screenlist, img_screen);
+                if (tv_screen.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_screen, recyclerView_screenlist, img_screen);
+                }else {
+                    hideexpnded(tv_screen, recyclerView_screenlist, img_screen);
+                }
+
                 break;
             case R.id.rly_volume:
-                hideexpnded(tv_volume, recyclerView_volume, img_volume);
+                if (tv_volume.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_volume, recyclerView_volume, img_volume);
+                }else {
+                    hideexpnded(tv_volume, recyclerView_volume, img_volume);
+                }
+
                 break;
             default:
         }

@@ -159,10 +159,10 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
 
     private void loaddatetime() {
         datetimelist = new ArrayList<>();
-        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.calendar_event));
-        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.day_month));
-        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.day_timer));
-        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.regular_interval));
+        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.datetime));
         datetimelist.add(new TriggerItemModel("Stopwatch",R.drawable.stopwatches_icon));
 
 
@@ -361,28 +361,67 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
                 showexpnded(tv_screen_speaker, recyclerView_screen_speaker, img_screen_speaker);
                 break;
             case R.id.rly_battery:
-                hideexpnded(tv_battery_power, recyclerView_battery_power, img_battery_power);
+                if (tv_battery_power.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_battery_power, recyclerView_battery_power, img_battery_power);
+                }else {
+                    hideexpnded(tv_battery_power, recyclerView_battery_power, img_battery_power);
+                }
+
                 break;
             case R.id.rly_bell:
-                hideexpnded(tv_notification, recyclerView_notification, img_notification);
+                if (tv_notification.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_notification, recyclerView_notification, img_notification);
+                }else {
+                    hideexpnded(tv_notification, recyclerView_notification, img_notification);
+                }
+
                 break;
             case R.id.rly_coonectivity:
-                hideexpnded(tv_connectivity, recyclerView_connectivity, img_connectivity);
+                if (tv_connectivity.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_connectivity, recyclerView_connectivity, img_connectivity);
+                }else {
+                    hideexpnded(tv_connectivity, recyclerView_connectivity, img_connectivity);
+                }
+
                 break;
             case R.id.rly_date_time:
-                hideexpnded(tv_datetime, recyclerViewc_datetime, img_datetime);
+                if (tv_datetime.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_datetime, recyclerViewc_datetime, img_datetime);
+                }else {
+                    hideexpnded(tv_datetime, recyclerViewc_datetime, img_datetime);
+                }
+
                 break;
             case R.id.rly_device_state:
-                hideexpnded(tv_devicestate, recyclerView_devicestate, img_devicestate);
+                if (tv_devicestate.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_devicestate, recyclerView_devicestate, img_devicestate);
+                }else {
+                    hideexpnded(tv_devicestate, recyclerView_devicestate, img_devicestate);
+                }
+
                 break;
             case R.id.rly_phone:
-                hideexpnded(tv__phone, recyclerView_phone, img_phone);
+                if (tv__phone.getVisibility()==View.VISIBLE){
+                    showexpnded(tv__phone, recyclerView_phone, img_phone);
+                }else {
+                    hideexpnded(tv__phone, recyclerView_phone, img_phone);
+                }
+
                 break;
             case R.id.rly_sensors:
-                hideexpnded(tv_sensor,recyclerView_sensor,img_sensor);
+                if (tv_sensor.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_sensor,recyclerView_sensor,img_sensor);
+                }else {
+                    hideexpnded(tv_sensor,recyclerView_sensor,img_sensor);
+                }
                 break;
             case R.id.rly_speake:
-                hideexpnded(tv_screen_speaker, recyclerView_screen_speaker, img_screen_speaker);
+                if (tv_screen_speaker.getVisibility()==View.VISIBLE){
+                    showexpnded(tv_screen_speaker, recyclerView_screen_speaker, img_screen_speaker);
+                }else {
+                    hideexpnded(tv_screen_speaker, recyclerView_screen_speaker, img_screen_speaker);
+                }
+
                 break;
 
             default:
