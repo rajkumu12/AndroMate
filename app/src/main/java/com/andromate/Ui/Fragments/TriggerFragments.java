@@ -181,10 +181,10 @@ public class TriggerFragments extends Fragment implements View.OnClickListener {
 
     private void load_dateandtime() {
         date_and_timelist = new ArrayList<>();
-        date_and_timelist.add(new TriggerItemModel("Calendar Event", R.drawable.datetime));
-        date_and_timelist.add(new TriggerItemModel("Day of Week/Month", R.drawable.datetime));
-        date_and_timelist.add(new TriggerItemModel("Day/Time Trigger", R.drawable.datetime));
-        date_and_timelist.add(new TriggerItemModel("Regular Interval", R.drawable.datetime));
+        date_and_timelist.add(new TriggerItemModel("Calendar Event", R.drawable.calendar_event));
+        date_and_timelist.add(new TriggerItemModel("Day of Week/Month", R.drawable.day_month));
+        date_and_timelist.add(new TriggerItemModel("Day/Time Trigger", R.drawable.day_timer));
+        date_and_timelist.add(new TriggerItemModel("Regular Interval", R.drawable.regular_interval));
         date_and_timelist.add(new TriggerItemModel("Stopwatch", R.drawable.stopwatches_icon));
 
 

@@ -159,10 +159,10 @@ public class ConstraintsFrag extends Fragment implements View.OnClickListener{
 
     private void loaddatetime() {
         datetimelist = new ArrayList<>();
-        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.datetime));
-        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.datetime));
-        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.datetime));
-        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.datetime));
+        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.calendar_event));
+        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.day_month));
+        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.day_timer));
+        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.regular_interval));
         datetimelist.add(new TriggerItemModel("Stopwatch",R.drawable.stopwatches_icon));
 
 
