@@ -44,7 +44,8 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/add_action"/>
             <ImageView
-
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_width="@dimen/dp18"
                 android:layout_height="@dimen/dp16"
                 android:layout_centerVertical="true"
@@ -57,11 +58,15 @@
                 android:layout_marginRight="@dimen/dp30"
                 android:layout_toLeftOf="@id/menu"
                 android:layout_width="@dimen/dp18"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:layout_centerVertical="true"
                 android:layout_height="@dimen/dp16"
                 android:src="@drawable/search_icon"/>
 
             <ImageView
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:id="@+id/menu"
                 android:layout_width="@dimen/dp12"
                 android:layout_height="@dimen/dp16"
