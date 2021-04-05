@@ -27,6 +27,9 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout lly_trigger;
     LinearLayout lly_action;
     LinearLayout lly_constraints;
+
+    public static String types;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +66,13 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         if (id==R.id.back_icon_addmacros){
             finish();
         }else if (id==R.id.lly_trigger){
+            types="trigger";
             startActivity(new Intent(AddMacroActivity.this,Add_triggersActivity.class));
         }else if (id==R.id.action_ui){
+            types="action";
             startActivity(new Intent(AddMacroActivity.this,AddAction.class));
         }else if (id==R.id.lly_constraints){
+            types="constraints";
             startActivity(new Intent(AddMacroActivity.this,AddConstraintsActivity.class));
         }else if (id==R.id.add_macro){
             showAlertDialog();

@@ -38,14 +38,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:layout_below="@+id/v1">
+        android:layout_below="@+id/v1"
+        android:layout_above="@+id/v2">
 
 
    <LinearLayout
 
        android:layout_width="match_parent"
        android:layout_marginTop="@dimen/dp24"
-       android:layout_marginBottom="@dimen/dp24"
+       android:layout_marginBottom="@dimen/dp8"
        android:layout_above="@+id/lly_oool"
        android:orientation="vertical"
        android:layout_height="match_parent">
@@ -305,6 +306,7 @@
            android:layout_height="wrap_content"
            android:layout_marginTop="@dimen/dp20"
            android:layout_marginHorizontal="@dimen/dp16"
+           android:layout_marginBottom="@dimen/dp30"
            android:orientation="horizontal">
 
            <androidx.appcompat.widget.AppCompatCheckBox

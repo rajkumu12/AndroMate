@@ -164,6 +164,7 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         conditionlist.add(new TriggerItemModel("If clause", R.drawable.if_claue));
         conditionlist.add(new TriggerItemModel("Repeat actions", R.drawable.repeat_mode));
 
+
         TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, conditionlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(AddAction.this, 2);
         recyclerView_ondition.setLayoutManager(layoutManager2);
@@ -800,7 +801,6 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
 
     void showexpnded(TextView tv_hide, RecyclerView recyclerView_show,
                      ImageView imageView_colored) {
-
 
         tv_hide.setVisibility(View.GONE);
         recyclerView_show.setVisibility(View.VISIBLE);

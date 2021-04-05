@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.andromate.CustomColors;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
+import com.andromate.Ui.Adapters.Application_trigger_item;
 import com.andromate.Ui.Adapters.NotificationsAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
@@ -95,8 +96,7 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
 
     private void load_Application() {
        applicationlist=new ArrayList<>();
-        applicationlist.add(new TriggerItemModel("App Install/Remove/\n" +
-                "update",R.drawable.suitcase));
+        applicationlist.add(new TriggerItemModel("App Install/Remove/\nupdate",R.drawable.suitcase));
 
         applicationlist.add(new TriggerItemModel("Application/Launched/\n" +
                 "Closed",R.drawable.recent_app_opened));
@@ -105,7 +105,7 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
 
         applicationlist.add(new TriggerItemModel("Tasker/Locate Plugin",R.drawable.tasker_locator));
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,applicationlist);
+        Application_trigger_item triggerItemsAdapters=new Application_trigger_item(this,applicationlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(Add_triggersActivity.this,2);
         recyclerView_application.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

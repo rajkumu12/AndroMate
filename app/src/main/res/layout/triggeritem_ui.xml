@@ -4,6 +4,7 @@
     android:layout_height="36dp"
     android:background="@drawable/triggeritemsbg"
     android:clickable="true"
+    android:id="@+id/lly_view"
     android:foreground="?android:attr/selectableItemBackground"
     android:layout_marginHorizontal="@dimen/dp4"
     android:layout_marginBottom="@dimen/dp20">
