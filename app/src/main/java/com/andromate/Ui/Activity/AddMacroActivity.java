@@ -1,14 +1,20 @@
 package com.andromate.Ui.Activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,8 +23,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
+import com.andromate.Ui.Adapters.Triggelists_items_Adapter;
+import com.andromate.db.DBHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddMacroActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,8 +40,16 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout lly_trigger;
     LinearLayout lly_action;
     LinearLayout lly_constraints;
+    TextView tv_notrigger;
 
     public static String types;
+    public static List<Triggerlistmodel>triggerlist;
+
+    RecyclerView recyclerView_triggerlist;
+    RelativeLayout rly_macronotes;
+    EditText et_description;
+    DBHelper mydb;
+    EditText editText_macroname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +68,14 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
 
         setContentView(R.layout.activity_add_macro);
 
+        mydb = new DBHelper(this);
+        recyclerView_triggerlist=findViewById(R.id.recy_trigger_item);
+        tv_notrigger=findViewById(R.id.tv_notrigger);
+        editText_macroname=findViewById(R.id.et_macroname);
+        rly_macronotes=findViewById(R.id.rly_macronotes);
+        et_description=findViewById(R.id.et_description);
+        triggerlist=new ArrayList<>();
+
         imageView_back=findViewById(R.id.back_icon_addmacros);
         lly_trigger=findViewById(R.id.lly_trigger);
         lly_action=findViewById(R.id.action_ui);
@@ -57,6 +86,7 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         lly_action.setOnClickListener(this);
         lly_constraints.setOnClickListener(this);
         add_macro.setOnClickListener(this);
+        rly_macronotes.setOnClickListener(this);
 
     }
 
@@ -64,7 +94,12 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         int id=v.getId();
         if (id==R.id.back_icon_addmacros){
-            finish();
+            if (triggerlist.size() !=0){
+                saveDialog();
+            }else {
+                finish();
+            }
+
         }else if (id==R.id.lly_trigger){
             types="trigger";
             startActivity(new Intent(AddMacroActivity.this,Add_triggersActivity.class));
@@ -76,7 +111,33 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(AddMacroActivity.this,AddConstraintsActivity.class));
         }else if (id==R.id.add_macro){
             showAlertDialog();
+        }else if (id==R.id.rly_macronotes){
+            et_description.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        loadTriggerlistitem();
+    }
+
+    private void loadTriggerlistitem() {
+
+
+        Triggelists_items_Adapter triggelists_items_adapter=new Triggelists_items_Adapter(this,triggerlist);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(AddMacroActivity.this);
+        recyclerView_triggerlist.setLayoutManager(layoutManager2);
+                            /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
+                                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
+        recyclerView_triggerlist.setItemAnimator(new DefaultItemAnimator());
+        recyclerView_triggerlist.setAdapter(triggelists_items_adapter);
+
+        if (triggerlist.size() !=0){
+            tv_notrigger.setVisibility(View.GONE);
+            recyclerView_triggerlist.setVisibility(View.VISIBLE);
+        }
+
     }
 
     public static void transparentStatusAndNavigation(Activity activity) {
@@ -146,4 +207,40 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         dialog.show();
     }
 
+
+
+    void saveDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddMacroActivity.this);
+        builder.setTitle("Save Macro")
+                .setMessage("Do you want to save macro")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mydb.insertDataMacro(editText_macroname.getText().toString(),et_description.getText().toString());
+
+                        mydb.getAllDataMacro();
+                        Log.d("hhhffhhfhfh","jjjj"+mydb.getAllDataMacro());
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+        //Creating dialog box
+        AlertDialog dialog  = builder.create();
+        dialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (triggerlist.size()!=0){
+            saveDialog();
+        }else {
+            super.onBackPressed();
+        }
+
+    }
 }

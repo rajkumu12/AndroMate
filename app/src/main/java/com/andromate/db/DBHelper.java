@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table " + MACRO_TABLE +" (ID INTEGER,MACRONAME TEXT,MACRODES TEXT)");
+        db.execSQL("create table " + MACRO_TABLE +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,MACRONAME TEXT,MACRODES TEXT)");
         db.execSQL("create table " + TABLENAME_TRIGGER +" (ID INTEGER,TRIGGERNAME TEXT,TRIGGER_DES TEXT,ICON INTEGER)");
         db.execSQL("create table " + TABLENAME_ACTION +" (ID INTEGER,ACTION_NAME TEXT,ACTION_NAME_DES TEXT,ICON INTEGER)");
         db.execSQL("create table " + TABLENAME_CONSTRAINTS +" (ID INTEGER,CONSTRAINTSNAME TEXT,CONSTRAINTS_DES TEXT,ICON INTEGER)");
@@ -53,10 +53,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLENAME_CONSTRAINTS);
         onCreate(db);
     }
-    public boolean insertDataMacro(int id,String macroname,String macrodes) {
+    public boolean insertDataMacro(String macroname,String macrodes) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ID,id);
         contentValues.put(MACRO_NAME,macroname);
         contentValues.put(MACRO_DES,macrodes);
         long result = db.insert(TABLENAME_TRIGGER,null ,contentValues);

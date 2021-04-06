@@ -1,0 +1,120 @@
+package com.andromate.Ui.Adapters;
+
+import android.content.Context;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.andromate.Model.Add_Action_model;
+import com.andromate.Model.ApplicationsInfo;
+import com.andromate.R;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class ApplicationlistAdapters extends RecyclerView.Adapter<ApplicationlistAdapters.ViewHolder> implements Filterable {
+
+    private Context context;
+    private List<ApplicationsInfo> arrayList;
+    private List<ApplicationsInfo> copylist;
+
+    public ApplicationlistAdapters(Context context, List<ApplicationsInfo> arrayList) {
+        this.context = context;
+        this.arrayList = arrayList;
+        this.copylist = arrayList;
+    }
+    @NonNull
+    @Override
+    public ApplicationlistAdapters.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.applist_ui, parent, false);
+        return new ApplicationlistAdapters.ViewHolder(v);
+    }
+
+
+
+
+    @Override
+    public void onBindViewHolder(@NonNull final ApplicationlistAdapters.ViewHolder holder, final int position) {
+        ApplicationsInfo applicationsInfo=arrayList.get(position);
+
+        holder.tv_appname.setText(applicationsInfo.getAppname());
+        holder.image_appicon.setImageDrawable(applicationsInfo.getIcon());
+
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return arrayList.size();
+    }
+
+
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView image_appicon;
+        TextView tv_appname;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            image_appicon=itemView.findViewById(R.id.app_icon);
+            tv_appname=itemView.findViewById(R.id.tv_text_appname);
+
+
+        }
+    }
+
+
+        @Override
+        public Filter getFilter() {
+            return new Filter() {
+                @Override
+                protected FilterResults performFiltering(CharSequence constraint) {
+
+                    String charString = constraint.toString();
+
+                    if (charString.isEmpty()){
+                        arrayList = copylist;
+                    }else{
+
+                        List<ApplicationsInfo> filterList = new ArrayList<>();
+
+                        for (ApplicationsInfo data : copylist){
+
+                            if (data.getAppname().toLowerCase().contains(charString)){
+                                filterList.add(data);
+                            }
+                        }
+
+                        arrayList = filterList;
+
+                    }
+
+                    FilterResults filterResults = new FilterResults();
+                    filterResults.values = arrayList;
+
+                    return filterResults;
+                }
+
+                @Override
+                protected void publishResults(CharSequence constraint, FilterResults results) {
+
+                    arrayList = (List<ApplicationsInfo>) results.values;
+                    notifyDataSetChanged();
+                }
+            };
+
+        }
+    }
+

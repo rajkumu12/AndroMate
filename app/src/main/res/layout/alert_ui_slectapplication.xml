@@ -14,7 +14,7 @@
         android:text="@string/select_option"/>
 
     <RadioGroup
-        android:id="@+id/rg_app_ins_type"
+        android:id="@+id/grp_apptype"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp20"
@@ -22,30 +22,19 @@
         android:orientation="vertical">
 
         <RadioButton
-            android:id="@+id/rb_app_installed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/dp8"
             android:textSize="@dimen/sp12"
             android:buttonTint="@color/theme_color"
-            android:text="Application Installed"/>
+            android:text="Any Application"/>
         <RadioButton
-            android:id="@+id/rb_app_updates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/dp8"
             android:buttonTint="@color/theme_color"
             android:textSize="@dimen/sp12"
-            android:text="Application Updates"/>
-        <RadioButton
-            android:id="@+id/rb_app_removed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp8"
-            android:textSize="@dimen/sp12"
-            android:buttonTint="@color/theme_color"
-            android:text="Application Removes"/>
-
+            android:text="Select Application(s)"/>
     </RadioGroup>
 
     <RelativeLayout
@@ -59,19 +48,21 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_app_in_cancel"
+                android:id="@+id/tv_cancel_apptype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/dp20"
                 android:paddingVertical="@dimen/dp8"
                 android:textColor="@color/theme_color"
+                android:textStyle="bold"
                 android:text="Cancel"/>
             <TextView
-                android:id="@+id/tv_app_in_ok"
+                android:id="@+id/app_type_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/dp20"
                 android:text="Ok"
+                android:textStyle="bold"
                 android:textColor="@color/theme_color"
                 android:paddingVertical="@dimen/dp8"/>
         </LinearLayout>
