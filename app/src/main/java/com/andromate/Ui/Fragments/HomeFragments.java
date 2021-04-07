@@ -1,20 +1,27 @@
 package com.andromate.Ui.Fragments;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.andromate.Model.MacroModel;
 import com.andromate.R;
 import com.andromate.Ui.Activity.AddMacroActivity;
 import com.andromate.Ui.Activity.AddMacroActivity_second;
 import com.andromate.Ui.Activity.ExportInport_Activity;
 import com.andromate.Ui.Activity.StopawatchActivity;
+import com.andromate.db.DBHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +33,9 @@ public class HomeFragments extends Fragment implements View.OnClickListener {
     LinearLayout lly_stopwatch;
     LinearLayout lly_export_import;
     LinearLayout lly_macro_wizard;
+
+
+
 
     public HomeFragments() {
         // Required empty public constructor
@@ -59,6 +69,7 @@ public class HomeFragments extends Fragment implements View.OnClickListener {
         lly_stopwatch.setOnClickListener(this);
         lly_export_import.setOnClickListener(this);
         lly_macro_wizard.setOnClickListener(this);
+
         return view;
     }
 

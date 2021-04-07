@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andromate.R;
+import com.andromate.Services.MyService;
 import com.andromate.Ui.Fragments.HomeFragments;
 import com.andromate.Ui.Fragments.InviteFragment;
 import com.andromate.Ui.Fragments.MacrosFragments;
@@ -69,7 +70,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         loadFragment(new HomeFragments());
         tv_heading.setText("ANDROMATE");
-        
+
         image_hamburger.setOnClickListener(this);
         navigation.setOnNavigationItemSelectedListener(this);
         img_bell.setOnClickListener(this);
@@ -99,8 +100,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             navigation.setSelectedItemId(R.id.navigation_home);
             drawerLayout.closeDrawer(Gravity.START);
         }
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -167,5 +166,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent service = new Intent(this, MyService.class);
+        startService(service);
     }
 }

@@ -21,6 +21,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ID = "id";
     public static final String MACRO_NAME = "macro_name";
     public static final String MACRO_DES = "macro_des";
+    public static final String STATUS = "true";
+    public static final String ACTIVE = "TIME";
 
     public static final String TRIGGERNAME = "triggername";
     public static final String TRIGGER_DES = "trigger_des";
@@ -38,10 +40,16 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table " + MACRO_TABLE +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,MACRONAME TEXT,MACRODES TEXT)");
-        db.execSQL("create table " + TABLENAME_TRIGGER +" (ID INTEGER,TRIGGERNAME TEXT,TRIGGER_DES TEXT,ICON INTEGER)");
+        String query = "CREATE TABLE " + MACRO_TABLE + " ("
+                + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + MACRO_NAME + " TEXT,"+ MACRO_DES + " TEXT,"+ STATUS + " TEXT,"+ ACTIVE + " TEXT,"
+                + TRIGGERNAME + " TEXT," + TRIGGER_DES + " TEXT,"+ ACTION_NAME + " TEXT,"+ ACTION_NAME_DES + " TEXT,"
+                + CONSTRAINTSNAME + " TEXT,"+ CONSTRAINTS_DES + " TEXT)";
+
+        db.execSQL(query);
+       /* db.execSQL("create table " + TABLENAME_TRIGGER +" (ID INTEGER,TRIGGERNAME TEXT,TRIGGER_DES TEXT,ICON INTEGER)");
         db.execSQL("create table " + TABLENAME_ACTION +" (ID INTEGER,ACTION_NAME TEXT,ACTION_NAME_DES TEXT,ICON INTEGER)");
-        db.execSQL("create table " + TABLENAME_CONSTRAINTS +" (ID INTEGER,CONSTRAINTSNAME TEXT,CONSTRAINTS_DES TEXT,ICON INTEGER)");
+        db.execSQL("create table " + TABLENAME_CONSTRAINTS +" (ID INTEGER,CONSTRAINTSNAME TEXT,CONSTRAINTS_DES TEXT,ICON INTEGER)");*/
 
 
     }
@@ -53,12 +61,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLENAME_CONSTRAINTS);
         onCreate(db);
     }
-    public boolean insertDataMacro(String macroname,String macrodes) {
+    public boolean insertDataMacro(String macroname,String macrodes,String status,String time,String triggername,String trigger_des,
+                                   String action_name,String action_des,String constraintsname,String constraints_des) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MACRO_NAME,macroname);
         contentValues.put(MACRO_DES,macrodes);
-        long result = db.insert(TABLENAME_TRIGGER,null ,contentValues);
+        contentValues.put(STATUS,status);
+        contentValues.put(ACTIVE,macrodes);
+        contentValues.put(TRIGGERNAME,macrodes);
+        contentValues.put(TRIGGER_DES,macrodes);
+        contentValues.put(ACTION_NAME,macrodes);
+        contentValues.put(ACTION_NAME_DES,macrodes);
+        contentValues.put(CONSTRAINTSNAME,macrodes);
+        contentValues.put(CONSTRAINTS_DES,macrodes);
+        long result = db.insert(MACRO_TABLE,null ,contentValues);
         if(result == -1)
             return false;
         else

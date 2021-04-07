@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +30,9 @@ import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
 import com.andromate.Ui.Adapters.Triggelists_items_Adapter;
 import com.andromate.db.DBHelper;
+import com.google.android.material.tabs.TabLayout;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,8 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     EditText et_description;
     DBHelper mydb;
     EditText editText_macroname;
+
+    public static String TAG="AddMacroActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,6 +215,9 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
 
 
     void saveDialog(){
+        String macroname=editText_macroname.getText().toString();
+        String macrodesc=et_description.getText().toString();
+
         AlertDialog.Builder builder = new AlertDialog.Builder(AddMacroActivity.this);
         builder.setTitle("Save Macro")
                 .setMessage("Do you want to save macro")
@@ -217,8 +225,22 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mydb.insertDataMacro(editText_macroname.getText().toString(),et_description.getText().toString());
-
+                        if (macroname.isEmpty()){
+                            Toast.makeText(AddMacroActivity.this, "Enter macroname", Toast.LENGTH_SHORT).show();
+                        }else if (macrodesc.isEmpty()){
+                            Toast.makeText(AddMacroActivity.this, "Enter description", Toast.LENGTH_SHORT).show();
+                        }else {
+                            StringBuilder triggersname = new StringBuilder("");
+                            for (int i=0;i<triggerlist.size();i++){
+                                Triggerlistmodel triggerlistmodel=triggerlist.get(i);
+                                triggersname.append(triggerlistmodel.getTriggername()).append(",");
+                            }
+                            String commaseparatedlist = triggersname.toString();
+                            Log.d(TAG,"ttt"+commaseparatedlist);
+                            mydb.insertDataMacro(macroname,macrodesc,"true","non",commaseparatedlist,"","",
+                                    "","","");
+                            finish();
+                        }
                         mydb.getAllDataMacro();
                         Log.d("hhhffhhfhfh","jjjj"+mydb.getAllDataMacro());
                     }

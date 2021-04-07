@@ -76,7 +76,7 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
                 if (holder.tv_title.getText().toString().equals("App Install/Remove/\nupdate")) {
                     showDialogtrigger();
                 } else {
-                    Toast.makeText(context, "Nooooo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -157,6 +157,22 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         dialog.setContentView(R.layout.alert_app_list_ui);
         RecyclerView recyclerView=dialog.findViewById(R.id.recyclerview_list_of_App);
         EditText et_search=dialog.findViewById(R.id.et_search);
+        TextView tv_cancel=dialog.findViewById(R.id.tv_cancel_selapp);
+        TextView tv_ok=dialog.findViewById(R.id.tv_ok_selapp);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
         CheckBox checkBox=dialog.findViewById(R.id.checkbox_nonlaunchable);
 

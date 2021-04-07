@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -15,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.andromate.Model.Add_Action_model;
 import com.andromate.Model.ApplicationsInfo;
+import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
+import com.andromate.Ui.Activity.AddMacroActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +30,7 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
     private Context context;
     private List<ApplicationsInfo> arrayList;
     private List<ApplicationsInfo> copylist;
-
+    Triggerlistmodel triggerlistmodel;
     public ApplicationlistAdapters(Context context, List<ApplicationsInfo> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
@@ -36,6 +40,7 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
     @Override
     public ApplicationlistAdapters.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.applist_ui, parent, false);
+        triggerlistmodel=new Triggerlistmodel();
         return new ApplicationlistAdapters.ViewHolder(v);
     }
 
@@ -49,7 +54,18 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
         holder.tv_appname.setText(applicationsInfo.getAppname());
         holder.image_appicon.setImageDrawable(applicationsInfo.getIcon());
 
-
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    triggerlistmodel.setTriggername(applicationsInfo.getAppname());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                }else {
+                    triggerlistmodel.setTriggername(applicationsInfo.getAppname());
+                    AddMacroActivity.triggerlist.remove(triggerlistmodel);
+                }
+            }
+        });
 
     }
 
@@ -64,12 +80,14 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
 
         ImageView image_appicon;
         TextView tv_appname;
+        CheckBox checkBox;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image_appicon=itemView.findViewById(R.id.app_icon);
             tv_appname=itemView.findViewById(R.id.tv_text_appname);
+            checkBox=itemView.findViewById(R.id.ch1);
 
 
         }
