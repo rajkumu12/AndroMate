@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-public class PackageremovalReceiver  extends BroadcastReceiver {
+import androidx.legacy.content.WakefulBroadcastReceiver;
+
+public class PackageremovalReceiver  extends WakefulBroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -15,6 +17,8 @@ public class PackageremovalReceiver  extends BroadcastReceiver {
             Toast.makeText(context, "UnInstalled", Toast.LENGTH_SHORT).show();
         }else if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")){
             Toast.makeText(context, "Installed", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(context, "from service", Toast.LENGTH_SHORT).show();
         }
 
 

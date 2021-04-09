@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="340dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp18"
+        android:layout_marginStart="@dimen/dp12"
+        android:text="@string/select_option"/>
+
+    <RadioGroup
+        android:id="@+id/rg_launch_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_app_launched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:textSize="@dimen/sp12"
+            android:buttonTint="@color/theme_color"
+            android:text="Application Launched"/>
+        <RadioButton
+            android:id="@+id/rb_app_closed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="Application Closed"/>
+
+
+        <CheckBox
+            android:id="@+id/chbx_mechanism"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp8"
+            android:layout_height="@dimen/dp28"
+            android:buttonTint="@color/theme_color"
+            android:text="Force legecy mechanism"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/dp12"
+            android:buttonTint="@color/theme_color"
+            android:text="Try this option if you have issues with the new application launched trigger
+implementation,or don't want to enable accessibilty access for Andromate"/>
+        <CheckBox
+            android:id="@+id/chbx_interfering"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp28"
+            android:buttonTint="@color/theme_color"
+            android:layout_marginTop="@dimen/dp8"
+            android:text="Prevent notifications interfering"/>
+        <TextView
+            android:id="@+id/tv_hide"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="@dimen/dp8"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/dp12"
+            android:text="Wipping down the status bar may interfere with this trigger.This option prevents this interference but may cause issues with the trigger on some devices "/>
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_app_launch_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:paddingVertical="@dimen/dp8"
+                android:textColor="@color/theme_color"
+                android:text="Cancel"/>
+            <TextView
+                android:id="@+id/tv_app_launch_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:text="Ok"
+                android:textColor="@color/theme_color"
+                android:paddingVertical="@dimen/dp8"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

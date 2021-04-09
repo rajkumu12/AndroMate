@@ -1,6 +1,7 @@
 package com.andromate.Ui.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -41,7 +42,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_heading;
 
     LinearLayout lly_nav_invite,lly_home;
-
+    public static String id1 = "test_channel_01";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,10 +169,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         win.setAttributes(winParams);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent service = new Intent(this, MyService.class);
-        startService(service);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Intent service = new Intent(this, MyService.class);
+            startForegroundService(service);
+        } else {
+            Intent service = new Intent(this, MyService.class);
+            startService(service);
+        }
+
     }
 }
