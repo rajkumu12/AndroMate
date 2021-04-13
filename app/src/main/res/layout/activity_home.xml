@@ -16,8 +16,6 @@
         android:layout_height="match_parent"
         android:id="@+id/rly_rootlayout"
         tools:context=".UI.Home.HomeActivity">
-
-
         <RelativeLayout
             android:id="@+id/topactionbar"
             android:layout_width="match_parent"

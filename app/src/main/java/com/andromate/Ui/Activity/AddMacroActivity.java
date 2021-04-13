@@ -53,7 +53,9 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     EditText et_description;
     DBHelper mydb;
     EditText editText_macroname;
+    RelativeLayout rly_interface;
 
+    String backstate="";
     public static String TAG="AddMacroActivity";
 
     @Override
@@ -79,6 +81,7 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         editText_macroname=findViewById(R.id.et_macroname);
         rly_macronotes=findViewById(R.id.rly_macronotes);
         et_description=findViewById(R.id.et_description);
+        rly_interface=findViewById(R.id.rly_interface);
         triggerlist=new ArrayList<>();
 
         imageView_back=findViewById(R.id.back_icon_addmacros);
@@ -92,6 +95,7 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         lly_constraints.setOnClickListener(this);
         add_macro.setOnClickListener(this);
         rly_macronotes.setOnClickListener(this);
+        rly_interface.setOnClickListener(this);
 
     }
 
@@ -100,6 +104,7 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         int id=v.getId();
         if (id==R.id.back_icon_addmacros){
             if (triggerlist.size() !=0){
+                backstate="b";
                 saveDialog();
             }else {
                 finish();
@@ -115,9 +120,13 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
             types="constraints";
             startActivity(new Intent(AddMacroActivity.this,AddConstraintsActivity.class));
         }else if (id==R.id.add_macro){
-            showAlertDialog();
+            backstate="";
+            saveDialog();
         }else if (id==R.id.rly_macronotes){
             et_description.setVisibility(View.VISIBLE);
+        }else if (id==R.id.rly_interface){
+
+            showAlertDialog();
         }
     }
 
@@ -248,7 +257,12 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        if (backstate.equals("b")){
+                            finish();
+                        }else {
+                            dialog.cancel();
+                        }
+
                     }
                 });
         //Creating dialog box
@@ -259,6 +273,7 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onBackPressed() {
         if (triggerlist.size()!=0){
+            backstate="b";
             saveDialog();
         }else {
             super.onBackPressed();

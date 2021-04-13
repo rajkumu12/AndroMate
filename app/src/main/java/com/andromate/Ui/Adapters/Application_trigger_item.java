@@ -101,10 +101,10 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         check_mechanism.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     tv_hide.setVisibility(View.VISIBLE);
                     check_interferening.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     tv_hide.setVisibility(View.GONE);
                     check_interferening.setVisibility(View.GONE);
                 }
@@ -137,11 +137,9 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         dialog.getWindow().setAttributes(layoutParams);
         dialog.show();
 
-
     }
 
     private void showLaunchApplication() {
-
 
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_launch_option);
@@ -149,10 +147,6 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         RadioGroup radioGroup = dialog.findViewById(R.id.rg_launch_type);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
-
-
-
-
 
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -166,24 +160,150 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
             public void onClick(View v) {
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton rd_btn = dialog.findViewById(selectedId);
-                Toast.makeText(context, "okkkkk"+rd_btn.getText().toString(), Toast.LENGTH_SHORT).show();
+
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application(s)")) {
-                    Log.d("lhfjfhhff","ddkj");
+                    Log.d("lhfjfhhff", "ddkj");
                     showApplistDialog();
                     dialog.dismiss();
-
-                }else if (rd_btn != null && !rd_btn.getText().toString().equals("Enter Package Name")){
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
+                    Log.d("jkslkfjkflkfk","kkkk");
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    showpackagedialog();
                     dialog.dismiss();
-
                 }
             }
         });
-
         WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setAttributes(layoutParams);
         dialog.show();
+    }
+
+    private void showpackagedialog() {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.enterpackagename);
+        EditText et_package=dialog.findViewById(R.id.et_packagename);
+        ImageView image_expand=dialog.findViewById(R.id.selectpackage);
+
+        TextView textVie_ok=dialog.findViewById(R.id.tv_app_launch_ok);
+        TextView textVie_cancel=dialog.findViewById(R.id.tv_app_launch_cancel);
+
+
+        image_expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPackagelist(et_package);
+            }
+        });
+
+        textVie_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_package.getText().toString().equals("")){
+                    Toast.makeText(context, "Select or enter package manually", Toast.LENGTH_SHORT).show();
+                }else {
+                    triggerlistmodel.setTriggerdescrption(et_package.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+            }
+        });
+        textVie_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    private void showPackagelist(EditText et_package) {
+        Toast.makeText(context, "wait while loading apps", Toast.LENGTH_SHORT).show();
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.packagelistui);
+
+        LinearLayout linearLayout=dialog.findViewById(R.id.lly_items_options);
+        TextView textVie_ok=dialog.findViewById(R.id.tv_app_launch_ok);
+        TextView textVie_cancel=dialog.findViewById(R.id.tv_app_launch_cancel);
+
+       /*RadioGroup radioGroup=dialog.findViewById(R.id.rg_packagelist_option);*/
+        boolean getSysPackages=false;
+       /* RadioButton rb = new RadioButton(context);*/
+
+
+        ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
+        List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
+        for (int i = 0; i < packs.size(); i++) {
+            PackageInfo p = packs.get(i);
+            if ((!getSysPackages) && (p.versionName == null)) {
+                continue;
+            }
+            ApplicationsInfo newInfo = new ApplicationsInfo();
+            newInfo.setAppname(p.applicationInfo.loadLabel(context.getPackageManager()).toString());
+            ;
+            newInfo.setPname(p.packageName);
+            Log.d("jfdkfjdkfjkfjf", "jjjjj" + p.packageName);
+            newInfo.setVersionName(p.versionName);
+            newInfo.setVersionCode(p.versionCode);
+
+            //rg is private member of class which refers to the radio group which I find
+            //by id.
+
+            newInfo.setIcon(p.applicationInfo.loadIcon(context.getPackageManager()));
+            res.add(newInfo);
+        }
+        final RadioButton[] rb = new RadioButton[res.size()];
+        RadioGroup rg = new RadioGroup(context); //create the RadioGroup
+        rg.setOrientation(RadioGroup.VERTICAL);
+
+        for (int i=0;i<res.size();i++){
+            ApplicationsInfo newInfo = res.get(i);
+
+            rb[i]  = new RadioButton(context);
+            rg.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+            rb[i].setText(newInfo.getAppname());
+
+        }
+        linearLayout.addView(rg);//you add the whole RadioGroup to the layout
+
+
+        textVie_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = rg.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn!=null){
+                    et_package.setText(rd_btn.getText());
+                    dialog.dismiss();
+                }
+              /*  Log.d("jflkdfjdklfjdkf","fnjdf"+rd_btn.getText().toString());
+                Toast.makeText(context, "ooo"+rd_btn.getText().toString(), Toast.LENGTH_SHORT).show();*/
+            }
+        });
+
+
+
+        textVie_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
+
+
+
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
 
 
     }
@@ -209,9 +329,9 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
-                 /*   triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                 triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     dialog.dismiss();
-                    dialogAppType();*/
+                    dialogAppType();
                 }
             }
         });
@@ -299,7 +419,6 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
                 }
             }
         });
-
 
         et_search.addTextChangedListener(new TextWatcher() {
             @Override

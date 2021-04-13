@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.andromate.Services.MyService;
+
 import com.andromate.Ui.Activity.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -29,8 +29,8 @@ public class SplashActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         setContentView(R.layout.activity_splash);
-        Intent intent = new Intent(this, MyService.class);
-        startService(intent);
+       /* Intent intent = new Intent(this, MyService.class);
+        startService(intent);*/
     }
     protected void onResume() {
         super.onResume();

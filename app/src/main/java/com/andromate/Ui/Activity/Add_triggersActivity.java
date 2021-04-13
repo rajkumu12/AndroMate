@@ -101,7 +101,7 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
         applicationlist.add(new TriggerItemModel("Application/Launched/\n" +
                 "Closed",R.drawable.recent_app_opened));
 
-        applicationlist.add(new TriggerItemModel("Recent Apps Opened",R.drawable.recent_app_opened));
+       /* applicationlist.add(new TriggerItemModel("Recent Apps Opened",R.drawable.recent_app_opened));*/
 
         applicationlist.add(new TriggerItemModel("Tasker/Locate Plugin",R.drawable.tasker_locator));
 

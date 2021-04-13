@@ -9,10 +9,13 @@ import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +27,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.andromate.R;
-import com.andromate.Services.MyService;
 import com.andromate.Ui.Fragments.HomeFragments;
 import com.andromate.Ui.Fragments.InviteFragment;
 import com.andromate.Ui.Fragments.MacrosFragments;
@@ -33,6 +35,8 @@ import com.andromate.Ui.Fragments.TemplatesFragments;
 import com.andromate.Ui.On;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener,BottomNavigationView.OnNavigationItemSelectedListener {
     public static BottomNavigationView navigation;
@@ -67,7 +71,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         lly_nav_invite = findViewById(R.id.nvd_invite_friend);
         lly_home = findViewById(R.id.nvd_home);
         tv_heading=findViewById(R.id.tv_heading);
-
+        permission();
 
         loadFragment(new HomeFragments());
         tv_heading.setText("ANDROMATE");
@@ -174,12 +178,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         super.onBackPressed();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Intent service = new Intent(this, MyService.class);
-            startForegroundService(service);
+           /* Intent service = new Intent(this, MyService.class);
+            startForegroundService(service);*/
         } else {
-            Intent service = new Intent(this, MyService.class);
-            startService(service);
+           /* Intent service = new Intent(this, MyService.class);
+            startService(service);*/
         }
 
+    }
+
+    void  permission(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String packageName = getApplicationContext().getPackageName();
+            PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
+            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+                Intent intent = new Intent();
+                intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+                intent.setData(Uri.parse("package:" + packageName));
+                startActivity(intent);
+            }
+        }
     }
 }

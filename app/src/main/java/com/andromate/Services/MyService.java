@@ -1,3 +1,4 @@
+/*
 package com.andromate.Services;
 
 
@@ -27,6 +28,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.andromate.R;
+import com.andromate.Receivers.PackageremovalReceiver;
 import com.andromate.Ui.Activity.HomeActivity;
 
 import java.util.Random;
@@ -34,13 +36,17 @@ import java.util.Random;
 public class MyService extends  Service {
 
 
+*/
+/*
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
+    PackageremovalReceiver packageremovalReceiver;
     private final static String TAG = "MyForegroundService";
 
     Random r;
 
     public MyService() {
+
     }
 
     // Handler that receives messages from the thread
@@ -53,13 +59,19 @@ public class MyService extends  Service {
         public void handleMessage(Message msg) {
             //promote to foreground and create persistent notification.
             //in Oreo we only have a few seconds to do this or the service is killed.
-          /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+          *//*
+
+*/
+/*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 startMyOwnForeground();
             }else {
                 Notification notification = getNotification("MyService is running");
                 startForeground(msg.arg1, notification);  //not sure what the ID needs to be.
             }
+*//*
 */
+/*
+
 
 
             Log.d(TAG, "should be foreground now.");
@@ -86,7 +98,7 @@ public class MyService extends  Service {
                 //make a toast
                 //unable to ensure the toasts will always show, so use a handler and post it for later.
                 // Toast.makeText(MyForeGroundService.this, info, Toast.LENGTH_SHORT).show();
-                toast(info);
+
             }
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
@@ -181,9 +193,12 @@ public class MyService extends  Service {
     public void onDestroy() {
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
+*//*
+
 
     // build a persistent notification and return it.
-    /*public Notification getNotification(String message) {
+    */
+/*public Notification getNotification(String message) {
 
         return new NotificationCompat.Builder(getApplicationContext(), HomeActivity.id1)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -192,5 +207,6 @@ public class MyService extends  Service {
                 .setContentTitle("Service")   //Title message top row.
                 .setContentText(message)  //message when looking at the notification, second row
                 .build();  //finally build and return a Notification.
-    }*/
-}
+    }*//*
+
+}*/
