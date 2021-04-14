@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.andromate.Constraints.Dialogs;
 import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
 
@@ -35,9 +37,14 @@ public class Triggelists_items_Adapter extends RecyclerView.Adapter<Triggelists_
     @Override
     public void onBindViewHolder(@NonNull final Triggelists_items_Adapter.ViewHolder holder, final int position) {
         Triggerlistmodel add_action_model = arrayList.get(position);
-
         holder.textView_trigger.setText(add_action_model.getTriggername());
         holder.textView_des.setText(add_action_model.getTriggerdescrption());
+        holder.rly_trigger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialogs.showConfigurations(context,add_action_model);
+            }
+        });
 
 
     }
@@ -51,12 +58,15 @@ public class Triggelists_items_Adapter extends RecyclerView.Adapter<Triggelists_
 
         TextView textView_trigger;
         TextView textView_des;
+        RelativeLayout rly_trigger;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textView_trigger=itemView.findViewById(R.id.tv_trigggers);
             textView_des=itemView.findViewById(R.id.tv_descriptiontriggers);
+
+            rly_trigger=itemView.findViewById(R.id.rly_view);
 
         }
     }

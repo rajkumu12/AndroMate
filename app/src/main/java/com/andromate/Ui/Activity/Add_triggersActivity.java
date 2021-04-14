@@ -21,6 +21,7 @@ import com.andromate.CustomColors;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
 import com.andromate.Ui.Adapters.Application_trigger_item;
+import com.andromate.Ui.Adapters.BatteryTriggerItems;
 import com.andromate.Ui.Adapters.NotificationsAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
@@ -118,7 +119,6 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void load_battery() {
-
         battery_powerslist=new ArrayList<>();
         battery_powerslist.add(new TriggerItemModel("Battery Level",R.drawable.battery_hori_icon));
         battery_powerslist.add(new TriggerItemModel("Battery Saver State",R.drawable.battery_icon));
@@ -128,16 +128,13 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
                 "Disconnected",R.drawable.powe_connected));
 
 
-
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,battery_powerslist);
+        BatteryTriggerItems triggerItemsAdapters=new BatteryTriggerItems(this,battery_powerslist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(Add_triggersActivity.this,2);
         recyclerView_battery.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
                                 recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
         recyclerView_battery.setItemAnimator(new DefaultItemAnimator());
         recyclerView_battery.setAdapter(triggerItemsAdapters);
-
-
     }
 
     private void load_call() {
@@ -149,7 +146,6 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
         call_smslist.add(new TriggerItemModel("Call Outgoing",R.drawable.call_outgoing));
         call_smslist.add(new TriggerItemModel("Dial Phone Number",R.drawable.dial_number));
         call_smslist.add(new TriggerItemModel("SMS Received",R.drawable.sms_received));
-
 
 
         TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,call_smslist);

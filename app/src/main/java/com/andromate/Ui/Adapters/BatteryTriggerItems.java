@@ -1,48 +1,29 @@
 package com.andromate.Ui.Adapters;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.andromate.Constraints.Dialogs;
 import com.andromate.CustomColors;
-import com.andromate.Model.ApplicationsInfo;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
-import com.andromate.Ui.Activity.AddMacroActivity;
-import com.andromate.Ui.Activity.Add_triggersActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.andromate.Constraints.Dialogs.showLaunchCloseDialog;
 
-public class Application_trigger_item extends RecyclerView.Adapter<Application_trigger_item.ViewHolder> {
+public class BatteryTriggerItems extends RecyclerView.Adapter<BatteryTriggerItems.ViewHolder> {
 
     private Context context;
     private List<TriggerItemModel> arrayList;
@@ -52,21 +33,21 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
     String triggerdesc;
     Triggerlistmodel triggerlistmodel;
 
-    public Application_trigger_item(Context context, List<TriggerItemModel> arrayList) {
+    public BatteryTriggerItems(Context context, List<TriggerItemModel> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
 
     @NonNull
     @Override
-    public Application_trigger_item.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BatteryTriggerItems.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.triggeritem_ui, parent, false);
         triggerlistmodel = new Triggerlistmodel();
-        return new Application_trigger_item.ViewHolder(v);
+        return new BatteryTriggerItems.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final Application_trigger_item.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final BatteryTriggerItems.ViewHolder holder, final int position) {
         TriggerItemModel triggerItemModel = arrayList.get(position);
 
         holder.imageView.setImageResource(triggerItemModel.getImage());
@@ -77,8 +58,8 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         holder.lly_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.tv_title.getText().toString().equals("App Install/Remove/\nupdate")) {
-                    Dialogs.showDialogtrigger(context,triggerlistmodel);
+                if (holder.tv_title.getText().toString().equals("Battery Level")) {
+                    Dialogs.showsbattery_option(context,triggerlistmodel);
                 } else if (holder.tv_title.getText().toString().equals("Application/Launched/\nClosed")) {
                     showLaunchCloseDialog(context,triggerlistmodel);
                 } else {
