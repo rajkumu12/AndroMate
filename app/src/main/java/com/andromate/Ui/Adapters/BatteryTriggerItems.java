@@ -59,11 +59,16 @@ public class BatteryTriggerItems extends RecyclerView.Adapter<BatteryTriggerItem
             @Override
             public void onClick(View v) {
                 if (holder.tv_title.getText().toString().equals("Battery Level")) {
-                    Dialogs.showsbattery_option(context,triggerlistmodel);
-                } else if (holder.tv_title.getText().toString().equals("Application/Launched/\nClosed")) {
-                    showLaunchCloseDialog(context,triggerlistmodel);
+                    Dialogs.showsbattery_option(context, triggerlistmodel);
+                } else if (holder.tv_title.getText().toString().equals("Battery Saver State")) {
+                    Dialogs.show_battery_state(context, triggerlistmodel);
+                } else if (holder.tv_title.getText().toString().equals("Battery Temperature")) {
+                    Dialogs.showstempreture_option(context, triggerlistmodel);
+                } else if (holder.tv_title.getText().toString().equals("Power Connected/\n" +
+                        "Disconnected")) {
+                    Dialogs.showsPower_option(context, triggerlistmodel);
                 } else {
-                    Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Work in  progress", Toast.LENGTH_SHORT).show();
                 }
             }
         });

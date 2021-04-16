@@ -25,10 +25,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.andromate.Model.ApplicationsInfo;
+import com.andromate.Model.ContactModel;
 import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
 import com.andromate.Ui.Activity.AddMacroActivity;
 import com.andromate.Ui.Adapters.ApplicationlistAdapters;
+import com.andromate.Ui.Adapters.Call_SmsAdapter;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 import com.andromate.Ui.On;
 
@@ -573,16 +575,13 @@ public  class Dialogs {
                     triggerlistmodel.setTriggerdescrption("<="+tv_percentage.getText().toString());
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
-                }else if (rd_btn!=null && rd_btn.getText().toString().equals("Decrease to")){
+                }else if (rd_btn!=null && rd_btn.getText().toString().equals("Increase to")){
                     triggerlistmodel.setTriggerdescrption(">="+tv_percentage.getText().toString());
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
-                }else {
+                }else if (rd_btn==null){
                     Toast.makeText(context, "Select one option", Toast.LENGTH_SHORT).show();
                 }
-
-
-
 
             }
         });
@@ -590,6 +589,365 @@ public  class Dialogs {
         dialog.show();
     }
     //endregion
+
+    //region batterystate
+    public static void show_battery_state(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_batterysaver_state);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_batterystate_type);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
+                    triggerlistmodel.setTriggername("Battery Saver State");
+                    triggerlistmodel.setTriggerdescrption(rd_btn.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+        // Apply the newly created layout parameters to
+    }
+
+
+
+    public static void showstempreture_option(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_battery_select_option);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_launch_type);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
+                    triggerlistmodel.setTriggername("Battery Temperature");
+                    dialog.dismiss();
+                    showbatteryTempDialog4(context,triggerlistmodel);
+                }
+            }
+        });
+
+
+        dialog.show();
+
+        // Apply the newly created layout parameters to
+    }
+
+
+
+    private static void showbatteryTempDialog4(Context context,Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_battery_level_trigger);
+        TextView tv_percentage=dialog.findViewById(R.id.tv_id_percentage);
+        SeekBar seekBar=dialog.findViewById(R.id.seek_change_percentage);
+        RadioGroup rg_increase_de_type=dialog.findViewById(R.id.rg_increase_de_type);
+        TextView textView_cancel=dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView textView_ok=dialog.findViewById(R.id.tv_app_launch_ok);
+
+        dialog.setCancelable(false);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tv_percentage.setText(progress+"%");
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+
+            }
+        });
+
+
+        textView_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        textView_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = rg_increase_de_type.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+
+                if (rd_btn!=null && rd_btn.getText().toString().equals("Decrease to")){
+                    triggerlistmodel.setTriggerdescrption("<="+tv_percentage.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn!=null && rd_btn.getText().toString().equals("Increase to")){
+                    triggerlistmodel.setTriggerdescrption(">="+tv_percentage.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn==null){
+                    Toast.makeText(context, "Select one option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        dialog.show();
+    }
+
+
+    public static void showsPower_option(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dialog_power);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_powerConnected_disconnected);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                Log.d("jkfjfkjfkfkf","dd"+rd_btn.getText().toString());
+                if (rd_btn != null && rd_btn.getText().toString().equals("Power Connected")) {
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    showpowertypeoption(context,triggerlistmodel);
+                    dialog.dismiss();
+                    ;
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Power Disconnected")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn == null){
+                    Toast.makeText(context, "Select one of the option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        dialog.show();
+
+        // Apply the newly created layout parameters to
+    }
+
+    private static void showpowertypeoption(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dialog_power_type);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        CheckBox wired=dialog.findViewById(R.id.rb_app_power_wired);
+        CheckBox wireless=dialog.findViewById(R.id.rb_app_wireless);
+        CheckBox wiredslow=dialog.findViewById(R.id.rb_app_power_wiredslow);
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if (wired.isChecked() && wireless.isChecked() && wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption("Any");
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else if (wired.isChecked()&& wireless.isChecked() && !wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption(wired.getText().toString()+"+"+wireless.getText().toString());
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else if (!wired.isChecked()&& wireless.isChecked() && wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption(wireless.getText().toString()+"+"+wiredslow.getText().toString());
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else if (wired.isChecked()&& !wireless.isChecked() && wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption(wired.getText().toString()+"+"+wiredslow.getText().toString());
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else if (wired.isChecked()&& !wireless.isChecked() && !wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption(wired.getText().toString());
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else if (!wired.isChecked()&& wireless.isChecked() && !wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption(wireless.getText().toString());
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else if (!wired.isChecked()&& !wireless.isChecked() && wiredslow.isChecked()){
+                   triggerlistmodel.setTriggerdescrption(wiredslow.getText().toString());
+                   AddMacroActivity.triggerlist.add(triggerlistmodel);
+                   dialog.dismiss();
+               }else {
+                   Toast.makeText(context, "Choose one", Toast.LENGTH_SHORT).show();
+               }
+            }
+        });
+
+
+        dialog.show();
+
+
+    }
+
+
+    //endregion
+
+
+
+    //region call_sms
+
+
+    public static void showContacts(Context context, Triggerlistmodel triggerlistmodel, List<ContactModel> contactModelList) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_contactlistui);
+        dialog.setCancelable(false);
+        /*RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_powerConnected_disconnected);*/
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        LinearLayout layout=dialog.findViewById(R.id.lly_contactlist);
+
+        StringBuilder str = new StringBuilder();
+        for (int i=0;i<contactModelList.size();i++){
+            ContactModel contactModel=contactModelList.get(i);
+
+            CheckBox cb = new CheckBox(context);
+            cb.setText(contactModel.getName());
+            layout.addView(cb);
+
+
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        str.append(cb.getText()+",");
+                    }else {
+
+                    }
+                }
+            });
+
+        }
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (str!=null){
+                    triggerlistmodel.setTriggerdescrption(String.valueOf(str));
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+                /*int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                Log.d("jkfjfkjfkfkf","dd"+rd_btn.getText().toString());
+                if (rd_btn != null && rd_btn.getText().toString().equals("Power Connected")) {
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    showpowertypeoption(context,triggerlistmodel);
+                    dialog.dismiss();
+                    ;
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Power Disconnected")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn == null){
+                    Toast.makeText(context, "Select one of the option", Toast.LENGTH_SHORT).show();
+                }*/
+            }
+        });
+
+
+        dialog.show();
+
+        // Apply the newly created layout parameters to
+    }
+
+
+    public static void show_call_ended(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dialog_call_ended);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_contctstype);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                Log.d("jkfjfkjfkfkf","dd"+rd_btn.getText().toString());
+                if (rd_btn != null && rd_btn.getText().toString().equals("Select Contacts(s)")) {
+                    Call_SmsAdapter call_smsAdapter=new Call_SmsAdapter(context);
+                    call_smsAdapter.getContactlist(context);
+                    ;dialog.dismiss();
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Power Disconnected")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn == null){
+                    Toast.makeText(context, "Select one of the option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+        dialog.show();
+
+        // Apply the newly created layout parameters to
+    }
+
+
+
+
+    //end region
+
 
 
 

@@ -4,7 +4,9 @@
     package="com.andromate">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -37,13 +39,28 @@
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
                 <action android:name="android.intent.action.PACKAGE_DATA_CLEARED" />
                 <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        <service
+        android:name=".Services.ExampleJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
        <!-- <service
             android:name=".Services.MyService"
             android:enabled="true"
             android:exported="true" />-->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/black" /> <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming notification message. -->
+
     </application>
 
 </manifest>

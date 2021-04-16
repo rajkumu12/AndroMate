@@ -22,6 +22,7 @@ import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
 import com.andromate.Ui.Adapters.Application_trigger_item;
 import com.andromate.Ui.Adapters.BatteryTriggerItems;
+import com.andromate.Ui.Adapters.Call_SmsAdapter;
 import com.andromate.Ui.Adapters.NotificationsAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
@@ -148,13 +149,13 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
         call_smslist.add(new TriggerItemModel("SMS Received",R.drawable.sms_received));
 
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,call_smslist);
+        Call_SmsAdapter call_smsAdapter=new Call_SmsAdapter(this,call_smslist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(Add_triggersActivity.this,2);
         recyclerView_call_list.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
                                 recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
         recyclerView_call_list.setItemAnimator(new DefaultItemAnimator());
-        recyclerView_call_list.setAdapter(triggerItemsAdapters);
+        recyclerView_call_list.setAdapter(call_smsAdapter);
     }
 
     private void load_connectivity() {
