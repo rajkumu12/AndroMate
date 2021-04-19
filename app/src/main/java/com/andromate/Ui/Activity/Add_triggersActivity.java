@@ -23,6 +23,7 @@ import com.andromate.R;
 import com.andromate.Ui.Adapters.Application_trigger_item;
 import com.andromate.Ui.Adapters.BatteryTriggerItems;
 import com.andromate.Ui.Adapters.Call_SmsAdapter;
+import com.andromate.Ui.Adapters.Connectivity_Adapter;
 import com.andromate.Ui.Adapters.NotificationsAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
@@ -181,7 +182,7 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
 
 
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,connectivitylist);
+        Connectivity_Adapter triggerItemsAdapters=new Connectivity_Adapter(this,connectivitylist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(Add_triggersActivity.this,2);
         recyclerView_connectivitylist.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

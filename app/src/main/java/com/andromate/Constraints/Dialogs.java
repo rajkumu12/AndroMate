@@ -2,7 +2,10 @@ package com.andromate.Constraints;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,11 +34,10 @@ import com.andromate.R;
 import com.andromate.Ui.Activity.AddMacroActivity;
 import com.andromate.Ui.Adapters.ApplicationlistAdapters;
 import com.andromate.Ui.Adapters.Call_SmsAdapter;
-import com.andromate.Ui.Adapters.TriggerItemsAdapters;
-import com.andromate.Ui.On;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public  class Dialogs {
   public static ProgressDialog progressDialog;
@@ -482,10 +484,13 @@ public  class Dialogs {
     //endregion
 
     //region configuration
-    public static void showConfigurations(Context context,Triggerlistmodel triggerlistmodel) {
+    public static void showConfigurations(Context context, Triggerlistmodel triggerlistmodel, String s) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.configurationui);
         dialog.setCancelable(true);
+
+        TextView tv_tittle=dialog.findViewById(R.id.tv_tittle);
+        tv_tittle.setText(s);
 
         dialog.show();
 
@@ -829,14 +834,18 @@ public  class Dialogs {
     //region call_sms
 
 
-    public static void showContacts(Context context, Triggerlistmodel triggerlistmodel, List<ContactModel> contactModelList) {
+    public static void showContacts(Context context, Triggerlistmodel triggerlistmodel, List<ContactModel> contactModelList,String heading) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_contactlistui);
         dialog.setCancelable(false);
         /*RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_powerConnected_disconnected);*/
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        TextView tv_head=dialog.findViewById(R.id.tvhead);
         LinearLayout layout=dialog.findViewById(R.id.lly_contactlist);
+
+
+        tv_head.setText(heading);
 
         StringBuilder str = new StringBuilder();
         for (int i=0;i<contactModelList.size();i++){
@@ -851,7 +860,9 @@ public  class Dialogs {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked){
+
                         str.append(cb.getText()+",");
+
                     }else {
 
                     }
@@ -872,6 +883,7 @@ public  class Dialogs {
             public void onClick(View v) {
 
                 if (str!=null){
+                    Log.d("Dailog","jjfjf"+triggerlistmodel);
                     triggerlistmodel.setTriggerdescrption(String.valueOf(str));
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
@@ -924,19 +936,56 @@ public  class Dialogs {
                 Log.d("jkfjfkjfkfkf","dd"+rd_btn.getText().toString());
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Contacts(s)")) {
                     Call_SmsAdapter call_smsAdapter=new Call_SmsAdapter(context);
-                    call_smsAdapter.getContactlist(context);
+                    call_smsAdapter.getContactlist(context,triggerlistmodel,rd_btn.getText().toString());
                     ;dialog.dismiss();
-                }else if (rd_btn != null && rd_btn.getText().toString().equals("Power Disconnected")){
-                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Select Number")){
+                    selectnumber(context,triggerlistmodel);
+                    dialog.dismiss();
+                   /* Toast.makeText(context, "one"+rd_btn.getText().toString(), Toast.LENGTH_SHORT).show();*/
+                  /*  triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
-                    dialog.dismiss();
+                    dialog.dismiss();*/
                 }else if (rd_btn == null){
                     Toast.makeText(context, "Select one of the option", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        dialog.show();
+        // Apply the newly created layout parameters to
+    }
+
+
+
+    public static void selectnumber(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.customnumber_layout);
+        dialog.setCancelable(false);
+        EditText edit_mobilenumber=dialog.findViewById(R.id.et_mobilenumber);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                show_call_ended(context,triggerlistmodel);
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (edit_mobilenumber.getText().toString().isEmpty()){
+                    Toast.makeText(context, "Enter Mobile number", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    triggerlistmodel.setTriggerdescrption(edit_mobilenumber.getText().toString().trim());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+            }
+        });
 
         dialog.show();
 
@@ -945,6 +994,271 @@ public  class Dialogs {
 
 
 
+    public static void Dialnumber(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dial_number);
+        dialog.setCancelable(false);
+        EditText edit_mobilenumber=dialog.findViewById(R.id.et_mobilenumber);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_dailnumber);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+
+                if (edit_mobilenumber.getText().toString().isEmpty() && rd_btn !=null){
+                    Toast.makeText(context, "Enter the number", Toast.LENGTH_SHORT).show();
+                }else if (!edit_mobilenumber.getText().toString().isEmpty() && rd_btn ==null){
+                    Toast.makeText(context, "Select any option", Toast.LENGTH_SHORT).show();
+               /* if (edit_mobilenumber.getText().toString().isEmpty()){
+                    Toast.makeText(context, "Enter Mobile number", Toast.LENGTH_SHORT).show();*/
+                }else if (edit_mobilenumber.getText().toString().isEmpty() && rd_btn ==null){
+                    Toast.makeText(context, "Enter number & Select option", Toast.LENGTH_SHORT).show();
+                } else {
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption(edit_mobilenumber.getText().toString().trim());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+        // Apply the newly created layout parameters to
+    }
+
+
+
+
+    //end region
+
+
+    //region connectivity
+
+    public static void showbeacons_event(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dialog_beacon_event);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        // Apply the newly created layout parameters to
+    }
+
+    public static void showbluetooth_event(Context context, Triggerlistmodel triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dialog_bluetooth_event);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn !=null && rd_btn.getText().toString().equals("Bluetooth Enabled")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn !=null && rd_btn.getText().toString().equals("Bluetooth Disabled")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn !=null && rd_btn.getText().toString().equals("Device Connected")){
+                        listofbluetooth(context,triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn !=null && rd_btn.getText().toString().equals("Device Disconnected")){
+                    listofbluetooth(context,triggerlistmodel);
+                    dialog.dismiss();
+                }else {
+                    Toast.makeText(context, "Select valid option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        dialog.show();
+        // Apply the newly created layout parameters to
+    }
+
+    private static void listofbluetooth(Context context, Triggerlistmodel triggerlistmodel) {
+        BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
+        ArrayList<String>arrayList=new ArrayList<>();
+
+        if(bAdapter==null){
+              /*  Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                context.startActivityForResult(enableIntent, REQUEST_ENABLE_CODE);
+           */
+            Toast.makeText(context,"Bluetooth Not Supported",Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Set<BluetoothDevice> pairedDevices = bAdapter.getBondedDevices();
+            ArrayList list = new ArrayList();
+            if(pairedDevices.size()>0){
+                for(BluetoothDevice device: pairedDevices){
+                    String devicename = device.getName();
+                    String macAddress = device.getAddress();
+                    Log.d("hhdsjkdhnsajlkdhskl","ddd"+devicename);
+                    list.add("Name: "+devicename+"MAC Address: "+macAddress);
+                }
+                shwoDialodforblutoothlist(context,triggerlistmodel,list);
+               /* lstvw = (ListView) findViewById(R.id.deviceList);
+                aAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, list);
+                lstvw.setAdapter(aAdapter);*/
+            }
+        }
+    }
+
+    private static void shwoDialodforblutoothlist(Context context, Triggerlistmodel triggerlistmodel, ArrayList list) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_bluetooth_list);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_blutooth_list);
+        for (int i=0;i<list.size();i++){
+            RadioButton rbn = new RadioButton(context);
+            rbn.setId(View.generateViewId());
+            rbn.setText((CharSequence) list.get(i));
+            radioGroup.addView(rbn);
+        }
+
+
+       /* tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                dialog.dismiss();
+            }
+        });*/
+        dialog.show();
+
+
+    }
+
+
+
+
+    public static void showDataconnectivitychange(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_dataconnectivity_change);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+     tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+              if(rd_btn !=null && rd_btn.getText().toString().equals("Data Available")){
+                  triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                  triggerlistmodel.setTriggerdescrption("");
+                  AddMacroActivity.triggerlist.add(triggerlistmodel);
+                  dialog.dismiss();
+              }else if (rd_btn !=null && rd_btn.getText().toString().equals("No Data Connection")){
+                  triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                  triggerlistmodel.setTriggerdescrption("");
+                  AddMacroActivity.triggerlist.add(triggerlistmodel);
+                  dialog.dismiss();
+              }
+            }
+        });
+        dialog.show();
+    }
+
+
+    public static void showHeadphoneschange(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_headphones_event_change);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && rd_btn.getText().toString().equals("Headphones Inserted")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn !=null && rd_btn.getText().toString().equals("Headphones Removed")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+
+
+    }
 
     //end region
 

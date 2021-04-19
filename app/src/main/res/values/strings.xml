@@ -32,5 +32,7 @@
     <string name="stopwatches">Stopwatches</string>
     <string name="select_option">Select Option</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="make_call">Make Call</string>
+    <string name="stop_call">Stop Call</string>
 
 </resources>

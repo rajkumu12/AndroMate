@@ -1,5 +1,6 @@
 package com.andromate.Services;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -24,6 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ExampleJobService extends JobService {
+    private static final String TAG ="ExampleJobService" ;
     private LongRunningTask mRunningTask;
     PackageremovalReceiver packageremovalReceiver;
     @Override
@@ -38,6 +40,26 @@ public class ExampleJobService extends JobService {
     public boolean onStopJob(JobParameters params) {
         mRunningTask.finishTask();
         return true;
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        Log.d(TAG, "TASK REMOVED");
+
+        PendingIntent service = PendingIntent.getService(
+                getApplicationContext(),
+                1001,
+                new Intent(getApplicationContext(), ExampleJobService.class),
+                PendingIntent.FLAG_ONE_SHOT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, service);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
 }
 
@@ -56,7 +78,7 @@ class LongRunningTask {
             public void run() {
                 int a=count++;
 
-                /*addNotification(exampleJobService,a);*/
+               /* addNotification(exampleJobService,a);*/
                 /*Log.e(TAG, "Executing long running task " + count++);*/
                   /*  showToast();*/
 
@@ -76,7 +98,7 @@ class LongRunningTask {
         if (mTimer == null) return;
         mTimer.cancel();
     }
-   /* private void addNotification(ExampleJobService exampleJobService, int count) {
+   private void addNotification(ExampleJobService exampleJobService, int count) {
         String channelId =exampleJobService.getString(R.string.default_notification_channel_id);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(exampleJobService, channelId)
@@ -98,6 +120,8 @@ class LongRunningTask {
             notificationManager.createNotificationChannel(channel);
         }
         assert notificationManager != null;
-        notificationManager.notify(0 *//* ID of notification *//*, notificationBuilder.build());
-    }*/
+        notificationManager.notify(0  /*ID of notification*/, notificationBuilder.build());
+    }
+
+
 }

@@ -1,4 +1,4 @@
-/*
+
 package com.andromate.Services;
 
 
@@ -36,8 +36,7 @@ import java.util.Random;
 public class MyService extends  Service {
 
 
-*/
-/*
+
     private Looper mServiceLooper;
     private ServiceHandler mServiceHandler;
     PackageremovalReceiver packageremovalReceiver;
@@ -59,18 +58,15 @@ public class MyService extends  Service {
         public void handleMessage(Message msg) {
             //promote to foreground and create persistent notification.
             //in Oreo we only have a few seconds to do this or the service is killed.
-          *//*
 
-*/
-/*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 startMyOwnForeground();
+      Toast.makeText(MyService.this, "again", Toast.LENGTH_SHORT).show();
             }else {
                 Notification notification = getNotification("MyService is running");
                 startForeground(msg.arg1, notification);  //not sure what the ID needs to be.
             }
-*//*
-*/
-/*
+
 
 
 
@@ -193,12 +189,12 @@ public class MyService extends  Service {
     public void onDestroy() {
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
-*//*
+
 
 
     // build a persistent notification and return it.
-    */
-/*public Notification getNotification(String message) {
+
+public Notification getNotification(String message) {
 
         return new NotificationCompat.Builder(getApplicationContext(), HomeActivity.id1)
                 .setSmallIcon(R.mipmap.ic_launcher)
@@ -207,6 +203,6 @@ public class MyService extends  Service {
                 .setContentTitle("Service")   //Title message top row.
                 .setContentText(message)  //message when looking at the notification, second row
                 .build();  //finally build and return a Notification.
-    }*//*
+    }
 
-}*/
+}

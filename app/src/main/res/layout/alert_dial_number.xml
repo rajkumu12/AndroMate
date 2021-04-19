@@ -4,9 +4,10 @@
     android:layout_width="340dp"
     android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical">.
 
     <TextView
+        android:id="@+id/tvhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -14,44 +15,44 @@
         android:layout_marginTop="@dimen/dp18"
         android:layout_marginStart="@dimen/dp16"
         android:text="@string/select_option"/>
-
-    <RadioGroup
-        android:id="@+id/rg_app_contctstype"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp20"
-        android:layout_marginHorizontal="@dimen/dp20"
-        android:orientation="vertical">
-
-        <RadioButton
-            android:id="@+id/rb_app_select_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp8"
-            android:textSize="@dimen/sp12"
-            android:buttonTint="@color/theme_color"
-            android:text="Select Contacts(s)"/>
-      <!--  <RadioButton
-            android:id="@+id/rb_app_select_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp8"
-            android:buttonTint="@color/theme_color"
-            android:textSize="@dimen/sp12"
-            android:text="Select Groups"/>-->
-        <RadioButton
-            android:id="@+id/rb_app_select_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp8"
-            android:buttonTint="@color/theme_color"
-            android:textSize="@dimen/sp12"
-            android:text="Select Number"/>
-
-    </RadioGroup>
-
-    <RelativeLayout
+    <EditText
+        android:id="@+id/et_mobilenumber"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:hint="Mobile Number"
+        android:inputType="number"
+        android:maxLength="10"
+        android:layout_marginTop="@dimen/dp8"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="@dimen/dp12"
+        android:layout_weight="0.7"/>
+
+   <RadioGroup
+       android:id="@+id/rg_dailnumber"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginVertical="@dimen/dp8"
+       android:layout_marginHorizontal="@dimen/dp8"
+       android:orientation="horizontal"
+       android:weightSum="2">
+
+       <RadioButton
+           android:id="@+id/rd_make_call"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:text="@string/make_call"
+           android:layout_weight="1"/>
+       <RadioButton
+           android:id="@+id/rd_stop_call"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content"
+           android:text="@string/stop_call"
+           android:layout_weight="1"/>
+   </RadioGroup>
+    <RelativeLayout
+        android:id="@+id/rly_btm"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="wrap_content"

@@ -13,10 +13,10 @@
         android:textSize="@dimen/dp20"
         android:layout_marginTop="@dimen/dp18"
         android:layout_marginStart="@dimen/dp16"
-        android:text="@string/select_option"/>
+        android:text="Select bluetooth"/>
 
     <RadioGroup
-        android:id="@+id/rg_app_contctstype"
+        android:id="@+id/rg_bluetooth_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp20"
@@ -30,7 +30,7 @@
             android:paddingLeft="@dimen/dp8"
             android:textSize="@dimen/sp12"
             android:buttonTint="@color/theme_color"
-            android:text="Select Contacts(s)"/>
+            android:text="Headphones Inserted"/>
       <!--  <RadioButton
             android:id="@+id/rb_app_select_group"
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             android:paddingLeft="@dimen/dp8"
             android:buttonTint="@color/theme_color"
             android:textSize="@dimen/sp12"
-            android:text="Select Number"/>
+            android:text="Headphones Removed"/>
 
     </RadioGroup>
 

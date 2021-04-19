@@ -6,6 +6,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +43,8 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
     String triggername;
     String triggerdesc;
     Triggerlistmodel triggerlistmodel;
-    List<ContactModel>contactModelList;
+    List<ContactModel> contactModelList;
+    public static String TAG = "Call_SmsAdapter";
 
     public Call_SmsAdapter(Context context) {
         this.context = context;
@@ -73,71 +76,124 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
             @Override
             public void onClick(View v) {
 
-                if (holder.tv_title.getText().toString().equals("Call Active")){
+                if (holder.tv_title.getText().toString().equals("Call Active")) {
                     triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
                     Dexter.withContext(context)
                             .withPermissions(
                                     Manifest.permission.READ_CONTACTS
                             ).withListener(new MultiplePermissionsListener() {
-                        @Override public void onPermissionsChecked(MultiplePermissionsReport report) {
-                            getContactlist(context);
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport report) {
+                            getContactlist(context,triggerlistmodel,holder.tv_title.getText().toString());
                         }
-                        @Override public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
                     }).check();
 
-                }else if (holder.tv_title.getText().toString().equals("Call Ended")){
-                        Dialogs.show_call_ended(context,triggerlistmodel);
+                } else if (holder.tv_title.getText().toString().equals("Call Ended")) {
+                    triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    Dialogs.show_call_ended(context, triggerlistmodel);
+
+                }else if (holder.tv_title.getText().toString().equals("Call Incoming")) {
+                    triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    Dialogs.show_call_ended(context, triggerlistmodel);
+
+                }else if (holder.tv_title.getText().toString().equals("Call Missed")) {
+                    triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    Dexter.withContext(context)
+                            .withPermissions(
+                                    Manifest.permission.READ_CONTACTS
+                            ).withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport report) {
+                            getContactlist(context,triggerlistmodel,holder.tv_title.getText().toString());
+                        }
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                    }).check();
+
+                }else if (holder.tv_title.getText().toString().equals("Call Outgoing")) {
+                    triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    Dexter.withContext(context)
+                            .withPermissions(
+                                    Manifest.permission.READ_CONTACTS
+                            ).withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport report) {
+                            getContactlist(context,triggerlistmodel,holder.tv_title.getText().toString());
+                        }
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
+                    }).check();
+
+                }else if (holder.tv_title.getText().toString().equals("Dial Phone Number")) {
+
+                    Dialogs.Dialnumber(context,triggerlistmodel);
+
+                }else if (holder.tv_title.getText().toString().equals("SMS Received")) {
+                    triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    Dialogs.show_call_ended(context, triggerlistmodel);
                 }
             }
         });
     }
-
-    public void getContactlist(Context context) {
-        ContentResolver cr = this.context. getContentResolver();
+    public void getContactlist(Context context,Triggerlistmodel triggerlistmodel,String heading) {
+        ContentResolver cr = this.context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, ContactsContract.RawContacts.DISPLAY_NAME_PRIMARY + " ASC");
-    /*    ContactCount = cur.getCount();*/
+        /*    ContactCount = cur.getCount();*/
 
         if (cur.getCount() > 0) {
-            contactModelList=new ArrayList<>();
+            contactModelList = new ArrayList<>();
             while (cur.moveToNext()) {
-                ContactModel contactModel=new ContactModel();
+                ContactModel contactModel = new ContactModel();
                 String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
+
                 String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+
+
+                Log.d(TAG, "hhfhfhfhf" + name);
                 contactModel.setName(name);
                 String phone = null;
                 if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
                     System.out.println("name : " + name + ", ID : " + id);
-
                     // get the phone number
                     Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                             new String[]{id}, null);
-                    while (pCur.moveToNext()) {
-                        phone = pCur.getString(
-                                pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        contactModel.setNumber(phone);
-                        contactModelList.add(contactModel);
+                    contactModel.setNumber(phone);
+                    contactModelList.add(contactModel);
+                    /*while (pCur.moveToNext()) {
                         System.out.println("phone" + phone);
-                    }
+                    }*/
                     pCur.close();
                 }
-                /*if (phone == "" || name == "" || name.equals(phone)) {
+            /*    if (phone == "" || name == "" || name.equals(phone)) {
                     if (phone.equals(""))
-                        getAllContact.add(new MissingPhoneModelClass("No Number", name, id));
+                        contactModel.setName("No Name");
+                    contactModel.setNumber(phone);
+                    contactModelList.add(contactModel);
                     if (name.equals("") || name.equals(phone))
-                        getAllContact.add(new MissingPhoneModelClass(phone, "No Name", id));
+                        contactModel.setName("No Name");
+                    contactModel.setNumber(phone);
+                    contactModelList.add(contactModel);
 
                 } else {
-                    if(TextUtils.equals(phone,null)){
-                        getAllContact.add(new MissingPhoneModelClass("No Number", name, id));
-                    }
-                    else {
-                        getAllContact.add(new MissingPhoneModelClass(phone, name, id));
+                    if (TextUtils.equals(phone, null)) {
+                        contactModel.setName(name);
+                        contactModel.setNumber("No Number");
+                        contactModelList.add(contactModel);
+                    } else {
+                        if (TextUtils.equals(phone, null)) {
+                            contactModel.setName(name);
+                            contactModel.setNumber(phone);
+                            contactModelList.add(contactModel);
                     }
                 }*/
+
             }
-            Dialogs.showContacts(this.context,triggerlistmodel,contactModelList);
+
+            Dialogs.showContacts(this.context, triggerlistmodel, contactModelList,heading);
         }
 
     }

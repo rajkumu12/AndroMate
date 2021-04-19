@@ -42,7 +42,7 @@ public class Triggelists_items_Adapter extends RecyclerView.Adapter<Triggelists_
         holder.rly_trigger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialogs.showConfigurations(context,add_action_model);
+                Dialogs.showConfigurations(context,add_action_model,add_action_model.getTriggername());
             }
         });
 
