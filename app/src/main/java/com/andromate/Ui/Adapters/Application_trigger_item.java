@@ -1,43 +1,30 @@
 package com.andromate.Ui.Adapters;
 
-import android.app.Dialog;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.DisplayMetrics;
-import android.util.Log;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.andromate.Constraints.Dialogs;
 import com.andromate.CustomColors;
-import com.andromate.Model.ApplicationsInfo;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
-import com.andromate.Ui.Activity.AddMacroActivity;
-import com.andromate.Ui.Activity.Add_triggersActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.andromate.Constraints.Dialogs.showLaunchCloseDialog;
@@ -75,12 +62,22 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
 
 
         holder.lly_view.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
                 if (holder.tv_title.getText().toString().equals("App Install/Remove/\nupdate")) {
                     Dialogs.showDialogtrigger(context,triggerlistmodel);
                 } else if (holder.tv_title.getText().toString().equals("Application/Launched/\nClosed")) {
-                    showLaunchCloseDialog(context,triggerlistmodel);
+
+                    if (!Settings.canDrawOverlays(context)) {
+
+                        showpermissionDialog(context);
+
+
+                    }else {
+                        showLaunchCloseDialog(context,triggerlistmodel);
+                    }
+
                 } else {
                     Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                 }
@@ -88,6 +85,35 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         });
     }
 
+
+   void showpermissionDialog(Context context){
+
+       AlertDialog.Builder builder = new AlertDialog.Builder(context);
+       builder.setTitle("Permission require");
+       builder.setMessage("To use this service we need to allow this app to run over on ther app");
+
+       // add a button
+       builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+               context.startActivity(myIntent);
+               dialog.dismiss();
+           }
+       });
+       builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               dialog.dismiss();
+           }
+       });
+
+       // create and show the alert dialog
+       AlertDialog dialog = builder.create();
+       dialog.show();
+
+
+    }
 /*
     private void showLaunchApplication() {
 
@@ -208,7 +234,6 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         return res;
     }
 */
-
 
     @Override
     public int getItemCount() {

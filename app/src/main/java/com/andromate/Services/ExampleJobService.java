@@ -1,5 +1,7 @@
 package com.andromate.Services;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,10 +11,14 @@ import android.app.job.JobService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.andromate.R;
@@ -21,18 +27,24 @@ import com.andromate.Receivers.PackageremovalReceiver;
 import com.andromate.SplashActivity;
 import com.andromate.Ui.Activity.HomeActivity;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.content.Context.ACTIVITY_SERVICE;
 
 public class ExampleJobService extends JobService {
     private static final String TAG ="ExampleJobService" ;
     private LongRunningTask mRunningTask;
+
     PackageremovalReceiver packageremovalReceiver;
     @Override
     public boolean onStartJob(JobParameters params) {
         if (mRunningTask == null)
             mRunningTask = new LongRunningTask();
-        mRunningTask.startTask(this);
+        SharedPreferences sharedpreferences =this.getSharedPreferences("myapp", Context.MODE_PRIVATE);
+        mRunningTask.startTask(this,sharedpreferences);
 
         return true;
     }
@@ -69,14 +81,43 @@ class LongRunningTask {
     private int count = 0;
     LongRunningTask() {
     }
-    void startTask(ExampleJobService exampleJobService) {
+    void startTask(ExampleJobService exampleJobService, SharedPreferences sharedpreferences) {
+
         if (mTimer == null)
             mTimer = new Timer();
         Toast.makeText(exampleJobService, "fh", Toast.LENGTH_SHORT).show();
         mTimer.scheduleAtFixedRate(new TimerTask() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void run() {
                 int a=count++;
+               /* Log.d("dfndafdf","ooooooo"+sharedpreferences.getString("key",""));*/
+               /*if (Helper.isAppRunning(exampleJobService, sharedpreferences.getString("key",""))) {
+                    // App is running
+                    Log.d("jdsakljdlkfjlkfalf","eee");
+                    Toast.makeText(exampleJobService, "App Launched", Toast.LENGTH_SHORT).show();
+                } else {
+                    // App is not running
+                    Log.d("jdsakljdlkfjlkfalf","fffff");
+                }
+*/
+
+                ActivityManager activityManager = (ActivityManager) exampleJobService.getSystemService( Context.ACTIVITY_SERVICE );
+                List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+                for(ActivityManager.RunningAppProcessInfo appProcess : appProcesses){
+                    if(appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND){
+                        Log.i("fdsgfdsgp", appProcess.processName);
+                    }
+                }
+              /* final ActivityManager activityManager = (ActivityManager) exampleJobService.getSystemService(Context.ACTIVITY_SERVICE);
+                final List<ActivityManager.RunningTaskInfo> recentTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+                Log.d("dfndafdf","ooooooo"+sharedpreferences.getString("key","")+"kkkkk"+recentTasks.size());
+                for (int i = 0; i < recentTasks.size(); i++)
+                {
+                    Log.d("Runninask", "Running task: " + recentTasks.get(i).baseActivity.toShortString() + "\t\t ID: " + recentTasks.get(i).id);
+                }
+*/
+
 
                /* addNotification(exampleJobService,a);*/
                 /*Log.e(TAG, "Executing long running task " + count++);*/
@@ -122,6 +163,4 @@ class LongRunningTask {
         assert notificationManager != null;
         notificationManager.notify(0  /*ID of notification*/, notificationBuilder.build());
     }
-
-
 }

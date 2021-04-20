@@ -1,6 +1,7 @@
 package com.andromate.Ui.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,10 +32,12 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
     private List<ApplicationsInfo> arrayList;
     private List<ApplicationsInfo> copylist;
     Triggerlistmodel triggerlistmodel;
+    SharedPreferences sharedpreferences;
     public ApplicationlistAdapters(Context context, List<ApplicationsInfo> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
         this.copylist = arrayList;
+        sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
     }
     @NonNull
     @Override
@@ -60,6 +63,10 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
                 if (isChecked){
                     triggerlistmodel.setTriggername(applicationsInfo.getAppname());
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("key", applicationsInfo.getPname());
+                    Log.d("hfjdfjffff","jlhfjkdhfjkdfhkjf"+applicationsInfo.getPname());
+                    editor.commit();
                 }else {
                     triggerlistmodel.setTriggername(applicationsInfo.getAppname());
                     AddMacroActivity.triggerlist.remove(triggerlistmodel);

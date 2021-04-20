@@ -1,6 +1,7 @@
 package com.andromate.Ui.Adapters;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,6 +25,7 @@ import com.andromate.Model.ContactModel;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
+import com.andromate.Ui.Activity.AddMacroActivity;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -86,25 +88,30 @@ public class Connectivity_Adapter extends RecyclerView.Adapter<Connectivity_Adap
                     Dialogs.showHeadphoneschange(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("Hotspot Enabled/\n" +
                         "Disabled")){
-
+                    Dialogs.showhospotoption(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("IP Address Change")){
-
+                        triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                        triggerlistmodel.setTriggerdescrption("");
+                        AddMacroActivity.triggerlist.add(triggerlistmodel);
+                         ((Activity)context).finish();
                 }else if (holder.tv_title.getText().toString().equals("Mobile Service Status")){
-
+                        Dialogs.showMobileServiceStatus(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("Roaming Started/\n" +
                         "Stopped")){
-
+                    Dialogs.showRoaming(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("USB Device Connect/\n" +
                         "Disconnect")){
-
+                    Dialogs.showUSBDevice_con(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("VPN State Change")){
-
+                    triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    Dialogs.showVpn_state(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("Webhook (Url)")){
-
+                    Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                 }else if (holder.tv_title.getText().toString().equals("Wifi SSID Transition")){
-
+                    Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                 }else if (holder.tv_title.getText().toString().equals("Wifi State Change")){
-
+                    /*Dialogs.showwif_state(context,triggerlistmodel);*/
+                    Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                 }
 
             }

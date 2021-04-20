@@ -12,7 +12,7 @@ public class PackageremovalReceiver  extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Toast.makeText(context, ""+intent, Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(context, ""+intent, Toast.LENGTH_SHORT).show();*/
         if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")){
             Toast.makeText(context, "UnInstalled", Toast.LENGTH_SHORT).show();
         }else if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")){

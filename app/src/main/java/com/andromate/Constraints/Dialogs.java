@@ -4,9 +4,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -41,7 +45,7 @@ import java.util.Set;
 
 public  class Dialogs {
   public static ProgressDialog progressDialog;
-
+public  static Triggerlistmodel triggerlistmodel1;
   public static ApplicationlistAdapters triggerItemsAdapters;
 
 
@@ -1244,8 +1248,7 @@ public  class Dialogs {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if(rd_btn !=null && rd_btn.getText().toString().equals("Headphones Inserted")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
-                    triggerlistmodel.setTriggerdescrption("");
-                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    showHeadphonestype(context,triggerlistmodel);
                     dialog.dismiss();
                 }else if (rd_btn !=null && rd_btn.getText().toString().equals("Headphones Removed")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
@@ -1260,6 +1263,387 @@ public  class Dialogs {
 
     }
 
+
+
+
+    public static void showHeadphonestype(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_headphonestype);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel.setTriggerdescrption(rd_btn.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+
+
+    }
+
+
+    public static void showhospotoption(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_hotspot_enabled_disabled);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+
+
+    }
+
+
+
+    public static void showMobileServiceStatus(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_mobile_service);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+
+
+    }
+
+
+    public static void showRoaming(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_roaming_enb_dis);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+
+
+    }
+
+
+    public static void showUSBDevice_con(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_usb_con_disc);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    public static void showVpn_state(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_vpn_state);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel.setTriggerdescrption(rd_btn.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    public static void showwif_state(Context context, Triggerlistmodel triggerlistmodel) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_wifistate_change);
+        dialog.setCancelable(false);
+
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && rd_btn.getText().toString().equals("Wifi Enabled")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if(rd_btn !=null && rd_btn.getText().toString().equals("Wifi Disabled")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if(rd_btn !=null && rd_btn.getText().toString().equals("Connected to network")){
+                   getWifilist(context,triggerlistmodel);
+                    dialog.dismiss();
+                }else if(rd_btn !=null && rd_btn.getText().toString().equals("Disconnected from network")){
+                    triggerlistmodel.setTriggerdescrption(rd_btn.getText().toString());
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else {
+                    Toast.makeText(context, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.show();
+    }
+
+   public static void getWifilist(Context context, Triggerlistmodel triggerlistmodel) {
+        WifiManager  mainWifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        triggerlistmodel1=triggerlistmodel;
+        if (mainWifi.isWifiEnabled() == false)
+        {
+            // If wifi disabled then enable it
+            Toast.makeText(context.getApplicationContext(), "wifi is disabled..making it enabled",
+                    Toast.LENGTH_LONG).show();
+
+            mainWifi.setWifiEnabled(true);
+        }
+        WifiReceiver receiverWifi = new WifiReceiver();
+        context.registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        mainWifi.startScan();
+        Toast.makeText(context, "Scanning", Toast.LENGTH_SHORT).show();
+    }
+   public static class WifiReceiver extends BroadcastReceiver {
+
+        // This method call when number of wifi connections changed
+        public void onReceive(Context c, Intent intent) {
+            Log.d("fdff","jdjd"+intent);
+            WifiManager  mainWifi = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
+            List<ScanResult> wifiList;
+            ArrayList<String>wifilists=new ArrayList<>();
+            wifiList = mainWifi.getScanResults();
+         /*   sb.append("\n        Number Of Wifi connections :"+wifiList.size()+"\n\n");*/
+
+            for(int i = 0; i < wifiList.size(); i++){
+                wifilists.add(wifiList.get(i).toString());
+               /* sb.append(new Integer(i+1).toString() + ". ");
+                sb.append((wifiList.get(i)).toString());
+                sb.append("\n\n");*/
+            }
+            ShowWifiAlert(c,wifilists,triggerlistmodel1);
+        }
+
+        private void ShowWifiAlert(Context c, ArrayList<String> wifiList, Triggerlistmodel triggerlistmodel1) {
+            Dialog dialog = new Dialog(c);
+            dialog.setContentView(R.layout.alert_wifilist);
+            dialog.setCancelable(false);
+            /*RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_powerConnected_disconnected);*/
+            TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+            TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+            TextView tv_head=dialog.findViewById(R.id.tvhead);
+            LinearLayout layout=dialog.findViewById(R.id.lly_contactlist);
+
+
+           /* tv_head.setText(heading);*/
+
+            StringBuilder str = new StringBuilder();
+            for (int i=0;i<wifiList.size();i++){
+
+
+                CheckBox cb = new CheckBox(c);
+                cb.setText(wifiList.get(i));
+                layout.addView(cb);
+
+
+                cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
+
+                            str.append(cb.getText()+",");
+
+                        }else {
+
+                        }
+                    }
+                });
+
+            }
+
+
+            tv_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            tv_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (str!=null){
+                        Log.d("Dailog","jjfjf"+triggerlistmodel1);
+                        triggerlistmodel1.setTriggerdescrption(String.valueOf(str));
+                        AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                        dialog.dismiss();
+                    }
+                /*int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                Log.d("jkfjfkjfkfkf","dd"+rd_btn.getText().toString());
+                if (rd_btn != null && rd_btn.getText().toString().equals("Power Connected")) {
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    showpowertypeoption(context,triggerlistmodel);
+                    dialog.dismiss();
+                    ;
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Power Disconnected")){
+                    triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }else if (rd_btn == null){
+                    Toast.makeText(context, "Select one of the option", Toast.LENGTH_SHORT).show();
+                }*/
+                }
+            });
+
+
+            dialog.show();
+
+
+
+        }
+
+    }
     //end region
 
 
