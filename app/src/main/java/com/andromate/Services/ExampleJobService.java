@@ -8,13 +8,22 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
+import android.app.usage.UsageStats;
+import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,8 +38,10 @@ import com.andromate.Ui.Activity.HomeActivity;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.SortedMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.TreeMap;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
@@ -101,14 +112,14 @@ class LongRunningTask {
                     Log.d("jdsakljdlkfjlkfalf","fffff");
                 }
 */
+                String selApp=sharedpreferences.getString("key","");
+                retriveNewApp(exampleJobService,selApp);
+                String bs=sharedpreferences.getString("bs","");
+               /* checkbattersavermode(exampleJobService,bs);*/
+                String gps=sharedpreferences.getString("gps","");
+                Log.d("jfhdlkjfhdlkf","gggg"+gps);
+                ChecGps(exampleJobService,gps);
 
-                ActivityManager activityManager = (ActivityManager) exampleJobService.getSystemService( Context.ACTIVITY_SERVICE );
-                List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-                for(ActivityManager.RunningAppProcessInfo appProcess : appProcesses){
-                    if(appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND){
-                        Log.i("fdsgfdsgp", appProcess.processName);
-                    }
-                }
               /* final ActivityManager activityManager = (ActivityManager) exampleJobService.getSystemService(Context.ACTIVITY_SERVICE);
                 final List<ActivityManager.RunningTaskInfo> recentTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
                 Log.d("dfndafdf","ooooooo"+sharedpreferences.getString("key","")+"kkkkk"+recentTasks.size());
@@ -128,6 +139,57 @@ class LongRunningTask {
             }
         }, 0, 1000);
     }
+
+    private void ChecGps(ExampleJobService exampleJobService, String gps) {
+        LocationManager locationManager = (LocationManager) exampleJobService.getSystemService(Context.LOCATION_SERVICE);
+        if (gps !=null && gps.equals("Enabled")){
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                addNotification(exampleJobService, "Gps Enable");
+            }
+            }else if (gps !=null && gps.equals("Disabled")){
+
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                addNotification(exampleJobService, "Gps Disabled");
+            }
+            }
+        }
+
+
+
+    private void checkbattersavermode(ExampleJobService exampleJobService, String bs) {
+
+
+
+
+
+        PowerManager powerManager = (PowerManager)exampleJobService.getSystemService(Context.POWER_SERVICE);
+        boolean powerSaveMode = powerManager.isPowerSaveMode();
+
+        if (powerSaveMode && bs.equals("Enable")){
+            addNotification(exampleJobService,"Battery saver mode is ON");
+        }else {
+         /*   addNotification(exampleJobService,"Battery saver mode is OFF");*/
+        }
+
+
+        if (isLocationEnabled(exampleJobService)){
+            addNotification(exampleJobService,"Gps Enable");
+        }else {
+            addNotification(exampleJobService,"Gps Disable");
+        }
+
+       /* PowerManager powerManager = (PowerManager)
+                exampleJobService.getSystemService(Context.POWER_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && powerManager.isPowerSaveMode()) {
+            // Animations are disabled in power save mode, so just show a toast instead.
+            Log.d(TAG,"gfgfgf     On");
+        }else if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                && !powerManager.isPowerSaveMode()){
+            Log.d(TAG,"gfgfgf     Off");
+        }*/
+
+    }
 /*
 
     private void showToast() {
@@ -139,17 +201,82 @@ class LongRunningTask {
         if (mTimer == null) return;
         mTimer.cancel();
     }
-   private void addNotification(ExampleJobService exampleJobService, int count) {
-        String channelId =exampleJobService.getString(R.string.default_notification_channel_id);
+
+    private String retriveNewApp(Context ctx, String selApp) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            String currentApp = null;
+            String nn = null;
+            UsageStatsManager usm = (UsageStatsManager) ctx.getSystemService(Context.USAGE_STATS_SERVICE);
+            long time = System.currentTimeMillis();
+            List<UsageStats> applist = usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time - 1000 * 1000, time);
+            if (applist != null && applist.size() > 0) {
+                SortedMap<Long, UsageStats> mySortedMap = new TreeMap<>();
+                for (UsageStats usageStats : applist) {
+                    mySortedMap.put(usageStats.getLastTimeUsed(), usageStats);
+                }
+                if (mySortedMap != null && !mySortedMap.isEmpty()) {
+                    currentApp = mySortedMap.get(mySortedMap.lastKey()).getPackageName();
+                    nn = mySortedMap.get(mySortedMap.lastKey()).getPackageName();
+                }
+            }
+
+            if (currentApp.equals(selApp)){
+                addNotification(ctx,nn);
+            }
+            Log.e(TAG, "Current App in foreground is: " + currentApp);
+
+            return currentApp;
+
+        }
+        else {
+
+            ActivityManager manager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+            String mm=(manager.getRunningTasks(1).get(0)).topActivity.getPackageName();
+            String name=(manager.getRunningTasks(1).get(0)).topActivity.getClassName();
+            if (mm.equals(selApp)){
+                addNotification(ctx,name);
+               /* Toast.makeText(context, ""+name+" is Running", Toast.LENGTH_SHORT).show();*/
+            }
+            Log.e(TAG, "Current App in foreground is: " + name);
+            return mm;
+        }
+    }
+
+    public static boolean isLocationEnabled(Context context) {
+        int locationMode = 0;
+        String locationProviders;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE);
+
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+
+        }else{
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+
+
+    }
+
+
+    private void addNotification(Context context, String string) {
+        String channelId =context.getString(R.string.default_notification_channel_id);
         NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(exampleJobService, channelId)
+                new NotificationCompat.Builder(context, channelId)
                         .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setContentTitle("ok"+count)
+                        .setContentTitle(""+string)
                         .setContentText("kl")
                         .setAutoCancel(true);
 
         NotificationManager notificationManager =
-                (NotificationManager)exampleJobService. getSystemService(Context.NOTIFICATION_SERVICE);
+                (NotificationManager)context. getSystemService(Context.NOTIFICATION_SERVICE);
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(channelId,

@@ -1,10 +1,13 @@
 package com.andromate.Ui.Adapters;
 
 import android.app.Activity;
+import android.app.AppOpsManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -68,12 +71,8 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
                 if (holder.tv_title.getText().toString().equals("App Install/Remove/\nupdate")) {
                     Dialogs.showDialogtrigger(context,triggerlistmodel);
                 } else if (holder.tv_title.getText().toString().equals("Application/Launched/\nClosed")) {
-
-                    if (!Settings.canDrawOverlays(context)) {
-
+                    if (!isAccessGranted(context)) {
                         showpermissionDialog(context);
-
-
                     }else {
                         showLaunchCloseDialog(context,triggerlistmodel);
                     }
@@ -96,9 +95,10 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
            @Override
            public void onClick(DialogInterface dialog, int which) {
-               Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-               context.startActivity(myIntent);
-               dialog.dismiss();
+               if (!isAccessGranted(context)) {
+                   Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                   context.startActivity(intent);
+               }
            }
        });
        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -113,6 +113,23 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
        dialog.show();
 
 
+    }
+
+    private boolean isAccessGranted(Context context) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+            int mode = 0;
+            if (android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.KITKAT) {
+                mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS,
+                        applicationInfo.uid, applicationInfo.packageName);
+            }
+            return (mode == AppOpsManager.MODE_ALLOWED);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 /*
     private void showLaunchApplication() {

@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -607,7 +608,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_batterystate_type);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
-
+       SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -622,6 +623,8 @@ public  static Triggerlistmodel triggerlistmodel1;
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
                     triggerlistmodel.setTriggername("Battery Saver State");
                     triggerlistmodel.setTriggerdescrption(rd_btn.getText().toString());
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("bs", rd_btn.getText().toString().trim());
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }
@@ -1646,7 +1649,501 @@ public  static Triggerlistmodel triggerlistmodel1;
     }
     //end region
 
+//region timedate
+
+  public static void  Showcal_event(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.alert_dialog_calenderevent);
+        dialog.setCancelable(false);
+        /*RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_powerConnected_disconnected);*/
+
+
+
+        /* tv_head.setText(heading);*/
+
+
+     /*   tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (str!=null){
+                    Log.d("Dailog","jjfjf"+triggerlistmodel1);
+                    triggerlistmodel1.setTriggerdescrption(String.valueOf(str));
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }
+
+            }
+        });*/
+
+
+        dialog.show();
+
+
+
+    }
+
+
+    //region device_event
+
+    public static void  Show_aitplane_opton(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.alert_airplane_mode_change);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+       tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+
+
+
+    public static void  Show_rotatechange(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.alert_autorotate);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+
+
+    public static void  Show_daydream(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.alert_day_dream);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+    public static void  Show_devicedock(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.alert_device_docked);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+
+    public static void  Show_gps_enable(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.gps_enable_dis);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+       SharedPreferences sharedpreferences = c.getSharedPreferences("myapp", Context.MODE_PRIVATE);
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("gps", rd_btn.getText().toString());
+                    editor.apply();
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+    public static void  Show_music(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.alert_music_sound);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+    public static void  Show_prioritymode_don_disturb(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.prioritymode);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+
+    public static void  Show_seimcard_change(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.sim_card_cahnge);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+
+    public static void  Show_screenOn_Off(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.screenon_off);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+
+    public static void  Show_silentmode(Context c, Triggerlistmodel triggerlistmodel1) {
+        Dialog dialog = new Dialog(c);
+        dialog.setContentView(R.layout.silent_mode_enable_disable);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        /* tv_head.setText(heading);*/
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
+                    triggerlistmodel1.setTriggername(rd_btn.getText().toString());
+                    triggerlistmodel1.setTriggerdescrption("");
+                    AddMacroActivity.triggerlist.add(triggerlistmodel1);
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+        dialog.show();
+
+
+
+    }
+
+    //end region
+
 
 
 
 }
+
+
+
+    //end region
+
+
+

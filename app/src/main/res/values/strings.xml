@@ -35,4 +35,12 @@
     <string name="make_call">Make Call</string>
     <string name="stop_call">Stop Call</string>
 
+
+
+
+    <string-array name="type">
+        <item>Any</item>
+        <item>Busy</item>
+        <item>Free</item>
+    </string-array>
 </resources>

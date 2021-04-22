@@ -66,7 +66,7 @@ public class TimeDate_Adapter extends RecyclerView.Adapter<TimeDate_Adapter.View
             @Override
             public void onClick(View v) {
                 if (holder.tv_title.getText().toString().equals("Calendar Event")){
-
+                    Dialogs.Showcal_event(context,triggerlistmodel);
                 }else if (holder.tv_title.getText().toString().equals("Day of Week/Month")){
 
                 }else if (holder.tv_title.getText().toString().equals("Day/Time Trigger")){

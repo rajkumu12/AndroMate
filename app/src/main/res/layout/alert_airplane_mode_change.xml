@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp18"
+        android:text="Select Option"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp20" />
+
+    <RadioGroup
+        android:id="@+id/rg_airplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_app_any"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:textSize="@dimen/sp12"
+            android:buttonTint="@color/theme_color"
+            android:text="Airplane Mode Enabled"/>
+      <!--  <RadioButton
+            android:id="@+id/rb_app_select_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="Select Groups"/>-->
+        <RadioButton
+            android:id="@+id/rb_app_No_microphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="Airplane Mode Disabled"/>
+
+
+
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/sp10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_app_in_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:paddingVertical="@dimen/dp8"
+                android:textColor="@color/theme_color"
+                android:text="Cancel"/>
+            <TextView
+                android:id="@+id/tv_app_in_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:text="Ok"
+                android:textColor="@color/theme_color"
+                android:paddingVertical="@dimen/dp8"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

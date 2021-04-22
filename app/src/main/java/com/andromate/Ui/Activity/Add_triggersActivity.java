@@ -24,6 +24,7 @@ import com.andromate.Ui.Adapters.Application_trigger_item;
 import com.andromate.Ui.Adapters.BatteryTriggerItems;
 import com.andromate.Ui.Adapters.Call_SmsAdapter;
 import com.andromate.Ui.Adapters.Connectivity_Adapter;
+import com.andromate.Ui.Adapters.DeviceEvent_Adapter;
 import com.andromate.Ui.Adapters.NotificationsAdapters;
 import com.andromate.Ui.Adapters.TimeDate_Adapter;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
@@ -241,9 +242,7 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
 
 
 
-
-
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,deviceevent_list);
+        DeviceEvent_Adapter triggerItemsAdapters=new DeviceEvent_Adapter(this,deviceevent_list);
         GridLayoutManager layoutManager2 = new GridLayoutManager(Add_triggersActivity.this,2);
         recyclerView_deviceevent_list.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

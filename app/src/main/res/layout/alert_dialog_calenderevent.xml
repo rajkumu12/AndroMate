@@ -1,46 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="340dp"
-    android:layout_gravity="center_horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical">.
 
     <TextView
         android:id="@+id/tvhead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dp20"
-        android:layout_marginTop="@dimen/dp18"
         android:layout_marginStart="@dimen/dp16"
-        android:text="@string/select_option"/>
+        android:layout_marginTop="@dimen/dp18"
+        android:text="Select Calendar Option"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp20" />
+
     <ScrollView
-        android:layout_below="@+id/tvhead"
-        android:layout_above="@+id/rly_btm"
         android:layout_width="match_parent"
-        android:layout_marginVertical="@dimen/dp8"
         android:layout_height="match_parent"
+        android:layout_above="@+id/rly_btm"
+        android:layout_below="@+id/tvhead"
+        android:layout_marginVertical="@dimen/dp8"
         android:scrollbars="none">
+
         <LinearLayout
             android:id="@+id/lly_contactlist"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp20"
             android:layout_marginHorizontal="@dimen/dp20"
             android:layout_marginVertical="@dimen/dp20"
-            android:paddingBottom="50dp"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/sp10"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Event starts" />
 
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Event ends" />
+            </RadioGroup>
 
-        </LinearLayout></ScrollView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:text="Select Calendar" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spner_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginHorizontal="8dp"
+                android:text="Select Availability" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spner_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp12"
+                android:entries="@array/type" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp8"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:text="Enter title(optional)" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginTop="@dimen/dp20">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Enter tittle(optional)" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:layout_marginHorizontal="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp20">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Enter event detail(optional)" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <RelativeLayout
         android:id="@+id/rly_btm"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,16 +134,17 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/dp20"
                 android:paddingVertical="@dimen/dp8"
-                android:textColor="@color/theme_color"
-                android:text="Cancel"/>
+                android:text="Cancel"
+                android:textColor="@color/theme_color" />
+
             <TextView
                 android:id="@+id/tv_app_in_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/dp20"
+                android:paddingVertical="@dimen/dp8"
                 android:text="Ok"
-                android:textColor="@color/theme_color"
-                android:paddingVertical="@dimen/dp8"/>
+                android:textColor="@color/theme_color" />
         </LinearLayout>
     </RelativeLayout>
 
