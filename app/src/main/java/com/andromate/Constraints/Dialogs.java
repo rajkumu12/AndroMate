@@ -1081,7 +1081,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_dialog_bluetooth_event);
         dialog.setCancelable(false);
-
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
         RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
@@ -1101,10 +1101,16 @@ public  static Triggerlistmodel triggerlistmodel1;
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("bt", rd_btn.getText().toString());
+                    editor.apply();
                     dialog.dismiss();
                 }else if (rd_btn !=null && rd_btn.getText().toString().equals("Bluetooth Disabled")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("bt", rd_btn.getText().toString());
+                    editor.apply();
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }else if (rd_btn !=null && rd_btn.getText().toString().equals("Device Connected")){
@@ -1195,7 +1201,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_dataconnectivity_change);
         dialog.setCancelable(false);
-
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
         RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
@@ -1214,11 +1220,17 @@ public  static Triggerlistmodel triggerlistmodel1;
               if(rd_btn !=null && rd_btn.getText().toString().equals("Data Available")){
                   triggerlistmodel.setTriggername(rd_btn.getText().toString());
                   triggerlistmodel.setTriggerdescrption("");
+                  SharedPreferences.Editor editor = sharedpreferences.edit();
+                  editor.putString("data_on", rd_btn.getText().toString());
+                  editor.apply();
                   AddMacroActivity.triggerlist.add(triggerlistmodel);
                   dialog.dismiss();
               }else if (rd_btn !=null && rd_btn.getText().toString().equals("No Data Connection")){
                   triggerlistmodel.setTriggername(rd_btn.getText().toString());
                   triggerlistmodel.setTriggerdescrption("");
+                  SharedPreferences.Editor editor = sharedpreferences.edit();
+                  editor.putString("data_on", rd_btn.getText().toString());
+                  editor.apply();
                   AddMacroActivity.triggerlist.add(triggerlistmodel);
                   dialog.dismiss();
               }
@@ -1233,7 +1245,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_headphones_event_change);
         dialog.setCancelable(false);
-
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
         RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
@@ -1252,10 +1264,16 @@ public  static Triggerlistmodel triggerlistmodel1;
                 if(rd_btn !=null && rd_btn.getText().toString().equals("Headphones Inserted")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     showHeadphonestype(context,triggerlistmodel);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("head", rd_btn.getText().toString());
+                    editor.apply();
                     dialog.dismiss();
                 }else if (rd_btn !=null && rd_btn.getText().toString().equals("Headphones Removed")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("head", rd_btn.getText().toString());
+                    editor.apply();
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }
@@ -1292,6 +1310,7 @@ public  static Triggerlistmodel triggerlistmodel1;
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
                     triggerlistmodel.setTriggerdescrption(rd_btn.getText().toString());
+
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }else{
@@ -1348,7 +1367,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_mobile_service);
         dialog.setCancelable(false);
-
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
         RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
@@ -1367,6 +1386,11 @@ public  static Triggerlistmodel triggerlistmodel1;
                 if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
+
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("mob_ser", rd_btn.getText().toString());
+                    editor.apply();
+
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }else{
@@ -1385,7 +1409,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_roaming_enb_dis);
         dialog.setCancelable(false);
-
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
         RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
@@ -1404,6 +1428,10 @@ public  static Triggerlistmodel triggerlistmodel1;
                 if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
+
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("roaming", rd_btn.getText().toString());
+                    editor.apply();
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }else{
@@ -1422,7 +1450,7 @@ public  static Triggerlistmodel triggerlistmodel1;
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_usb_con_disc);
         dialog.setCancelable(false);
-
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
         RadioGroup radioGroup=dialog.findViewById(R.id.rg_bluetooth_event);
@@ -1441,6 +1469,9 @@ public  static Triggerlistmodel triggerlistmodel1;
                 if(rd_btn !=null && !rd_btn.getText().toString().equals("")){
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel.setTriggerdescrption("");
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("usb", rd_btn.getText().toString());
+                    editor.apply();
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     dialog.dismiss();
                 }else{
