@@ -16,6 +16,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.content.res.Configuration;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorListener;
+import android.hardware.SensorManager;
 import android.location.LocationManager;
 import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
@@ -65,7 +71,12 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import safety.com.br.android_shake_detector.core.ShakeCallback;
+import safety.com.br.android_shake_detector.core.ShakeDetector;
+import safety.com.br.android_shake_detector.core.ShakeOptions;
+
 import static android.content.Context.CONNECTIVITY_SERVICE;
+import static android.content.Context.SENSOR_SERVICE;
 
 public class TriigersList {
     public static String TAG = "TriigersList";
@@ -83,6 +94,23 @@ public class TriigersList {
                 addNotification(exampleJobService, "Gps Disabled");
             }
         }
+    }
+    public static void device_boot(Context context,String message){
+        BroadcastReceiver mReceiver;
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                Log.d("jflkdfjklfjklfjklf", "dddfdd" + action);
+                if (intent.getAction() == "android.permission.RECEIVE_BOOT_COMPLETED") {
+                        // Hotspot AP is enabled
+                        addNotification(context, message);
+
+                }
+            }
+        };
+        context.registerReceiver(mReceiver,
+                new IntentFilter("android.permission.RECEIVE_BOOT_COMPLETED"));
     }
 
 
@@ -109,9 +137,7 @@ public class TriigersList {
                 addNotification(ctx, nn);
             }
             /*  Log.e(TAG, "Current App in foreground is: " + currentApp);*/
-
             return currentApp;
-
         } else {
 
             ActivityManager manager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
@@ -333,15 +359,15 @@ public class TriigersList {
 
     public static void roamingcheck(Context context, String message) {
         if (isDataRoamingEnabled(context)) {
-            addNotification(context, "Roaming");
+            if (!message.isEmpty() && message.equals("Roaming Started")) {
+                addNotification(context, message);
+            }
         } else {
-            addNotification(context, "Roaming no");
-
+            if (!message.isEmpty() && message.equals("Roaming Stopped")) {
+                addNotification(context, message);
+            }
         }
-
-
     }
-
 
     public static final Boolean isDataRoamingEnabled(final Context application_context) {
         try {
@@ -354,6 +380,183 @@ public class TriigersList {
             return false;
         }
     }
+
+    //Sensor flip
+    public static void flipdevice(Context context, String message) {
+        SensorManager sensorManager;
+        Sensor accelerometerSensor;
+        boolean accelerometerPresent;
+        SensorEventListener accelerometerListener = new SensorEventListener() {
+
+            @Override
+            public void onAccuracyChanged(Sensor arg0, int arg1) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onSensorChanged(SensorEvent arg0) {
+                // TODO Auto-generated method stub
+                float z_value = arg0.values[2];
+                if (z_value >= 0) {
+                    if (!message.isEmpty() && message.equals("Face Up -> Face Down")) {
+                        addNotification(context, "Up");
+                    }
+                } else {
+                    if (!message.isEmpty() && message.equals(" Face Down -> Face Up")) {
+                        addNotification(context, "Down");
+                    } else if (!message.isEmpty() && message.equals("Any -> Face Dwon")) {
+                        addNotification(context, "Down");
+                    }
+                }
+            }
+        };
+        sensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
+        List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ACCELEROMETER);
+        if (sensorList.size() > 0) {
+            accelerometerPresent = true;
+            accelerometerSensor = sensorList.get(0);
+            if (accelerometerPresent) {
+
+                sensorManager.registerListener(accelerometerListener, accelerometerSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            }
+        } else {
+            accelerometerPresent = false;
+        }
+    }
+
+
+    public static void showLightSensor(Context context, String message, String point) {
+        SensorManager sensorManager = null;
+        Sensor light = null;
+        final float[] sensorValue = {-1};
+
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        sensorManager.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                    if (event.values[0] < 3 || event.values[0] > 15) {
+                        sensorValue[0] = event.values[0];
+                    }
+                    if (sensorValue[0] < 2) {
+
+                    } else {
+                        if (!message.isEmpty() && message.equals("Decreases to")) {
+                            Log.d("lkffdffdf", "dfffdf" + point);
+                            if (!point.isEmpty()) {
+                                if (sensorValue[0] >= Float.parseFloat(point)) {
+                                    addNotification(context, message + "" + sensorValue[0]);
+                                }
+                            }
+
+                        } else if (!message.isEmpty() && message.equals("increases to")) {
+                            if (!point.isEmpty()) {
+                                if (sensorValue[0] >= Float.parseFloat(point)) {
+                                    addNotification(context, message + "" + sensorValue[0]);
+                                }
+                            }
+
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            }
+        }, light, SensorManager.SENSOR_DELAY_NORMAL);
+
+    }
+
+
+    public static void proximity_sensor(Context context, String message) {
+        SensorManager mSensorManager;
+        Sensor mSensor;
+        mSensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
+        mSensorManager.registerListener(new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (event.values[0] == 0) {
+                    if (!message.isEmpty() && message.equals("Near")) {
+                        addNotification(context, message);
+                    }
+
+                } else {
+                    if (!message.isEmpty() && message.equals("Far")) {
+                        addNotification(context, message);
+                    }
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        }, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+
+    }
+
+
+    public static void show_orientation(Context context, String message) {
+        int ot = context.getResources().getConfiguration().orientation;
+        switch (ot) {
+
+            case Configuration.ORIENTATION_LANDSCAPE:
+                if (!message.isEmpty() && message.equals("Landscape")) {
+                    addNotification(context, "Land");
+                }
+
+                break;
+            case Configuration.ORIENTATION_PORTRAIT:
+                if (!message.isEmpty() && message.equals("Portrait")) {
+                    addNotification(context, "port");
+                }
+                break;
+            default:
+                Log.d("my orient", "default val");
+                break;
+        }
+
+
+    }
+
+
+    public static void shaking(Context context, String message) {
+        ShakeDetector shakeDetector;
+        ShakeOptions options = new ShakeOptions()
+                .background(true)
+                .interval(1000)
+                .shakeCount(2)
+                .sensibility(2.0f);
+
+        shakeDetector= new ShakeDetector(options).start(context, new ShakeCallback() {
+            @Override
+            public void onShake() {
+                Log.d("event", "onShake");
+                if (!message.isEmpty()  && message.equals("Shake Device"))
+                addNotification(context,message);
+            }
+        });
+
+    }
+
+    public static float Round(float Rval, int Rpl) {
+        float p = (float) Math.pow(10, Rpl);
+        Rval = Rval * p;
+        float tmp = Math.round(Rval);
+        return (float) tmp / p;
+    }
+
+
+
+
+
 
 
     //Notifications

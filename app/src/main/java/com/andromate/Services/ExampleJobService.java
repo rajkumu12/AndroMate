@@ -119,6 +119,11 @@ class LongRunningTask {
                 Log.d("jfhdlkjfhdlkf", "gggg" + gps);
                 TriigersList.ChecGps(exampleJobService, gps);
 
+
+                String boot = sharedpreferences.getString("db", "");
+                TriigersList.device_boot(exampleJobService,boot);
+
+
                 String bt = sharedpreferences.getString("bt", "");
 
                 checkBlutooth_trigger(exampleJobService,bt);
@@ -141,6 +146,25 @@ class LongRunningTask {
 
                 String roaming = sharedpreferences.getString("roaming", "");
                 TriigersList.roamingcheck(exampleJobService,roaming);
+
+
+                String flip_sensor = sharedpreferences.getString("flip", "");
+                TriigersList.flipdevice(exampleJobService,flip_sensor);
+
+
+                String lightsensor = sharedpreferences.getString("light", "");
+                String point = sharedpreferences.getString("point", "");
+                TriigersList.showLightSensor(exampleJobService,lightsensor,point);
+                TriigersList.proximity_sensor(exampleJobService,"lightsensor");
+
+                String orientation = sharedpreferences.getString("orientation", "");
+                TriigersList.show_orientation(exampleJobService,orientation);
+
+                String shaking = sharedpreferences.getString("shaking", "");
+                TriigersList.shaking(exampleJobService,shaking);
+
+
+
 
             }
         }, 0, 1000);

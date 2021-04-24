@@ -54,7 +54,6 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
         triggerlistmodel = new Triggerlistmodel();
         return new Application_trigger_item.ViewHolder(v);
     }
-
     @Override
     public void onBindViewHolder(@NonNull final Application_trigger_item.ViewHolder holder, final int position) {
         TriggerItemModel triggerItemModel = arrayList.get(position);
@@ -72,18 +71,18 @@ public class Application_trigger_item extends RecyclerView.Adapter<Application_t
                     Dialogs.showDialogtrigger(context,triggerlistmodel);
                 } else if (holder.tv_title.getText().toString().equals("Application/Launched/\nClosed")) {
                     if (!isAccessGranted(context)) {
+
                         showpermissionDialog(context);
+
                     }else {
                         showLaunchCloseDialog(context,triggerlistmodel);
                     }
-
                 } else {
                     Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 
    void showpermissionDialog(Context context){
 

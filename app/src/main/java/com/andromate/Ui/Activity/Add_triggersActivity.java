@@ -26,6 +26,7 @@ import com.andromate.Ui.Adapters.Call_SmsAdapter;
 import com.andromate.Ui.Adapters.Connectivity_Adapter;
 import com.andromate.Ui.Adapters.DeviceEvent_Adapter;
 import com.andromate.Ui.Adapters.NotificationsAdapters;
+import com.andromate.Ui.Adapters.Sensor_Adapter;
 import com.andromate.Ui.Adapters.TimeDate_Adapter;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
@@ -278,13 +279,13 @@ public class Add_triggersActivity extends AppCompatActivity implements View.OnCl
         sensorslist.add(new TriggerItemModel("Screen Orientation",R.drawable.screen_orientation));
         sensorslist.add(new TriggerItemModel("Shake Device",R.drawable.shake_device));
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,sensorslist);
+        Sensor_Adapter sensor_adapter=new Sensor_Adapter(this,sensorslist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(Add_triggersActivity.this,2);
         recyclerView_sensorslist.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
                                 recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
         recyclerView_sensorslist.setItemAnimator(new DefaultItemAnimator());
-        recyclerView_sensorslist.setAdapter(triggerItemsAdapters);
+        recyclerView_sensorslist.setAdapter(sensor_adapter);
     }
 
     private void load_userlist() {

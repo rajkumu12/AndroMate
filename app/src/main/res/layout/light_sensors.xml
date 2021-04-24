@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp18"
+        android:text="Light Sensor"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp20" />
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp12"
+        android:layout_marginTop="@dimen/dp18"
+        android:text="By default the light sensor will only work when the screen is on .You may configure the trigger via the setting to allow periodic background update but this will impact battery life)"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dp12" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp18"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Light Sensor"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/dp16" />
+
+        <TextView
+            android:id="@+id/tv_sensors_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0lx"
+            android:layout_marginStart="@dimen/dp12"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/dp16" />
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_sen_flip_device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp20"
+        android:weightSum="1"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_app_fu_fd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:textSize="@dimen/sp12"
+            android:layout_weight="0.5"
+            android:buttonTint="@color/theme_color"
+            android:text="Decreases to"/>
+      <!--  <RadioButton
+            android:id="@+id/rb_app_select_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="Select Groups"/>-->
+        <RadioButton
+            android:id="@+id/rb_app_fd_fu"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:layout_marginStart="@dimen/dp12"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="increases to"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp18"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/et_input_value"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter lux value"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/dp16" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lx"
+            android:layout_marginStart="@dimen/dp12"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/dp20" />
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp8">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/sp10"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_app_in_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:paddingVertical="@dimen/dp8"
+                android:textColor="@color/theme_color"
+                android:text="Cancel"/>
+            <TextView
+                android:id="@+id/tv_app_in_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:text="Ok"
+                android:textColor="@color/theme_color"
+                android:paddingVertical="@dimen/dp8"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>
