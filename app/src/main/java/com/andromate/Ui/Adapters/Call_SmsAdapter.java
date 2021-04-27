@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -44,6 +45,7 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
     String triggerdesc;
     Triggerlistmodel triggerlistmodel;
     List<ContactModel> contactModelList;
+    SharedPreferences sharedpreferences;
     public static String TAG = "Call_SmsAdapter";
 
     public Call_SmsAdapter(Context context) {
@@ -53,6 +55,7 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
     public Call_SmsAdapter(Context context, List<TriggerItemModel> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
+        sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -89,13 +92,16 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
                         @Override
                         public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
                     }).check();
-
                 } else if (holder.tv_title.getText().toString().equals("Call Ended")) {
                     triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
                     Dialogs.show_call_ended(context, triggerlistmodel);
 
                 }else if (holder.tv_title.getText().toString().equals("Call Incoming")) {
                     triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("call", triggerItemModel.getTitle());
+                   /* Log.d("hfjdfjffff","jlhfjkdhfjkdfhkjf"+applicationsInfo.getPname());*/
+                    editor.commit();
                     Dialogs.show_call_ended(context, triggerlistmodel);
 
                 }else if (holder.tv_title.getText().toString().equals("Call Missed")) {
@@ -125,11 +131,8 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
                         @Override
                         public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
                     }).check();
-
                 }else if (holder.tv_title.getText().toString().equals("Dial Phone Number")) {
-
                     Dialogs.Dialnumber(context,triggerlistmodel);
-
                 }else if (holder.tv_title.getText().toString().equals("SMS Received")) {
                     triggerlistmodel.setTriggername(holder.tv_title.getText().toString());
                     Dialogs.show_call_ended(context, triggerlistmodel);
@@ -142,7 +145,6 @@ public class Call_SmsAdapter extends RecyclerView.Adapter<Call_SmsAdapter.ViewHo
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
                 null, null, null, ContactsContract.RawContacts.DISPLAY_NAME_PRIMARY + " ASC");
         /*    ContactCount = cur.getCount();*/
-
         if (cur.getCount() > 0) {
             contactModelList = new ArrayList<>();
             while (cur.moveToNext()) {

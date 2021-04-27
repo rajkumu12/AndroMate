@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/theme_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_tittle"
+        android:layout_width="340dp"
+        android:layout_height="@dimen/dp50"
+        android:text="Applicatiuon Installed"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/dp8"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp24"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Configure"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Test Action"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Add action above"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_marginTop="@dimen/dp12"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Add constraints"
+        android:textColor="@color/white"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Add comments"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Copy"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:paddingHorizontal="@dimen/dp12"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:textSize="@dimen/dp14"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Disable"
+        android:textColor="@color/white"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:layout_marginBottom="@dimen/dp18"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp40"
+        android:text="Help"
+        android:textColor="@color/white"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/dp12"
+        android:layout_marginBottom="@dimen/dp18"
+        android:paddingHorizontal="@dimen/dp12"
+        android:textSize="@dimen/dp14"/>
+</LinearLayout>

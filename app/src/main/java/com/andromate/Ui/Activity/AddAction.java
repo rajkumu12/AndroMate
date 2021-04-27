@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.andromate.CustomColors;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
+import com.andromate.Ui.Adapters.ActionApplicationsAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
 import java.util.ArrayList;
@@ -113,17 +114,21 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
 
     private void loadApplications() {
         applicationlist = new ArrayList<>();
-        applicationlist.add(new TriggerItemModel("App Install/Remove/\n" +
-                "update", R.drawable.suitcase));
+        applicationlist.add(new TriggerItemModel("App Enable/Disable", R.drawable.recent_app_opened));
 
-        applicationlist.add(new TriggerItemModel("Application/Launched/\n" +
-                "Closed", R.drawable.recent_app_opened));
+        applicationlist.add(new TriggerItemModel("Clear App Data", R.drawable.suitcase));
 
-        applicationlist.add(new TriggerItemModel("Recent Apps Opened", R.drawable.recent_app_opened));
+        applicationlist.add(new TriggerItemModel("Kill Application", R.drawable.recent_app_opened));
 
-        applicationlist.add(new TriggerItemModel("Tasker/Locate Plugin", R.drawable.tasker_locator));
+        applicationlist.add(new TriggerItemModel("Kill Background\nProcess", R.drawable.ic_kill_process));
+        applicationlist.add(new TriggerItemModel("Launch Application", R.drawable.recent_app_opened));
+        applicationlist.add(new TriggerItemModel("Launch Shortcut", R.drawable.tasker_locator));
+        applicationlist.add(new TriggerItemModel("Launch and Press", R.drawable.tasker_locator));
+        applicationlist.add(new TriggerItemModel("Locale/Tasker Plugin", R.drawable.suitcase));
+        applicationlist.add(new TriggerItemModel("Open Website/HTTP\nGET", R.drawable.webhook));
+        applicationlist.add(new TriggerItemModel("Shell Script", R.drawable.screen));
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, applicationlist);
+        ActionApplicationsAdapters triggerItemsAdapters = new ActionApplicationsAdapters(this, applicationlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(AddAction.this, 2);
         recyclerView_application.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

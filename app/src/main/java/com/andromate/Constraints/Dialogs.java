@@ -864,23 +864,24 @@ public class Dialogs {
             CheckBox cb = new CheckBox(context);
             cb.setText(contactModel.getName());
             layout.addView(cb);
+           SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
 
-
+            int finalI = i;
             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
-
                         str.append(cb.getText() + ",");
-
+                        SharedPreferences.Editor editor = sharedpreferences.edit();
+                        editor.putString("number", contactModelList.get(finalI).getNumber());
+                        /* Log.d("hfjdfjffff","jlhfjkdhfjkdfhkjf"+applicationsInfo.getPname());*/
+                        editor.commit();
                     } else {
 
                     }
                 }
             });
-
         }
-
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -891,7 +892,6 @@ public class Dialogs {
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (str != null) {
                     Log.d("Dailog", "jjfjf" + triggerlistmodel);
                     triggerlistmodel.setTriggerdescrption(String.valueOf(str));
@@ -1314,8 +1314,6 @@ public class Dialogs {
             }
         });
         dialog.show();
-
-
     }
 
 
@@ -1351,10 +1349,7 @@ public class Dialogs {
             }
         });
         dialog.show();
-
-
     }
-
 
     public static void showMobileServiceStatus(Context context, Triggerlistmodel triggerlistmodel) {
 
@@ -1393,13 +1388,10 @@ public class Dialogs {
             }
         });
         dialog.show();
-
-
     }
 
 
     public static void showRoaming(Context context, Triggerlistmodel triggerlistmodel) {
-
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_roaming_enb_dis);
         dialog.setCancelable(false);
@@ -1434,8 +1426,6 @@ public class Dialogs {
             }
         });
         dialog.show();
-
-
     }
 
 
@@ -1627,8 +1617,6 @@ public class Dialogs {
                 });
 
             }
-
-
             tv_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -1663,16 +1651,10 @@ public class Dialogs {
                 }*/
                 }
             });
-
-
             dialog.show();
-
-
         }
-
     }
     //end region
-
 //region timedate
 
     public static void Showcal_event(Context c, Triggerlistmodel triggerlistmodel1) {
@@ -1706,7 +1688,6 @@ public class Dialogs {
             }
         });*/
 
-
         dialog.show();
 
 
@@ -1736,7 +1717,6 @@ public class Dialogs {
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
@@ -1747,16 +1727,11 @@ public class Dialogs {
                 } else {
                     Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 
-
         dialog.show();
-
-
     }
-
 
     public static void Show_rotatechange(Context c, Triggerlistmodel triggerlistmodel1) {
         Dialog dialog = new Dialog(c);
@@ -1842,10 +1817,7 @@ public class Dialogs {
 
 
         dialog.show();
-
-
     }
-
     public static void Show_devicedock(Context c, Triggerlistmodel triggerlistmodel1) {
         Dialog dialog = new Dialog(c);
         dialog.setContentView(R.layout.alert_device_docked);
@@ -1941,7 +1913,7 @@ public class Dialogs {
         RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
-
+        SharedPreferences sharedpreferences = c.getSharedPreferences("myapp", Context.MODE_PRIVATE);
 
         /* tv_head.setText(heading);*/
 
@@ -1961,6 +1933,9 @@ public class Dialogs {
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
                     triggerlistmodel1.setTriggername(rd_btn.getText().toString());
                     triggerlistmodel1.setTriggerdescrption("");
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("music", rd_btn.getText().toString());
+                    editor.apply();
                     AddMacroActivity.triggerlist.add(triggerlistmodel1);
                     dialog.dismiss();
                 } else {
@@ -2077,7 +2052,6 @@ public class Dialogs {
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
@@ -2088,13 +2062,10 @@ public class Dialogs {
                 } else {
                     Toast.makeText(c, "Select an option", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
         dialog.show();
     }
-
     public static void Show_silentmode(Context c, Triggerlistmodel triggerlistmodel1) {
         Dialog dialog = new Dialog(c);
         dialog.setContentView(R.layout.silent_mode_enable_disable);
@@ -2102,10 +2073,7 @@ public class Dialogs {
         RadioGroup radioGroup = dialog.findViewById(R.id.rg_airplane);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
-
-
         /* tv_head.setText(heading);*/
-
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -2115,7 +2083,6 @@ public class Dialogs {
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
@@ -2129,12 +2096,9 @@ public class Dialogs {
 
             }
         });
-
         dialog.show();
     }
-
     //end region
-
 
     //region sensor
     public static void Show_sensor(Context c, Triggerlistmodel triggerlistmodel1) {
@@ -2182,10 +2146,6 @@ public class Dialogs {
 
 
     }
-
-
-
-
 
     public static void Show_lightsensor(Context c, Triggerlistmodel triggerlistmodel1) {
         Dialog dialog = new Dialog(c);

@@ -32,6 +32,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -95,7 +96,8 @@ public class TriigersList {
             }
         }
     }
-    public static void device_boot(Context context,String message){
+
+    public static void device_boot(Context context, String message) {
         BroadcastReceiver mReceiver;
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -103,8 +105,8 @@ public class TriigersList {
                 String action = intent.getAction();
                 Log.d("jflkdfjklfjklfjklf", "dddfdd" + action);
                 if (intent.getAction() == "android.permission.RECEIVE_BOOT_COMPLETED") {
-                        // Hotspot AP is enabled
-                        addNotification(context, message);
+                    // Hotspot AP is enabled
+                    addNotification(context, message);
 
                 }
             }
@@ -535,12 +537,12 @@ public class TriigersList {
                 .shakeCount(2)
                 .sensibility(2.0f);
 
-        shakeDetector= new ShakeDetector(options).start(context, new ShakeCallback() {
+        shakeDetector = new ShakeDetector(options).start(context, new ShakeCallback() {
             @Override
             public void onShake() {
                 Log.d("event", "onShake");
-                if (!message.isEmpty()  && message.equals("Shake Device"))
-                addNotification(context,message);
+                if (!message.isEmpty() && message.equals("Shake Device"))
+                    addNotification(context, message);
             }
         });
 
@@ -553,14 +555,60 @@ public class TriigersList {
         return (float) tmp / p;
     }
 
+    public static void musicplayingcheck(Context context,String message) {
 
+        Log.d("gggggggggg","iot"+message);
+        AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        if(manager.isMusicActive())
+        {
+          Log.d("gggggggggg","p");
+          if (!message.isEmpty() && message.equals("Started")){
+              addNotification(context,message);
+          }
+        }else {
+            Log.d("gggggggggg","s");
+            if (!message.isEmpty() && message.equals("Stopped")){
+                addNotification(context,message);
+            }
+        }
+    }
+
+
+
+    //
+    public static void checkCallState(Context context, String message) {
+
+
+        BroadcastReceiver mReceiver;
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if(intent.getAction().equals("android.intent.action.PHONE_STATE")){
+
+                    String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
+
+                    if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)){
+                        Log.e(TAG, "Inside EXTRA_STATE_RINGING");
+                        String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+                        Log.e(TAG, "incoming number : " + number);
+                    }
+                    else if(state.equals(TelephonyManager.EXTRA_STATE_IDLE)){
+                        Log.d(TAG, "Inside EXTRA_STATE_IDLE");
+                    }
+                }
+            }
+        };
+        context.registerReceiver(mReceiver,
+                new IntentFilter("android.intent.action.PHONE_STATE"));
+
+
+    }
 
 
 
 
 
     //Notifications
-
     public static void addNotification(Context context, String string) {
         String channelId = context.getString(R.string.default_notification_channel_id);
         NotificationCompat.Builder notificationBuilder =

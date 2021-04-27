@@ -26,8 +26,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andromate.Model.ActionModelList;
 import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
+import com.andromate.Ui.Adapters.Actionlists_items_Adapter;
 import com.andromate.Ui.Adapters.Triggelists_items_Adapter;
 import com.andromate.db.DBHelper;
 import com.google.android.material.tabs.TabLayout;
@@ -43,12 +45,13 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout lly_trigger;
     LinearLayout lly_action;
     LinearLayout lly_constraints;
-    TextView tv_notrigger;
+    TextView tv_notrigger,tv_dummy_action;
 
     public static String types;
     public static List<Triggerlistmodel>triggerlist;
+    public static List<ActionModelList>actionlist;
 
-    RecyclerView recyclerView_triggerlist;
+    RecyclerView recyclerView_triggerlist,recyclerview_actionlist;
     RelativeLayout rly_macronotes;
     EditText et_description;
     DBHelper mydb;
@@ -77,12 +80,15 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
 
         mydb = new DBHelper(this);
         recyclerView_triggerlist=findViewById(R.id.recy_trigger_item);
+        recyclerview_actionlist=findViewById(R.id.recy_action_item);
         tv_notrigger=findViewById(R.id.tv_notrigger);
         editText_macroname=findViewById(R.id.et_macroname);
         rly_macronotes=findViewById(R.id.rly_macronotes);
         et_description=findViewById(R.id.et_description);
         rly_interface=findViewById(R.id.rly_interface);
         triggerlist=new ArrayList<>();
+        actionlist=new ArrayList<>();
+
 
         imageView_back=findViewById(R.id.back_icon_addmacros);
         lly_trigger=findViewById(R.id.lly_trigger);
@@ -134,6 +140,27 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     protected void onPostResume() {
         super.onPostResume();
         loadTriggerlistitem();
+        loadActionlistItem();
+    }
+
+    private void loadActionlistItem() {
+
+         Actionlists_items_Adapter triggelists_items_adapter=new Actionlists_items_Adapter(this,actionlist);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(AddMacroActivity.this);
+        recyclerView_triggerlist.setLayoutManager(layoutManager2);
+                            /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
+                                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
+        recyclerView_triggerlist.setItemAnimator(new DefaultItemAnimator());
+        recyclerView_triggerlist.setAdapter(triggelists_items_adapter);
+
+        if (triggerlist.size() !=0){
+            tv_notrigger.setVisibility(View.GONE);
+            recyclerView_triggerlist.setVisibility(View.VISIBLE);
+        }
+
+
+
+
     }
 
     private void loadTriggerlistitem() {

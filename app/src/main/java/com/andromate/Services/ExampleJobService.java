@@ -163,14 +163,16 @@ class LongRunningTask {
                 String shaking = sharedpreferences.getString("shaking", "");
                 TriigersList.shaking(exampleJobService,shaking);
 
+                //music
+                String musicstate = sharedpreferences.getString("music", "");
+                TriigersList.musicplayingcheck(exampleJobService,musicstate);
 
-
-
+                String callstate = sharedpreferences.getString("call", "");
+                String num = sharedpreferences.getString("call", "");
+                TriigersList.checkCallState(exampleJobService,callstate);
             }
-        }, 0, 1000);
+        }, 0, 2000);
     }
-
-
 
 
 
