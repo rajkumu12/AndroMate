@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageInfo;
+import android.database.Cursor;
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,7 +32,9 @@ import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
 import com.andromate.Ui.Activity.AddMacroActivity;
 import com.andromate.Ui.Adapters.ApplicationlistAdapters;
+import com.andromate.Ui.On;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,10 +69,10 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Enabled")) {
-                    LoadApplicainlist(context,triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Disabled")) {
-                    LoadApplicainlist(context,triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel);
                     dialog.dismiss();
                 }
             }
@@ -145,7 +149,6 @@ public class DialogsActions {
         dialog.show();
 
 
-
     }
 
     public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, RecyclerView recyclerView, Context context) {
@@ -182,7 +185,7 @@ public class DialogsActions {
     public static ArrayList<ApplicationsInfo> getInstalledApps2(boolean getSysPackages, RecyclerView recyclerView, Context context) {
         ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
-        ProgressDialog progressDialog=new ProgressDialog(context);
+        ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Loading Apps");
         progressDialog.setCancelable(false);
         progressDialog.show();
@@ -226,7 +229,6 @@ public class DialogsActions {
     }
 
 
-
     public static void show_clear_data(Context context, ActionModelList triggerlistmodel) {
 
         Dialog dialog = new Dialog(context);
@@ -250,11 +252,11 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application")) {
-                    LoadApplicainlist(context,triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
 
-                    showpackagedialog(context,triggerlistmodel);
+                    showpackagedialog(context, triggerlistmodel);
 
                 }
             }
@@ -264,8 +266,6 @@ public class DialogsActions {
         dialog.getWindow().setAttributes(layoutParams);
         dialog.show();
     }
-
-
 
 
     public static void showpackagedialog(Context context, ActionModelList triggerlistmodel) {
@@ -303,12 +303,9 @@ public class DialogsActions {
                 dialog.dismiss();
             }
         });
-
-
         dialog.setCancelable(false);
         dialog.show();
     }
-
 
     public static void showPackagelist(Context context, ActionModelList triggerlistmodel, EditText et_package) {
         Toast.makeText(context, "wait while loading apps", Toast.LENGTH_SHORT).show();
@@ -415,12 +412,10 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application")) {
-                    LoadApplicainlist(context,triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
-
-                    showpackagedialog(context,triggerlistmodel);
-
+                    showpackagedialog(context, triggerlistmodel);
                 }
             }
         });
@@ -429,5 +424,466 @@ public class DialogsActions {
         dialog.getWindow().setAttributes(layoutParams);
         dialog.show();
     }
+
+
+    public static void show_launch_option(Context context, ActionModelList triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_launch_option);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_launch_type);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+
+                if (rd_btn != null && rd_btn.getText().toString().equals("Select Application")) {
+                    LoadApplicainlist(context, triggerlistmodel);
+                    dialog.dismiss();
+                } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
+                    showpackagedialog(context, triggerlistmodel);
+                }
+            }
+        });
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setAttributes(layoutParams);
+        dialog.show();
+    }
+
+
+    public static void loadApps_shortcut(Context context, ActionModelList actionModelList) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_applist_shortcut);
+        dialog.setCancelable(false);
+        LinearLayout linearLayout = dialog.findViewById(R.id.lly_shortcut);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+
+
+        ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
+        List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
+        for (int i = 0; i < packs.size(); i++) {
+            PackageInfo p = packs.get(i);
+            if ((false) && (p.versionName == null)) {
+                continue;
+            }
+            ApplicationsInfo newInfo = new ApplicationsInfo();
+            newInfo.setAppname(p.applicationInfo.loadLabel(context.getPackageManager()).toString());
+            ;
+            newInfo.setPname(p.packageName);
+            Log.d("jfdkfjdkfjkfjf", "jjjjj" + p.packageName);
+            newInfo.setVersionName(p.versionName);
+            newInfo.setVersionCode(p.versionCode);
+            newInfo.setIcon(p.applicationInfo.loadIcon(context.getPackageManager()));
+            res.add(newInfo);
+        }
+
+        final RadioButton[] rb = new RadioButton[res.size()];
+        RadioGroup rg = new RadioGroup(context); //create the RadioGroup
+        rg.setOrientation(RadioGroup.VERTICAL);
+
+        for (int i = 0; i < res.size(); i++) {
+            ApplicationsInfo newInfo = res.get(i);
+
+            rb[i] = new RadioButton(context);
+            rg.addView(rb[i]); //the RadioButtons are added to the radioGroup instead of the layout
+            rb[i].setText(newInfo.getAppname());
+
+        }
+        linearLayout.addView(rg);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = rg.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+
+                if (rd_btn != null) {
+                    Toast.makeText(context, "" + rd_btn.getText().toString() + " Selected", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Select a shortcut", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setAttributes(layoutParams);
+        dialog.show();
+
+
+    }
+
+
+    public static void logAllTaskerTasks(Context context, ActionModelList actionModelList) {
+        Cursor c = context.getContentResolver().query(
+                Uri.parse("content://net.dinglisch.android.tasker/tasks"),
+                null, null, null, null);
+
+        if (c != null) {
+            int nameCol = c.getColumnIndex("name");
+            int projNameCol = c.getColumnIndex("project_name");
+
+            while (c.moveToNext()) {
+                Log.d("onenene", "ldhfkjdhfjkf" + c.getString(projNameCol) + "/" + c.getString(nameCol));
+            }
+            c.close();
+        } else {
+            Toast.makeText(context, "No tasker or plugin found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public static void show_declairationCamera(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_enable_camera_notice);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        CheckBox checkBox = dialog.findViewById(R.id.checkbox);
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (!checkBox.isChecked()) {
+                    Toast.makeText(context, "Please check Terms & Conditions", Toast.LENGTH_SHORT).show();
+                } else {
+                    show_dialog_t_n_c(context, actionModelList);
+                    dialog.dismiss();
+                }
+            }
+        });
+
+
+        dialog.show();
+    }
+
+
+    public static void show_dialog_t_n_c(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_enable_camera_notice_description);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        CheckBox checkBox = dialog.findViewById(R.id.checkbox);
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+
+    }
+
+
+    public static void show_dialog_photoselector(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_photo_opener_option);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public static void show_dialog_share_lastphoto(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_share_last_photos);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public static void show_dialog_takephoto(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_take_photos);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_take_photos);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && rd_btn.getText().toString().equals("Front Facing")) {
+                    show_dialog_showCam_icon(context, actionModelList);
+                    dialog.dismiss();
+                } else if (rd_btn != null && rd_btn.getText().toString().equals("Front Facing")) {
+                    show_dialog_showflash(context, actionModelList);
+                    dialog.dismiss();
+                }
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public static void show_dialog_showCam_icon(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_show_camera_icon);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_take_photos);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && rd_btn.getText().toString().equals("Show camera icon")) {
+
+                    savefilename(context,actionModelList);
+                    dialog.dismiss();
+                } else if (rd_btn != null && rd_btn.getText().toString().equals("hide camera icon")) {
+                    savefilename(context,actionModelList);
+                    dialog.dismiss();
+                }
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public static void show_dialog_showflash(Context context, ActionModelList actionModelList) {
+
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_flash_option);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_take_photos);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && rd_btn.getText().toString().equals("Flash Off")) {
+                    show_dialog_showCam_icon(context, actionModelList);
+                    dialog.dismiss();
+                } else if (rd_btn != null && rd_btn.getText().toString().equals("Flash On")) {
+                    show_dialog_showCam_icon(context, actionModelList);
+                    dialog.dismiss();
+                } else if (rd_btn != null && rd_btn.getText().toString().equals("Flash Auto")) {
+                    show_dialog_showCam_icon(context, actionModelList);
+                    dialog.dismiss();
+                }
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+    public static void savefilename(Context context,ActionModelList actionModelList){
+        File dir_ = new File(context.getExternalFilesDir("Andromate"),"One");
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_file_saving_ui);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        TextView tvpath=dialog.findViewById(R.id.tv_folderpth);
+
+        tvpath.setText(""+dir_);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+
+    }
+
+
+    public static void shwo_action_airplane_mode(Context context,ActionModelList actionModelList){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_airplanemode);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_take_photos);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
+                    shwo_action_airplane_mode_option(context, actionModelList);
+                    dialog.dismiss();
+                }
+
+            }
+        });
+        dialog.show();
+    }
+
+
+    public static void shwo_action_airplane_mode_option(Context context,ActionModelList actionModelList){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.select_toggle_airplanemodes);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_launch_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_launch_ok);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_take_photos);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
+                    dialog.dismiss();
+                }
+
+            }
+        });
+
+        dialog.show();
+    }
+
     //end region
 }

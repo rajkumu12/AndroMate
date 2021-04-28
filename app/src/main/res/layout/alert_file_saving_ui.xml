@@ -13,10 +13,20 @@
         android:textSize="@dimen/dp20"
         android:layout_marginTop="@dimen/dp18"
         android:layout_marginStart="@dimen/dp12"
-        android:text="@string/select_option"/>
+        android:text="Take Picture"/>
+
+    <TextView
+        android:id="@+id/tv_folderpth"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="@color/black_light"
+    android:textSize="@dimen/dp14"
+    android:layout_marginTop="@dimen/dp18"
+    android:layout_marginStart="@dimen/dp12"
+    android:text="filepath"/>
 
     <RadioGroup
-        android:id="@+id/rg_launch_type"
+        android:id="@+id/rg_take_photos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp20"
@@ -29,7 +39,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/theme_color"
             android:paddingLeft="@dimen/dp8"
-            android:text="Select Application(s)"
+            android:text="Default Filename"
             android:textSize="@dimen/sp12" />
 
         <RadioButton
@@ -39,11 +49,20 @@
             android:paddingLeft="@dimen/dp8"
             android:buttonTint="@color/theme_color"
             android:textSize="@dimen/sp12"
-            android:text="Enter Package Name"/>
+            android:text="Customer Filename"/>
     </RadioGroup>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp36"
+        android:layout_marginEnd="@dimen/dp50"
+        android:layout_marginStart="@dimen/dp20"
+        android:inputType="text"
+        android:hint="Filename"
+        android:layout_marginTop="@dimen/dp12"/>
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp12"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="wrap_content"

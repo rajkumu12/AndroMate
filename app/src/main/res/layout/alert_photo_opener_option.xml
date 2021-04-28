@@ -13,7 +13,7 @@
         android:textSize="@dimen/dp20"
         android:layout_marginTop="@dimen/dp18"
         android:layout_marginStart="@dimen/dp12"
-        android:text="@string/select_option"/>
+        android:text="Select Application"/>
 
     <RadioGroup
         android:id="@+id/rg_launch_type"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/theme_color"
             android:paddingLeft="@dimen/dp8"
-            android:text="Select Application(s)"
+            android:text="AZ Image View"
             android:textSize="@dimen/sp12" />
 
         <RadioButton
@@ -39,7 +39,25 @@
             android:paddingLeft="@dimen/dp8"
             android:buttonTint="@color/theme_color"
             android:textSize="@dimen/sp12"
-            android:text="Enter Package Name"/>
+            android:text="Copy to..(com.android.fileexplorer.activity.FileActivity)"/>
+
+        <RadioButton
+            android:id="@+id/rb_app_photos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="Photos"/>
+
+        <RadioButton
+            android:id="@+id/rb_app_View_photos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp8"
+            android:buttonTint="@color/theme_color"
+            android:textSize="@dimen/sp12"
+            android:text="View photos"/>
     </RadioGroup>
 
     <RelativeLayout

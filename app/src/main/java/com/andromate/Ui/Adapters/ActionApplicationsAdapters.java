@@ -60,15 +60,15 @@ public class ActionApplicationsAdapters extends RecyclerView.Adapter<ActionAppli
                     }else if (holder.tv_title.getText().toString().equals("Kill Background\nProcess")){
                         DialogsActions.show_kill_background(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Launch Application")){
-                        Toast.makeText(context, "message: "+holder.tv_title.getText().toString(), Toast.LENGTH_SHORT).show();
+                        DialogsActions.show_launch_option(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Launch Shortcut")){
-                        Toast.makeText(context, "message: "+holder.tv_title.getText().toString(), Toast.LENGTH_SHORT).show();
+                        DialogsActions.loadApps_shortcut(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Launch and Press")){
                         Toast.makeText(context, "message: "+holder.tv_title.getText().toString(), Toast.LENGTH_SHORT).show();
                     }else if (holder.tv_title.getText().toString().equals("Locale/Tasker Plugin")){
-                        Toast.makeText(context, "message: "+holder.tv_title.getText().toString(), Toast.LENGTH_SHORT).show();
+                        DialogsActions.logAllTaskerTasks(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Open Website/HTTP\nGET")){
-                        Toast.makeText(context, "message: "+holder.tv_title.getText().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                     }else if (holder.tv_title.getText().toString().equals("Shell Script")){
                         Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                     }

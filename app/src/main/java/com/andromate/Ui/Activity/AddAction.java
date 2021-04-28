@@ -22,6 +22,8 @@ import com.andromate.CustomColors;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
 import com.andromate.Ui.Adapters.ActionApplicationsAdapters;
+import com.andromate.Ui.Adapters.ActionCameraAdapters;
+import com.andromate.Ui.Adapters.ActionConnectivityAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
 import java.util.ArrayList;
@@ -149,7 +151,7 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         cameraphotolist.add(new TriggerItemModel("Take Picture", R.drawable.camera));
         cameraphotolist.add(new TriggerItemModel("Take Screenshot", R.drawable.smartphone));
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, cameraphotolist);
+        ActionCameraAdapters triggerItemsAdapters = new ActionCameraAdapters(this, cameraphotolist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(AddAction.this, 2);
         recyclerView_cameraphoto.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -181,27 +183,20 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
 
     private void loadconnectivity() {
         connectivitylist = new ArrayList<>();
+        connectivitylist.add(new TriggerItemModel("Airplane Mode On/Off",R.drawable.airplane));
         connectivitylist.add(new TriggerItemModel("Android Wear",R.drawable.android_wear));
-        connectivitylist.add(new TriggerItemModel("Bluetooth Event",R.drawable.bluetooth_event));
-        connectivitylist.add(new TriggerItemModel("Data Connectivity\n" +
-                "Change",R.drawable.data_connectivity_change));
-        connectivitylist.add(new TriggerItemModel("Headphones Insert/\n" +
-                "Remove",R.drawable.headphones_inserts_remove));
-        connectivitylist.add(new TriggerItemModel("Hotspot Enabled/\n" +
-                "Disabled",R.drawable.hotspot_enable));
-        connectivitylist.add(new TriggerItemModel("IP Address Change",R.drawable.iip_address));
-        connectivitylist.add(new TriggerItemModel("Mobile Service Status",R.drawable.mobile_service_enable));
-        connectivitylist.add(new TriggerItemModel("Roaming Started/\n" +
-                "Stopped",R.drawable.roaming_enamble));
-        connectivitylist.add(new TriggerItemModel("USB Device Connect/\n" +
-                "Disconnect",R.drawable.usb_device_connected));
-        connectivitylist.add(new TriggerItemModel("VPN State Change",R.drawable.vpn_state_change));
-        connectivitylist.add(new TriggerItemModel("Webhook (Url)",R.drawable.webhook));
-        connectivitylist.add(new TriggerItemModel("Wifi SSID Transition",R.drawable.wifi_sssid));
-        connectivitylist.add(new TriggerItemModel("Wifi State Change",R.drawable.wifi_state_change));
+        connectivitylist.add(new TriggerItemModel("Auto Sync On/Off",R.drawable.async_changed));
+        connectivitylist.add(new TriggerItemModel("Bluetooth Configure",R.drawable.bluetooth_event));
+        connectivitylist.add(new TriggerItemModel("Bluetooth tethering",R.drawable.bluetooth_event));
+        connectivitylist.add(new TriggerItemModel("Connectivity Check",R.drawable.connectivity));
+        connectivitylist.add(new TriggerItemModel("HotSpot On/Off",R.drawable.hotspot_enable));
+        connectivitylist.add(new TriggerItemModel("Mobile Data On/Off",R.drawable.data_connectivity_change));
+        connectivitylist.add(new TriggerItemModel("Send Intent",R.drawable.intent_received));
+        connectivitylist.add(new TriggerItemModel("Sync Account",R.drawable.async_changed));
+        connectivitylist.add(new TriggerItemModel("USB Tethering",R.drawable.usb_device_connected));
+        connectivitylist.add(new TriggerItemModel("Wifi Configuration",R.drawable.wifi_state_change));
 
-
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, connectivitylist);
+        ActionConnectivityAdapters triggerItemsAdapters = new ActionConnectivityAdapters(this, connectivitylist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(AddAction.this, 2);
         recyclerViewc_connectivity.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

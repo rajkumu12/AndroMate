@@ -6,41 +6,38 @@
     android:layout_gravity="center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dp20"
-        android:layout_marginTop="@dimen/dp18"
-        android:layout_marginStart="@dimen/dp12"
-        android:text="@string/select_option"/>
-
-    <RadioGroup
-        android:id="@+id/rg_launch_type"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp20"
-        android:layout_marginHorizontal="@dimen/dp20"
         android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/rb_app_laun_seleApp"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/theme_color"
-            android:paddingLeft="@dimen/dp8"
-            android:text="Select Application(s)"
-            android:textSize="@dimen/sp12" />
+            android:textColor="#E4000000"
+            android:textSize="@dimen/sp14"
+            android:layout_marginVertical="@dimen/dp8"
+            android:layout_marginHorizontal="@dimen/dp16"
+            android:text="Andromate has received 100s of 1 star reviews from users who could not uninstall the app after enabling device admin access."/>
 
-        <RadioButton
-            android:id="@+id/rb_app_laun_enterpackage"
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#E4000000"
+            android:textSize="@dimen/sp14"
+            android:layout_marginVertical="@dimen/dp4"
+            android:layout_marginHorizontal="@dimen/dp16"
+            android:text="Please remember to use the simple uninstall otpion available on the home screen drawer menu"/>
+
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/dp8"
-            android:buttonTint="@color/theme_color"
-            android:textSize="@dimen/sp12"
-            android:text="Enter Package Name"/>
-    </RadioGroup>
+            android:layout_marginHorizontal="@dimen/dp16"
+            android:text="I have read and understand"/>
+    </LinearLayout>
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,7 +48,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="@dimen/dp20"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/tv_app_launch_cancel"
                 android:layout_width="wrap_content"
