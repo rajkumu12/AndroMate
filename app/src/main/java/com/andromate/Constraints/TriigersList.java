@@ -135,7 +135,7 @@ public class TriigersList {
                 }
             }
 
-            if (currentApp.equals(selApp)) {
+            if (currentApp!=null && currentApp.equals(selApp)) {
                 addNotification(ctx, nn);
             }
             /*  Log.e(TAG, "Current App in foreground is: " + currentApp);*/

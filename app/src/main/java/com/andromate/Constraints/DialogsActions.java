@@ -32,6 +32,7 @@ import com.andromate.Model.Triggerlistmodel;
 import com.andromate.R;
 import com.andromate.Ui.Activity.AddMacroActivity;
 import com.andromate.Ui.Adapters.ApplicationlistAdapters;
+import com.andromate.Ui.Adapters.ApplicationlistAdapters_Action;
 import com.andromate.Ui.On;
 
 import java.io.File;
@@ -43,7 +44,7 @@ public class DialogsActions {
 
     public static ProgressDialog progressDialog;
     public static Triggerlistmodel triggerlistmodel1;
-    public static ApplicationlistAdapters triggerItemsAdapters;
+    public static ApplicationlistAdapters_Action triggerItemsAdapters;
 
     //Region Action Application
     public static void showactionApplication(Context context, ActionModelList triggerlistmodel) {
@@ -69,9 +70,12 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Enabled")) {
+                    triggerlistmodel.setActioname(rd_btn.getText().toString());
                     LoadApplicainlist(context, triggerlistmodel);
+
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Disabled")) {
+                    triggerlistmodel.setActioname(rd_btn.getText().toString());
                     LoadApplicainlist(context, triggerlistmodel);
                     dialog.dismiss();
                 }
@@ -172,7 +176,7 @@ public class DialogsActions {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        triggerItemsAdapters = new ApplicationlistAdapters(context, res);
+        triggerItemsAdapters = new ApplicationlistAdapters_Action(context, res);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -206,7 +210,7 @@ public class DialogsActions {
             }
         }
         progressDialog.dismiss();
-        triggerItemsAdapters = new ApplicationlistAdapters(context, res);
+        triggerItemsAdapters = new ApplicationlistAdapters_Action(context, res);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

@@ -47,7 +47,7 @@ public class MacrosFragments extends Fragment {
 
         dbHelper=new DBHelper(getContext());
 
-        Log.d("ljhfjkdhfjd","jdddd"+dbHelper.getAllDataMacro());
+     /*  Log.d("ljhfjkdhfjd","jdddd"+dbHelper.getAllDataMacro());
 
         arralist = new ArrayList<>();
         Cursor curse=dbHelper.getAllDataMacro();
@@ -58,20 +58,20 @@ public class MacrosFragments extends Fragment {
                 MacroModel macroModel=new MacroModel();
                 macroModel.setMacro_name(curse.getString(1));
                 macroModel.setMacro_des(curse.getString(2));
-               /* Log.d("jffjjfjfj","hh"+curse.getString(0));
+               *//* Log.d("jffjjfjfj","hh"+curse.getString(0));
                 Log.d("jffjjfjfj","hh"+curse.getString(1));
-                Log.d("jffjjfjfj","hh"+curse.getString(2));*/
+                Log.d("jffjjfjfj","hh"+curse.getString(2));*//*
                 Log.d("jffjjfjfj","hh"+curse.getString(5));
                 // on below line we are adding the data from cursor to our array list.
                 arralist.add(macroModel);
 
             } while (curse.moveToNext());
-            /*Log.d("jffjjfjfj","hh"+arralist.size());*/
+            *//*Log.d("jffjjfjfj","hh"+arralist.size());*//*
             MacroItemsAdapter triggerItemsAdapters=new MacroItemsAdapter(getContext(),arralist);
             LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
             macrolist_recy.setLayoutManager(layoutManager2);
-                            /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
-                                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
+                            *//*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
+                                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*//*
             macrolist_recy.setItemAnimator(new DefaultItemAnimator());
             macrolist_recy.setAdapter(triggerItemsAdapters);
 
@@ -79,7 +79,7 @@ public class MacrosFragments extends Fragment {
         }
         // at last closing our cursor
         // and returning our array list.
-        curse.close();
+        curse.close();*/
 
         return view;
     }

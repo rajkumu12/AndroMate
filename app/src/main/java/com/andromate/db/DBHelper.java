@@ -5,168 +5,192 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static androidx.room.RoomMasterTable.TABLE_NAME;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "andromate.db";
-    public static final String TABLENAME_TRIGGER = "triggertable";
-    public static final String TABLENAME_ACTION = "actiontable";
-    public static final String TABLENAME_CONSTRAINTS = "constraintstable";
-    public static final String MACRO_TABLE = "mactotable";
+    private static final String DATABASE_NAME = "andromate_db2";
+    private static final int DATABASE_VERSION = 5;
 
-    public static final String ID = "id";
-    public static final String MACRO_NAME = "macro_name";
-    public static final String MACRO_DES = "macro_des";
-    public static final String STATUS = "true";
-    public static final String ACTIVE = "TIME";
+    // Table Names
+    private static final String TABLE_MACRO = "macros";
+    private static final String TABLE_TRIGGER = "triggers";
+    private static final String TABLE_ACTION = "action";
+    private static final String TABLE_CONSTRAINTS = "constraints";
+    /* private static final String TABLE_USERS = "users";*/
 
-    public static final String TRIGGERNAME = "triggername";
-    public static final String TRIGGER_DES = "trigger_des";
-    public static final String ACTION_NAME = "actionname";
-    public static final String ACTION_NAME_DES = "actiondes";
-    public static final String CONSTRAINTSNAME = "constraints_name";
-    public static final String CONSTRAINTS_DES = "constraints_des";
-    public static final String ICON = "icon";
+    // macro Table Columns
+    private static final String KEY_MACRO_ID = "id";
+    private static final String MACRO_NAME = "macroname";
+    private static final String MACRO_DES = "macrodes";
+    private static final String MACRO_CATEGORY = "category";
+    private static final String MACRO_STATE = "macrostate";
+    private static final String ACTIVE_TIME = "activetime";
 
+
+    //Trigger Column item
+    private static final String TRIGGERID = "Trig_id";
+    private static final String TRIGGER_NAME = "triggername";
+    private static final String TRIGGER_DES = "triggerdes";
+
+
+
+    private static final String ACT_ID = "act_id";
+    private static final String ACTION_NAME = "actionname";
+    private static final String ACTION_DES = "actiondes";
+
+
+    // User Table Columns
+    /*private static final String KEY_USER_ID = "id";
+    private static final String KEY_USER_NAME = "userName";
+    private static final String KEY_USER_PROFILE_PICTURE_URL = "profilePictureUrl";*/
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME , null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    // Called when the database connection is being configured.
+    // Configure database settings for things like foreign key support, write-ahead logging, etc.
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    // Called when the database is created for the FIRST time.
+    // If a database already exists on disk with the same DATABASE_NAME, this method will NOT be called.
     @Override
     public void onCreate(SQLiteDatabase db) {
+        /*String CREATE_MACRO_TABLE = "CREATE TABLE " + TABLE_MACRO +
+                "(" +
+                KEY_MACRO_ID + "INTEGER PRIMARY KEY," + // Define a primary key
+                MACRO_NAME + "TEXT," + MACRO_DES + "TEXT," + // Define a foreign key
+                MACRO_STATE + "TEXT," + ACTIVE_TIME + "TEXT" +
+                ")";*/
 
-        String query = "CREATE TABLE " + MACRO_TABLE + " ("
-                + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + MACRO_NAME + " TEXT,"+ MACRO_DES + " TEXT,"+ STATUS + " TEXT,"+ ACTIVE + " TEXT,"
-                + TRIGGERNAME + " TEXT," + TRIGGER_DES + " TEXT,"+ ACTION_NAME + " TEXT,"+ ACTION_NAME_DES + " TEXT,"
-                + CONSTRAINTSNAME + " TEXT,"+ CONSTRAINTS_DES + " TEXT)";
 
+        String query = "CREATE TABLE " + TABLE_MACRO + " (" +
+                KEY_MACRO_ID + " INTEGER, " +
+                MACRO_NAME + " TEXT, " +
+                MACRO_DES + " TEXT, " +
+                MACRO_STATE + " TEXT, " +
+                MACRO_CATEGORY + " TEXT, " +
+                ACTIVE_TIME + " TEXT); ";
         db.execSQL(query);
-       /* db.execSQL("create table " + TABLENAME_TRIGGER +" (ID INTEGER,TRIGGERNAME TEXT,TRIGGER_DES TEXT,ICON INTEGER)");
-        db.execSQL("create table " + TABLENAME_ACTION +" (ID INTEGER,ACTION_NAME TEXT,ACTION_NAME_DES TEXT,ICON INTEGER)");
-        db.execSQL("create table " + TABLENAME_CONSTRAINTS +" (ID INTEGER,CONSTRAINTSNAME TEXT,CONSTRAINTS_DES TEXT,ICON INTEGER)");*/
+
+        String query2 = "CREATE TABLE " + TABLE_TRIGGER + " (" +
+                TRIGGERID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_MACRO_ID + " INTEGER, " +
+                TRIGGER_NAME + " TEXT, " +
+                TRIGGER_DES + " TEXT); ";
+
+        db.execSQL(query2);
 
 
+
+        String query_action = "CREATE TABLE " + TABLE_ACTION + " (" +
+                ACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_MACRO_ID + " INTEGER, " +
+                ACTION_NAME + " TEXT, " +
+                ACTION_DES + " TEXT); ";
+
+        db.execSQL(query_action);
+
+
+       /* String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
+                "(" +
+                KEY_USER_ID + " INTEGER PRIMARY KEY," +
+                KEY_USER_NAME + " TEXT," +
+                KEY_USER_PROFILE_PICTURE_URL + " TEXT" +
+                ")";*/
+
+        /*db.execSQL(CREATE_MACRO_TABLE);*/
+        /*db.execSQL(CREATE_USERS_TABLE);*/
+
+
+    }
+
+    public void insertMacro(int id, String macroname, String macro_des, String state, String active_time, String category) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Log.d("kjflkdjflkdflk", "okkk" + TABLE_MACRO);
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("macroname", macroname);
+        values.put("macrodes", macro_des);
+        values.put("macrostate", state);
+        values.put("category", category);
+        values.put("activetime", active_time);
+        database.insert(TABLE_MACRO, null, values);
+        database.close();
+    }
+
+
+    public void insertTrigger(int id, String triggername, String triggerdes) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Log.d("kjflkdjflkdflk", "okkk" + TABLE_MACRO);
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("triggername", triggername);
+        values.put("triggerdes", triggerdes);
+        database.insert(TABLE_TRIGGER, null, values);
+        database.close();
+    }
+
+
+    public void insertAction(int id, String actionname, String action_des) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Log.d("kjflkdjflkdflk", "okkk" + TABLE_MACRO);
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put(ACTION_NAME, actionname);
+        values.put(ACTION_DES, action_des);
+        database.insert(TABLE_ACTION, null, values);
+        database.close();
+    }
+
+
+
+    public void printTableData() {
+        Log.d("dfdfdfdf", "enter");
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cur = db.rawQuery("SELECT * FROM " + TABLE_MACRO, null);
+        Log.d("dfdfdfdf", "counter" + cur.getCount());
+        if (cur.getCount() != 0) {
+            cur.moveToFirst();
+            do {
+                String row_values = "";
+                for (int i = 0; i < cur.getColumnCount(); i++) {
+                    row_values = row_values + " || " + cur.getString(i);
+                    Log.d("dfdfdfdf", row_values);
+                }
+            } while (cur.moveToNext());
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLENAME_TRIGGER);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLENAME_ACTION);
-        db.execSQL("DROP TABLE IF EXISTS "+TABLENAME_CONSTRAINTS);
-        onCreate(db);
+        if (oldVersion != newVersion) {
+            // Simplest implementation is to drop all old tables and recreate them
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_MACRO);
+            /*db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);*/
+            onCreate(db);
+        }
     }
-    public boolean insertDataMacro(String macroname,String macrodes,String status,String time,String triggername,String trigger_des,
-                                   String action_name,String action_des,String constraintsname,String constraints_des) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MACRO_NAME,macroname);
-        contentValues.put(MACRO_DES,macrodes);
-        contentValues.put(STATUS,status);
-        contentValues.put(ACTIVE,macrodes);
-        contentValues.put(TRIGGERNAME,macrodes);
-        contentValues.put(TRIGGER_DES,macrodes);
-        contentValues.put(ACTION_NAME,macrodes);
-        contentValues.put(ACTION_NAME_DES,macrodes);
-        contentValues.put(CONSTRAINTSNAME,macrodes);
-        contentValues.put(CONSTRAINTS_DES,macrodes);
-        long result = db.insert(MACRO_TABLE,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
-    }
-
-
-    public boolean insertDataTriggers(int id,String triggername,String triggers_des,int icon) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ID,id);
-        contentValues.put(TRIGGERNAME,triggername);
-        contentValues.put(TRIGGER_DES,triggers_des);
-        contentValues.put(ICON,icon);
-        long result = db.insert(TABLENAME_TRIGGER,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
-    }
-
-
-    public boolean insertDataAction(int id,String actionname,String action_des,int icon) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ID,id);
-        contentValues.put(ACTION_NAME,actionname);
-        contentValues.put(ACTION_NAME_DES,action_des);
-        contentValues.put(ICON,icon);
-        long result = db.insert(TABLENAME_ACTION,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
-    }
-
-    public boolean insertDataAConstraints(int id,String actionname,String action_des,int icon) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ID,id);
-        contentValues.put(CONSTRAINTSNAME,actionname);
-        contentValues.put(CONSTRAINTS_DES,action_des);
-        contentValues.put(ICON,icon);
-        long result = db.insert(TABLENAME_ACTION,null ,contentValues);
-        if(result == -1)
-            return false;
-        else
-            return true;
-    }
-
-
-    public Cursor getAllDataMacro() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+MACRO_TABLE,null);
-        return res;
-    }
-
-    public Cursor getAllDatatTrigger() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLENAME_TRIGGER,null);
-        return res;
-    }
-    public Cursor getAllDatatAction() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLENAME_ACTION,null);
-        return res;
-    }
-
-    public Cursor getAllDatatConstraints() {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from "+TABLENAME_CONSTRAINTS,null);
-        return res;
-    }
-
-    public Integer deleteDataMacro (String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(MACRO_TABLE, "ID = ?",new String[] {id});
-    }
-
-    public Integer deleteDataTrigger (String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLENAME_TRIGGER, "ID = ?",new String[] {id});
-    }
-
-    public Integer deleteDataAction (String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLENAME_ACTION, "ID = ?",new String[] {id});
-    }
-    public Integer deleteDataConstraintso (String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLENAME_CONSTRAINTS, "ID = ?",new String[] {id});
-    }
-
 }

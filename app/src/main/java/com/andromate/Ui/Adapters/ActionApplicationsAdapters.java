@@ -53,6 +53,7 @@ public class ActionApplicationsAdapters extends RecyclerView.Adapter<ActionAppli
                 public void onClick(View v) {
                     if (holder.tv_title.getText().toString().equals("App Enable/Disable")){
                         DialogsActions.showactionApplication(context,triggerlistmodel);
+
                     }else if (holder.tv_title.getText().toString().equals("Clear App Data")){
                         DialogsActions.show_clear_data(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Kill Application")){

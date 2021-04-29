@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.nfc.Tag;
@@ -35,6 +37,7 @@ import com.andromate.db.DBHelper;
 import com.google.android.material.tabs.TabLayout;
 
 import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,21 +48,21 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     LinearLayout lly_trigger;
     LinearLayout lly_action;
     LinearLayout lly_constraints;
-    TextView tv_notrigger,tv_dummy_action;
+    TextView tv_notrigger, tv_dummy_action;
 
     public static String types;
-    public static List<Triggerlistmodel>triggerlist;
-    public static List<ActionModelList>actionlist;
+    public static List<Triggerlistmodel> triggerlist;
+    public static List<ActionModelList> actionlist;
 
-    RecyclerView recyclerView_triggerlist,recyclerview_actionlist;
+    RecyclerView recyclerView_triggerlist, recyclerview_actionlist;
     RelativeLayout rly_macronotes;
     EditText et_description;
     DBHelper mydb;
     EditText editText_macroname;
     RelativeLayout rly_interface;
 
-    String backstate="";
-    public static String TAG="AddMacroActivity";
+    String backstate = "";
+    public static String TAG = "AddMacroActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,22 +82,22 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_add_macro);
 
         mydb = new DBHelper(this);
-        recyclerView_triggerlist=findViewById(R.id.recy_trigger_item);
-        recyclerview_actionlist=findViewById(R.id.recy_action_item);
-        tv_notrigger=findViewById(R.id.tv_notrigger);
-        editText_macroname=findViewById(R.id.et_macroname);
-        rly_macronotes=findViewById(R.id.rly_macronotes);
-        et_description=findViewById(R.id.et_description);
-        rly_interface=findViewById(R.id.rly_interface);
-        triggerlist=new ArrayList<>();
-        actionlist=new ArrayList<>();
+        recyclerView_triggerlist = findViewById(R.id.recy_trigger_item);
+        recyclerview_actionlist = findViewById(R.id.recy_action_item);
+        tv_notrigger = findViewById(R.id.tv_notrigger);
+        tv_dummy_action = findViewById(R.id.tv_dummy_action);
+        editText_macroname = findViewById(R.id.et_macroname);
+        rly_macronotes = findViewById(R.id.rly_macronotes);
+        et_description = findViewById(R.id.et_description);
+        rly_interface = findViewById(R.id.rly_interface);
+        triggerlist = new ArrayList<>();
+        actionlist = new ArrayList<>();
 
-
-        imageView_back=findViewById(R.id.back_icon_addmacros);
-        lly_trigger=findViewById(R.id.lly_trigger);
-        lly_action=findViewById(R.id.action_ui);
-        lly_constraints=findViewById(R.id.lly_constraints);
-        add_macro=findViewById(R.id.add_macro);
+        imageView_back = findViewById(R.id.back_icon_addmacros);
+        lly_trigger = findViewById(R.id.lly_trigger);
+        lly_action = findViewById(R.id.action_ui);
+        lly_constraints = findViewById(R.id.lly_constraints);
+        add_macro = findViewById(R.id.add_macro);
         imageView_back.setOnClickListener(this);
         lly_trigger.setOnClickListener(this);
         lly_action.setOnClickListener(this);
@@ -103,35 +106,35 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         rly_macronotes.setOnClickListener(this);
         rly_interface.setOnClickListener(this);
 
+        mydb.printTableData();
+
     }
 
     @Override
     public void onClick(View v) {
-        int id=v.getId();
-        if (id==R.id.back_icon_addmacros){
-            if (triggerlist.size() !=0){
-                backstate="b";
+        int id = v.getId();
+        if (id == R.id.back_icon_addmacros) {
+            if (triggerlist.size() != 0) {
+                backstate = "b";
                 saveDialog();
-            }else {
+            } else {
                 finish();
             }
-
-        }else if (id==R.id.lly_trigger){
-            types="trigger";
-            startActivity(new Intent(AddMacroActivity.this,Add_triggersActivity.class));
-        }else if (id==R.id.action_ui){
-            types="action";
-            startActivity(new Intent(AddMacroActivity.this,AddAction.class));
-        }else if (id==R.id.lly_constraints){
-            types="constraints";
-            startActivity(new Intent(AddMacroActivity.this,AddConstraintsActivity.class));
-        }else if (id==R.id.add_macro){
-            backstate="";
+        } else if (id == R.id.lly_trigger) {
+            types = "trigger";
+            startActivity(new Intent(AddMacroActivity.this, Add_triggersActivity.class));
+        } else if (id == R.id.action_ui) {
+            types = "action";
+            startActivity(new Intent(AddMacroActivity.this, AddAction.class));
+        } else if (id == R.id.lly_constraints) {
+            types = "constraints";
+            startActivity(new Intent(AddMacroActivity.this, AddConstraintsActivity.class));
+        } else if (id == R.id.add_macro) {
+            backstate = "";
             saveDialog();
-        }else if (id==R.id.rly_macronotes){
+        } else if (id == R.id.rly_macronotes) {
             et_description.setVisibility(View.VISIBLE);
-        }else if (id==R.id.rly_interface){
-
+        } else if (id == R.id.rly_interface) {
             showAlertDialog();
         }
     }
@@ -145,49 +148,40 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
 
     private void loadActionlistItem() {
 
-         Actionlists_items_Adapter triggelists_items_adapter=new Actionlists_items_Adapter(this,actionlist);
+        Actionlists_items_Adapter triggelists_items_adapter = new Actionlists_items_Adapter(this, actionlist);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(AddMacroActivity.this);
-        recyclerView_triggerlist.setLayoutManager(layoutManager2);
+        recyclerview_actionlist.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
                                 recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
-        recyclerView_triggerlist.setItemAnimator(new DefaultItemAnimator());
-        recyclerView_triggerlist.setAdapter(triggelists_items_adapter);
+        recyclerview_actionlist.setItemAnimator(new DefaultItemAnimator());
+        recyclerview_actionlist.setAdapter(triggelists_items_adapter);
 
-        if (triggerlist.size() !=0){
-            tv_notrigger.setVisibility(View.GONE);
-            recyclerView_triggerlist.setVisibility(View.VISIBLE);
+        if (actionlist.size() != 0) {
+            tv_dummy_action.setVisibility(View.GONE);
+            recyclerview_actionlist.setVisibility(View.VISIBLE);
         }
-
-
-
-
     }
 
     private void loadTriggerlistitem() {
-
-
-        Triggelists_items_Adapter triggelists_items_adapter=new Triggelists_items_Adapter(this,triggerlist);
+        Triggelists_items_Adapter triggelists_items_adapter = new Triggelists_items_Adapter(this, triggerlist);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(AddMacroActivity.this);
         recyclerView_triggerlist.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
                                 recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
         recyclerView_triggerlist.setItemAnimator(new DefaultItemAnimator());
         recyclerView_triggerlist.setAdapter(triggelists_items_adapter);
-
-        if (triggerlist.size() !=0){
+        if (triggerlist.size() != 0) {
             tv_notrigger.setVisibility(View.GONE);
             recyclerView_triggerlist.setVisibility(View.VISIBLE);
         }
-
     }
 
     public static void transparentStatusAndNavigation(Activity activity) {
-
         Window window = activity.getWindow();
 
         // make full transparent statusBar
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
-            setWindowFlag(window,WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+            setWindowFlag(window, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                     | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, true);
         }
         if (Build.VERSION.SDK_INT >= 19) {
@@ -198,14 +192,14 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         if (Build.VERSION.SDK_INT >= 21) {
             int windowManager = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
             windowManager = windowManager | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
-            setWindowFlag(window ,windowManager, false);
+            setWindowFlag(window, windowManager, false);
             window.setStatusBarColor(Color.TRANSPARENT);
             window.setNavigationBarColor(Color.TRANSPARENT);
         }
-
     }
-    private static void setWindowFlag(Window window,final int bits, boolean on) {
-        Window win =window;
+
+    private static void setWindowFlag(Window window, final int bits, boolean on) {
+        Window win = window;
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
             winParams.flags |= bits;
@@ -221,11 +215,8 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setCanceledOnTouchOutside(false);
 
-
-
-        TextView cancel=dialog.findViewById(R.id.tv_cancel);
-        TextView ok=dialog.findViewById(R.id.tv_ok);
-
+        TextView cancel = dialog.findViewById(R.id.tv_cancel);
+        TextView ok = dialog.findViewById(R.id.tv_ok);
 
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -249,10 +240,9 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
-    void saveDialog(){
-        String macroname=editText_macroname.getText().toString();
-        String macrodesc=et_description.getText().toString();
+    void saveDialog() {
+        String macroname = editText_macroname.getText().toString();
+        String macrodesc = et_description.getText().toString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AddMacroActivity.this);
         builder.setTitle("Save Macro")
@@ -261,50 +251,64 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (macroname.isEmpty()){
+                        if (macroname.isEmpty()) {
                             Toast.makeText(AddMacroActivity.this, "Enter macroname", Toast.LENGTH_SHORT).show();
-                        }else if (macrodesc.isEmpty()){
+                        } else if (macrodesc.isEmpty()) {
                             Toast.makeText(AddMacroActivity.this, "Enter description", Toast.LENGTH_SHORT).show();
-                        }else {
-                            StringBuilder triggersname = new StringBuilder("");
-                            for (int i=0;i<triggerlist.size();i++){
-                                Triggerlistmodel triggerlistmodel=triggerlist.get(i);
-                                triggersname.append(triggerlistmodel.getTriggername()).append(",");
+                        } else {
+                            if (triggerlist != null && triggerlist.size() != 0) {
+
+                                SecureRandom random = new SecureRandom();
+                                int num = random.nextInt(100000);
+                                mydb.insertMacro(num, macroname, macrodesc, "Not Active", "Never Activated", "Uncategorized");
+                                StringBuilder triggersname = new StringBuilder("");
+                                for (int i = 0; i < triggerlist.size(); i++) {
+                                    Triggerlistmodel triggerlistmodel = triggerlist.get(i);
+                                    triggersname.append(triggerlistmodel.getTriggername()).append(",");
+                                    mydb.insertTrigger(num, triggerlistmodel.getTriggername(), triggerlistmodel.getTriggerdescrption());
+                                }
+
+                                for (int i = 0; i < actionlist.size(); i++) {
+                                    ActionModelList triggerlistmodel = actionlist.get(i);
+                                    triggersname.append(triggerlistmodel.getActioname()).append(",");
+                                    mydb.insertAction(num, triggerlistmodel.getActioname(), triggerlistmodel.getActionDescription());
+                                }
+                           /* String commaseparatedlist = triggersname.toString();
+                            Log.d(TAG,"ttt"+commaseparatedlist);*/
+
+                                /*  finish();*/
+
+                            } else {
+                                Toast.makeText(AddMacroActivity.this, "Add Atleast one trigger", Toast.LENGTH_SHORT).show();
                             }
-                            String commaseparatedlist = triggersname.toString();
-                            Log.d(TAG,"ttt"+commaseparatedlist);
-                            mydb.insertDataMacro(macroname,macrodesc,"true","non",commaseparatedlist,"","",
-                                    "","","");
-                            finish();
                         }
-                        mydb.getAllDataMacro();
-                        Log.d("hhhffhhfhfh","jjjj"+mydb.getAllDataMacro());
+                       /* mydb.getAllDataMacro();
+                        Log.d("hhhffhhfhfh","jjjj"+mydb.getAllDataMacro());*/
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (backstate.equals("b")){
+                        if (backstate.equals("b")) {
                             finish();
-                        }else {
+                        } else {
                             dialog.cancel();
                         }
 
                     }
                 });
         //Creating dialog box
-        AlertDialog dialog  = builder.create();
+        AlertDialog dialog = builder.create();
         dialog.show();
     }
 
     @Override
     public void onBackPressed() {
-        if (triggerlist.size()!=0){
-            backstate="b";
+        if (triggerlist.size() != 0) {
+            backstate = "b";
             saveDialog();
-        }else {
+        } else {
             super.onBackPressed();
         }
-
     }
 }
