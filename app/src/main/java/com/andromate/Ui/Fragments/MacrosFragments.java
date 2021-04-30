@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.andromate.Model.MacroDetailModel;
 import com.andromate.Model.MacroModel;
 import com.andromate.R;
 import com.andromate.Ui.Activity.Add_triggersActivity;
@@ -32,7 +33,7 @@ public class MacrosFragments extends Fragment {
 
     DBHelper dbHelper;
 
-    List<MacroModel>arralist;
+    List<MacroDetailModel>arralist;
     RecyclerView macrolist_recy;
     public MacrosFragments() {
         // Required empty public constructor
@@ -46,6 +47,71 @@ public class MacrosFragments extends Fragment {
         macrolist_recy=view.findViewById(R.id.reclerview_macro_list);
 
         dbHelper=new DBHelper(getContext());
+
+        Cursor cursor=dbHelper.getmacro();
+            arralist=new ArrayList<>();
+
+            if (cursor.moveToFirst()) {
+                do {
+                    StringBuilder trigger = new StringBuilder();
+                    StringBuilder action = new StringBuilder();
+                    StringBuilder constraints = new StringBuilder();
+                    MacroDetailModel macroDetailModel=new MacroDetailModel();
+                    Log.d("okjhdhbd","okk"+cursor.getString(0));
+                    macroDetailModel.setId(cursor.getString(0));
+                    macroDetailModel.setMacroname(cursor.getString(1));
+                    macroDetailModel.setMacrodes(cursor.getString(2));
+                    macroDetailModel.setMacrostate(cursor.getString(3));
+                    macroDetailModel.setCategory(cursor.getString(4));
+                    macroDetailModel.setActivetime(cursor.getString(5));
+                    arralist.add(macroDetailModel);
+
+                        Cursor cursor1=dbHelper.getTriggers(cursor.getString(0));
+                    if (cursor1.moveToFirst()) {
+                        do {
+                            trigger.append(cursor1.getString(2));
+                            trigger.append(", ");
+
+                        }while (cursor1.moveToNext());
+                        macroDetailModel.setTriggername(String.valueOf(trigger));
+                    }
+
+
+                    Cursor cursor2=dbHelper.getAction(cursor.getString(0));
+                    if (cursor2.moveToFirst()) {
+                        do {
+                            action.append(cursor2.getString(2));
+                            action.append(", ");
+
+                        }while (cursor2.moveToNext());
+                        macroDetailModel.setActionname(String.valueOf(trigger));
+                    }
+
+
+                    Cursor cursor3=dbHelper.getConstraints(cursor.getString(0));
+                    if (cursor3.moveToFirst()) {
+                        do {
+                            constraints.append(cursor3.getString(2));
+                            constraints.append(", ");
+
+                        }while (cursor3.moveToNext());
+                        macroDetailModel.setCons_name(String.valueOf(trigger));
+                    }
+
+                    // cursor.moveToNext();
+
+                } while (cursor.moveToNext());
+
+                MacroItemsAdapter triggerItemsAdapters=new MacroItemsAdapter(getContext(),arralist);
+                LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
+                macrolist_recy.setLayoutManager(layoutManager2);
+                            /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
+                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
+                macrolist_recy.setItemAnimator(new DefaultItemAnimator());
+                macrolist_recy.setAdapter(triggerItemsAdapters);
+            }
+
+
 
      /*  Log.d("ljhfjkdhfjd","jdddd"+dbHelper.getAllDataMacro());
 

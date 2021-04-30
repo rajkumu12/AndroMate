@@ -38,16 +38,15 @@ public class Constraintslists_items_Adapter extends RecyclerView.Adapter<Constra
     @Override
     public void onBindViewHolder(@NonNull final Constraintslists_items_Adapter.ViewHolder holder, final int position) {
         ConstraintsListModelList add_action_model = arrayList.get(position);
-        holder.textView_trigger.setText(add_action_model.getActioname());
-        holder.textView_des.setText(add_action_model.getActionDescription());
+        holder.textView_trigger.setText(add_action_model.getConstraintsname());
+        holder.textView_des.setText(add_action_model.getConstraintsDescription());
         holder.rly_trigger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConstraintsType.showConfigurations(context,add_action_model,add_action_model.getActioname());
+                ConstraintsType.showConfigurations(context,add_action_model,add_action_model.getConstraintsname());
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return arrayList.size();
@@ -64,7 +63,6 @@ public class Constraintslists_items_Adapter extends RecyclerView.Adapter<Constra
 
             textView_trigger=itemView.findViewById(R.id.tv_trigggers);
             textView_des=itemView.findViewById(R.id.tv_descriptiontriggers);
-
             rly_trigger=itemView.findViewById(R.id.rly_view);
 
         }

@@ -17,7 +17,7 @@ import static androidx.room.RoomMasterTable.TABLE_NAME;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "andromate_db2";
+    private static final String DATABASE_NAME = "androdb";
     private static final int DATABASE_VERSION = 5;
 
     // Table Names
@@ -48,6 +48,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String ACTION_DES = "actiondes";
 
 
+
+    private static final String CONS_ID = "cons_id";
+    private static final String CONS_NAME = "cons_name";
+    private static final String CONS_DES = "cons_des";
     // User Table Columns
     /*private static final String KEY_USER_ID = "id";
     private static final String KEY_USER_NAME = "userName";
@@ -105,6 +109,19 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(query_action);
 
 
+        String query_constraints = "CREATE TABLE " + TABLE_CONSTRAINTS + " (" +
+                CONS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                KEY_MACRO_ID + " INTEGER, " +
+                CONS_NAME + " TEXT, " +
+                CONS_DES + " TEXT); ";
+
+        db.execSQL(query_constraints);
+
+
+
+       /* String searchQ="SELECT " +TABLE_TRIGGER+"*, "+TABLE_ACTION+"*, "+TABLE_CONSTRAINTS+"FROM "+TABLE_MACRO+"JOIN as"+TABLE_TRIGGER*/
+
+
        /* String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS +
                 "(" +
                 KEY_USER_ID + " INTEGER PRIMARY KEY," +
@@ -117,6 +134,41 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     }
+
+    public Cursor getmacro(){
+        SQLiteDatabase db =  this.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery("select * from "+TABLE_MACRO,null);
+        return cursor;
+
+    }
+
+
+    public Cursor getTriggers(String id){
+        SQLiteDatabase db =  this.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery("select * from "+TABLE_TRIGGER+" WHERE id ="+"'"+id+"'",null);
+        return cursor;
+
+    }
+
+
+    public Cursor getAction(String id){
+        SQLiteDatabase db =  this.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery("select * from "+TABLE_ACTION+" WHERE id ="+"'"+id+"'",null);
+        return cursor;
+
+    }
+
+    public Cursor getConstraints(String id){
+        SQLiteDatabase db =  this.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery("select * from "+TABLE_CONSTRAINTS+" WHERE id ="+"'"+id+"'",null);
+        return cursor;
+
+    }
+
 
     public void insertMacro(int id, String macroname, String macro_des, String state, String active_time, String category) {
 
@@ -162,6 +214,20 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(ACTION_NAME, actionname);
         values.put(ACTION_DES, action_des);
         database.insert(TABLE_ACTION, null, values);
+        database.close();
+    }
+
+
+    public void insertConstraints(int id, String consname, String cons_des) {
+
+        SQLiteDatabase db = getWritableDatabase();
+        Log.d("kjflkdjflkdflk", "okkk" + TABLE_CONSTRAINTS);
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put(CONS_NAME, consname);
+        values.put(CONS_DES, cons_des);
+        database.insert(TABLE_CONSTRAINTS, null, values);
         database.close();
     }
 

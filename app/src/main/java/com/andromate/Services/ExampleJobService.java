@@ -155,7 +155,10 @@ class LongRunningTask {
                 String lightsensor = sharedpreferences.getString("light", "");
                 String point = sharedpreferences.getString("point", "");
                 TriigersList.showLightSensor(exampleJobService,lightsensor,point);
-                TriigersList.proximity_sensor(exampleJobService,"lightsensor");
+
+
+                /*String proximity = sharedpreferences.getString("porximity", "");
+                TriigersList.proximity_sensor(exampleJobService,proximity);*/
 
                 String orientation = sharedpreferences.getString("orientation", "");
                 TriigersList.show_orientation(exampleJobService,orientation);

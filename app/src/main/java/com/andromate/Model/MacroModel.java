@@ -6,7 +6,15 @@ public class MacroModel {
     String active_time;
     String macro_name;
     String macro_des;
+    String id;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getMacro_state() {
         return macro_state;

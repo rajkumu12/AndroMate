@@ -19,6 +19,13 @@ import android.widget.TextView;
 import com.andromate.CustomColors;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
+import com.andromate.Ui.Adapters.Constraints_batteryPowerItemsAdapters;
+import com.andromate.Ui.Adapters.Constraints_datetime_ItemsAdapters;
+import com.andromate.Ui.Adapters.Constraints_devicestate_ItemsAdapters;
+import com.andromate.Ui.Adapters.Constraints_load_phone_ItemsAdapters;
+import com.andromate.Ui.Adapters.Constraints_load_sensor_ItemsAdapters;
+import com.andromate.Ui.Adapters.Constraints_notifications_ItemsAdapters;
+import com.andromate.Ui.Adapters.Constraints_speaker_ItemsAdapters;
 import com.andromate.Ui.Adapters.TriggerItemsAdapters;
 
 import java.util.ArrayList;
@@ -78,13 +85,12 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
         battery_powerlist.add(new TriggerItemModel("Battery Level",R.drawable.battery_hori_icon));
         battery_powerlist.add(new TriggerItemModel("Battery Saver State",R.drawable.battery_icon));
         battery_powerlist.add(new TriggerItemModel("Battery Temperature",R.drawable.thermometer));
-        battery_powerlist.add(new TriggerItemModel("Power Button Toggle",R.drawable.power));
         battery_powerlist.add(new TriggerItemModel("Power Connected/\n" +
                 "Disconnected",R.drawable.powe_connected));
 
 
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,battery_powerlist);
+        Constraints_batteryPowerItemsAdapters triggerItemsAdapters=new Constraints_batteryPowerItemsAdapters(this,battery_powerlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this,2);
         recyclerView_battery_power.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -106,7 +112,7 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
         notificationlist.add(new TriggerItemModel("Set Notification Sound",R.drawable.volume));
 
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, notificationlist);
+        Constraints_notifications_ItemsAdapters triggerItemsAdapters = new Constraints_notifications_ItemsAdapters(this, notificationlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
         recyclerView_notification.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -117,23 +123,15 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
 
     private void loadconnectivity() {
         connectivitylist = new ArrayList<>();
-        connectivitylist.add(new TriggerItemModel("Bluetooth Event",R.drawable.bluetooth_event));
-        connectivitylist.add(new TriggerItemModel("Data Connectivity\n" +
-                "Change",R.drawable.data_connectivity_change));
-        connectivitylist.add(new TriggerItemModel("Headphones Insert/\n" +
-                "Remove",R.drawable.headphones_inserts_remove));
-        connectivitylist.add(new TriggerItemModel("Hotspot Enabled/\n" +
-                "Disabled",R.drawable.hotspot_enable));
-        connectivitylist.add(new TriggerItemModel("IP Address Change",R.drawable.iip_address));
+        connectivitylist.add(new TriggerItemModel("Bluetooth State",R.drawable.bluetooth_event));
+        connectivitylist.add(new TriggerItemModel("Cell Towers",R.drawable.cell_tower_change));
+        connectivitylist.add(new TriggerItemModel("GPS State",R.drawable.location_gps));
+        connectivitylist.add(new TriggerItemModel("is Roaming",R.drawable.roaming_enamble));
+        connectivitylist.add(new TriggerItemModel("Location Mode",R.drawable.location_gps));
+        connectivitylist.add(new TriggerItemModel("Mobile data On/Off",R.drawable.data_connectivity_change));
         connectivitylist.add(new TriggerItemModel("Mobile Service Status",R.drawable.mobile_service_enable));
-        connectivitylist.add(new TriggerItemModel("Roaming Started/\n" +
-                "Stopped",R.drawable.roaming_enamble));
-        connectivitylist.add(new TriggerItemModel("USB Device Connect/\n" +
-                "Disconnect",R.drawable.usb_device_connected));
-        connectivitylist.add(new TriggerItemModel("VPN State Change",R.drawable.vpn_state_change));
-        connectivitylist.add(new TriggerItemModel("Webhook (Url)",R.drawable.webhook));
-        connectivitylist.add(new TriggerItemModel("Wifi SSID Transition",R.drawable.wifi_sssid));
-        connectivitylist.add(new TriggerItemModel("Wifi State Change",R.drawable.wifi_state_change));
+        connectivitylist.add(new TriggerItemModel("Wifi HotSpot State",R.drawable.hotspot_enable));
+        connectivitylist.add(new TriggerItemModel("Wifi State",R.drawable.wifi_state_change));
 
 
         TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, connectivitylist);
@@ -147,14 +145,16 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
 
     private void loaddatetime() {
         datetimelist = new ArrayList<>();
-        datetimelist.add(new TriggerItemModel("Calendar Event",R.drawable.calendar_event));
-        datetimelist.add(new TriggerItemModel("Day of Week/Month",R.drawable.day_month));
-        datetimelist.add(new TriggerItemModel("Day/Time Trigger",R.drawable.day_timer));
-        datetimelist.add(new TriggerItemModel("Regular Interval",R.drawable.regular_interval));
+        datetimelist.add(new TriggerItemModel("Calendar Entry",R.drawable.calendar_event));
+        datetimelist.add(new TriggerItemModel("Day of Month",R.drawable.day_month));
+        datetimelist.add(new TriggerItemModel("Day of the week",R.drawable.ic_calendar));
+        datetimelist.add(new TriggerItemModel("Month of the year",R.drawable.day_month));
         datetimelist.add(new TriggerItemModel("Stopwatch",R.drawable.stopwatches_icon));
+        datetimelist.add(new TriggerItemModel("Sunrise/Sunset",R.drawable.sunrise));
+        datetimelist.add(new TriggerItemModel("Time of the Day",R.drawable.day_timer));
 
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, datetimelist);
+        Constraints_datetime_ItemsAdapters triggerItemsAdapters = new Constraints_datetime_ItemsAdapters(this, datetimelist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
         recyclerViewc_datetime.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -179,7 +179,7 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
         devicestatelist.add(new TriggerItemModel("VPN State", R.drawable.vpn_state_change));
 
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, devicestatelist);
+        Constraints_devicestate_ItemsAdapters triggerItemsAdapters = new Constraints_devicestate_ItemsAdapters(this, devicestatelist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
         recyclerView_devicestate.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -199,7 +199,7 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
         phonelist.add(new TriggerItemModel("Ringtone Configuration", R.drawable.call_incoming));
 
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, phonelist);
+        Constraints_load_phone_ItemsAdapters triggerItemsAdapters = new Constraints_load_phone_ItemsAdapters(this, phonelist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
         recyclerView_phone.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -218,7 +218,7 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
         sensorlist.add(new TriggerItemModel("Shake Device",R.drawable.shake_device));
 
 
-        TriggerItemsAdapters triggerItemsAdapters=new TriggerItemsAdapters(this,sensorlist);
+        Constraints_load_sensor_ItemsAdapters triggerItemsAdapters=new Constraints_load_sensor_ItemsAdapters(this,sensorlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this,2);
         recyclerView_sensor.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -237,7 +237,7 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
 
 
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, screen_speakerlist);
+        Constraints_speaker_ItemsAdapters triggerItemsAdapters = new Constraints_speaker_ItemsAdapters(this, screen_speakerlist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
         recyclerView_screen_speaker.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

@@ -483,15 +483,19 @@ public class TriigersList {
         mSensorManager.registerListener(new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
+
                 if (event.values[0] == 0) {
                     if (!message.isEmpty() && message.equals("Near")) {
                         addNotification(context, message);
                     }
-
-                } else {
+                }else {
                     if (!message.isEmpty() && message.equals("Far")) {
                         addNotification(context, message);
                     }
+                }
+
+                if (message.equals("")){
+                    mSensorManager.unregisterListener(this);
                 }
             }
 

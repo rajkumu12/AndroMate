@@ -2,24 +2,24 @@ package com.andromate.Model;
 
 public class ConstraintsListModelList {
 
-    String actioname;
-    String actionDescription;
+    String constraintsname;
+    String ConstraintsDescription;
     Integer image;
 
-    public String getActioname() {
-        return actioname;
+    public String getConstraintsname() {
+        return constraintsname;
     }
 
-    public void setActioname(String actioname) {
-        this.actioname = actioname;
+    public void setConstraintsname(String constraintsname) {
+        this.constraintsname = constraintsname;
     }
 
-    public String getActionDescription() {
-        return actionDescription;
+    public String getConstraintsDescription() {
+        return ConstraintsDescription;
     }
 
-    public void setActionDescription(String actionDescription) {
-        this.actionDescription = actionDescription;
+    public void setConstraintsDescription(String constraintsDescription) {
+        ConstraintsDescription = constraintsDescription;
     }
 
     public Integer getImage() {
