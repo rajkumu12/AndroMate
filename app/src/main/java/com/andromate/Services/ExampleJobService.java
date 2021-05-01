@@ -174,7 +174,7 @@ class LongRunningTask {
                 String num = sharedpreferences.getString("call", "");
                 TriigersList.checkCallState(exampleJobService,callstate);
             }
-        }, 0, 2000);
+        }, 0, 15000);
     }
 
 

@@ -170,6 +170,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+
+    public Cursor checktrigger(String triggername){
+        SQLiteDatabase db =  this.getReadableDatabase();
+
+        Cursor cursor=db.rawQuery("select id from "+TABLE_TRIGGER+" WHERE triggername ="+"'"+triggername+"'",null);
+        return cursor;
+
+    }
+
+
     public void insertMacro(int id, String macroname, String macro_des, String state, String active_time, String category) {
 
         SQLiteDatabase db = getWritableDatabase();

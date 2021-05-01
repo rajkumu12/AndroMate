@@ -17,6 +17,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -64,6 +65,7 @@ import com.andromate.Services.ExampleJobService;
 import com.andromate.Ui.Activity.AddMacroActivity;
 import com.andromate.Ui.Adapters.ApplicationlistAdapters;
 import com.andromate.Ui.Adapters.Call_SmsAdapter;
+import com.andromate.db.DBHelper;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -78,16 +80,29 @@ import safety.com.br.android_shake_detector.core.ShakeOptions;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Context.SENSOR_SERVICE;
+import static xdroid.core.Global.getContext;
 
 public class TriigersList {
     public static String TAG = "TriigersList";
-
+    public static DBHelper dbHelper;
     //Gps trigger
     public static void ChecGps(ExampleJobService exampleJobService, String gps) {
         LocationManager locationManager = (LocationManager) exampleJobService.getSystemService(Context.LOCATION_SERVICE);
-
+        dbHelper=new DBHelper(getContext());
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (gps != null && gps.equals("GPS Enabled")) {
+                Cursor cursor=dbHelper.checktrigger(gps);
+
+                if (cursor.moveToFirst()) {
+                    do {
+                       String id=cursor.getString(1);
+                        Log.d("iiiiiiiiiiiii","uid"+id);
+
+                    }while (cursor.moveToNext());
+
+                }
+
+
                 addNotification(exampleJobService, "Gps Enable");
             }
         } else {

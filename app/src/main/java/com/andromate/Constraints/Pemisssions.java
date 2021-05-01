@@ -8,6 +8,9 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Pemisssions {
 
     public static void cameraPermsiion(Context ontext){
@@ -41,6 +44,16 @@ public class Pemisssions {
 
     }
 
+
+
+
+    public static String currenttime(){
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String millisInString  = dateFormat.format(new Date());
+
+        return millisInString;
+    }
 
 
 }
