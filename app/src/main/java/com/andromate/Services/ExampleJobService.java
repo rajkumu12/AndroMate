@@ -37,6 +37,7 @@ import com.andromate.Receivers.MyStartServiceReceiver;
 import com.andromate.Receivers.PackageremovalReceiver;
 import com.andromate.SplashActivity;
 import com.andromate.Ui.Activity.HomeActivity;
+import com.andromate.db.DBHelper;
 
 import java.util.Iterator;
 import java.util.List;
@@ -60,8 +61,9 @@ public class ExampleJobService extends JobService {
     public boolean onStartJob(JobParameters params) {
         if (mRunningTask == null)
             mRunningTask = new LongRunningTask();
+        DBHelper dbHelper=new DBHelper(this);
         SharedPreferences sharedpreferences = this.getSharedPreferences("myapp", Context.MODE_PRIVATE);
-        mRunningTask.startTask(this, sharedpreferences);
+        mRunningTask.startTask(this, sharedpreferences,dbHelper);
 
         return true;
     }
@@ -101,7 +103,7 @@ class LongRunningTask {
     LongRunningTask() {
     }
 
-    void startTask(ExampleJobService exampleJobService, SharedPreferences sharedpreferences) {
+    void startTask(ExampleJobService exampleJobService, SharedPreferences sharedpreferences, DBHelper dbHelper) {
 
         if (mTimer == null)
             mTimer = new Timer();
@@ -117,7 +119,7 @@ class LongRunningTask {
                 checkbattersavermode(exampleJobService,bs);
                 String gps = sharedpreferences.getString("gps", "");
                 Log.d("jfhdlkjfhdlkf", "gggg" + gps);
-                TriigersList.ChecGps(exampleJobService, gps);
+                TriigersList.ChecGps(exampleJobService, gps,dbHelper);
 
 
                 String boot = sharedpreferences.getString("db", "");

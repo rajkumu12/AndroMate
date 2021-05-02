@@ -84,7 +84,7 @@ public class MacrosFragments extends Fragment {
                             action.append(", ");
 
                         }while (cursor2.moveToNext());
-                        macroDetailModel.setActionname(String.valueOf(trigger));
+                        macroDetailModel.setActionname(String.valueOf(action));
                     }
 
 
@@ -95,7 +95,7 @@ public class MacrosFragments extends Fragment {
                             constraints.append(", ");
 
                         }while (cursor3.moveToNext());
-                        macroDetailModel.setCons_name(String.valueOf(trigger));
+                        macroDetailModel.setCons_name(String.valueOf(constraints));
                     }
 
                     // cursor.moveToNext();

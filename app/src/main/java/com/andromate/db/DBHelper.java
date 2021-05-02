@@ -147,7 +147,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getTriggers(String id){
         SQLiteDatabase db =  this.getReadableDatabase();
 
-        Cursor cursor=db.rawQuery("select * from "+TABLE_TRIGGER+" WHERE id ="+"'"+id+"'",null);
+        Cursor cursor=db.rawQuery("SELECT * FROM "+TABLE_TRIGGER+" WHERE id ="+"'"+id+"'",null);
+        Log.d("dsdsddddd","fff"+cursor);
         return cursor;
 
     }
@@ -174,8 +175,17 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor checktrigger(String triggername){
         SQLiteDatabase db =  this.getReadableDatabase();
 
-        Cursor cursor=db.rawQuery("select id from "+TABLE_TRIGGER+" WHERE triggername ="+"'"+triggername+"'",null);
+        Cursor cursor=db.rawQuery("select* from "+TABLE_TRIGGER+" WHERE triggername ="+"'"+triggername+"'",null);
         return cursor;
+
+    }
+    public void updatemacro(String time,String id){
+        SQLiteDatabase db =  this.getWritableDatabase();
+
+        String sql="update "+TABLE_MACRO+" SET activetime ="+"'"+time+"'"+" WHERE id ="+"'"+id+"'";
+       /* Cursor cursor=db.update(,null);*/
+        db.execSQL(sql);
+
 
     }
 

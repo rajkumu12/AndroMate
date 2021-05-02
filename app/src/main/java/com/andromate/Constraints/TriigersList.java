@@ -52,6 +52,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.Constraints;
 import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -84,30 +85,37 @@ import static xdroid.core.Global.getContext;
 
 public class TriigersList {
     public static String TAG = "TriigersList";
-    public static DBHelper dbHelper;
     //Gps trigger
-    public static void ChecGps(ExampleJobService exampleJobService, String gps) {
+    public static void ChecGps(ExampleJobService exampleJobService, String gps, DBHelper dbHelper) {
         LocationManager locationManager = (LocationManager) exampleJobService.getSystemService(Context.LOCATION_SERVICE);
-        dbHelper=new DBHelper(getContext());
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (gps != null && gps.equals("GPS Enabled")) {
+
                 Cursor cursor=dbHelper.checktrigger(gps);
 
-                if (cursor.moveToFirst()) {
+
+                if (cursor!=null && cursor.moveToFirst()) {
                     do {
                        String id=cursor.getString(1);
                         Log.d("iiiiiiiiiiiii","uid"+id);
+                     dbHelper.updatemacro(Pemisssions.currenttime(),id);
 
                     }while (cursor.moveToNext());
 
                 }
-
-
-                addNotification(exampleJobService, "Gps Enable");
+             /*   addNotification(exampleJobService, "Gps Enable");*/
             }
         } else {
             if (gps != null && gps.equals("GPS Disabled")) {
-                addNotification(exampleJobService, "Gps Disabled");
+                Cursor cursor=dbHelper.checktrigger(gps);
+                if (cursor!=null && cursor.moveToFirst()) {
+                    do {
+                        String id=cursor.getString(1);
+                        Log.d("iiiiiiiiiiiii","uid"+id);
+                        dbHelper.updatemacro(Pemisssions.currenttime(),id);
+                    }while (cursor.moveToNext());
+                }
+                /*addNotification(exampleJobService, "Gps Disabled");*/
             }
         }
     }
@@ -652,7 +660,6 @@ public class TriigersList {
         assert notificationManager != null;
         notificationManager.notify(0  /*ID of notification*/, notificationBuilder.build());
     }
-
 }
 
 
