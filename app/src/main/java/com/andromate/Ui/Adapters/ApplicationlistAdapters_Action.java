@@ -32,10 +32,12 @@ public class ApplicationlistAdapters_Action extends RecyclerView.Adapter<Applica
     private List<ApplicationsInfo> copylist;
     ActionModelList triggerlistmodel;
     SharedPreferences sharedpreferences;
-    public ApplicationlistAdapters_Action(Context context, List<ApplicationsInfo> arrayList) {
+    String s;
+    public ApplicationlistAdapters_Action(Context context, List<ApplicationsInfo> arrayList,String s) {
         this.context = context;
         this.arrayList = arrayList;
         this.copylist = arrayList;
+        this.s=s;
         sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
     }
     @NonNull
@@ -60,7 +62,8 @@ public class ApplicationlistAdapters_Action extends RecyclerView.Adapter<Applica
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    triggerlistmodel.setActioname(applicationsInfo.getAppname());
+                    triggerlistmodel.setActioname(s);
+                    triggerlistmodel.setActionDescription(applicationsInfo.getPname());
                     AddMacroActivity.actionlist.add(triggerlistmodel);
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("key", applicationsInfo.getPname());

@@ -3,6 +3,7 @@ package com.andromate.Constraints;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RadioButton;
@@ -37,6 +38,7 @@ public class ConstraintsType {
         dialog.show();
 
     }
+
 
 
 
@@ -86,15 +88,15 @@ public class ConstraintsType {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Less than")) {
-                    triggerlistmodel.setConstraintsname("Battery <" + tv_percentage.getText().toString());
+                    triggerlistmodel.setConstraintsDescription("Battery <" + tv_percentage.getText().toString());
                     AddMacroActivity.constraintslist.add(triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Greater than")) {
-                    triggerlistmodel.setConstraintsname("Battery >" + tv_percentage.getText().toString());
+                    triggerlistmodel.setConstraintsDescription("Battery >" + tv_percentage.getText().toString());
                     AddMacroActivity.constraintslist.add(triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("=")){
-                    triggerlistmodel.setConstraintsname("Battery =" + tv_percentage.getText().toString());
+                    triggerlistmodel.setConstraintsDescription("Battery =" + tv_percentage.getText().toString());
                     AddMacroActivity.constraintslist.add(triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn == null) {
@@ -105,5 +107,40 @@ public class ConstraintsType {
         });
 
         dialog.show();
+    }
+
+
+
+    public static void show_battery_state(Context context, ConstraintsListModelList triggerlistmodel) {
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_batterysaver_state);
+        dialog.setCancelable(false);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_batterystate_type);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
+                    triggerlistmodel.setConstraintsname("Battery Saver State");
+                    triggerlistmodel.setConstraintsDescription(rd_btn.getText().toString());
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("bs", rd_btn.getText().toString().trim());
+                    AddMacroActivity.constraintslist.add(triggerlistmodel);
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+        // Apply the newly created layout parameters to
     }
 }

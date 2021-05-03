@@ -179,6 +179,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
 
     }
+
+
+
+
+
+
     public void updatemacro(String time,String id){
         SQLiteDatabase db =  this.getWritableDatabase();
 

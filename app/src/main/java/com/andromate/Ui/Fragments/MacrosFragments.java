@@ -32,7 +32,6 @@ import java.util.List;
 public class MacrosFragments extends Fragment {
 
     DBHelper dbHelper;
-
     List<MacroDetailModel>arralist;
     RecyclerView macrolist_recy;
     public MacrosFragments() {
@@ -65,7 +64,6 @@ public class MacrosFragments extends Fragment {
                     macroDetailModel.setCategory(cursor.getString(4));
                     macroDetailModel.setActivetime(cursor.getString(5));
                     arralist.add(macroDetailModel);
-
                         Cursor cursor1=dbHelper.getTriggers(cursor.getString(0));
                     if (cursor1.moveToFirst()) {
                         do {
@@ -76,7 +74,6 @@ public class MacrosFragments extends Fragment {
                         macroDetailModel.setTriggername(String.valueOf(trigger));
                     }
 
-
                     Cursor cursor2=dbHelper.getAction(cursor.getString(0));
                     if (cursor2.moveToFirst()) {
                         do {
@@ -86,22 +83,16 @@ public class MacrosFragments extends Fragment {
                         }while (cursor2.moveToNext());
                         macroDetailModel.setActionname(String.valueOf(action));
                     }
-
-
                     Cursor cursor3=dbHelper.getConstraints(cursor.getString(0));
                     if (cursor3.moveToFirst()) {
                         do {
                             constraints.append(cursor3.getString(2));
                             constraints.append(", ");
-
                         }while (cursor3.moveToNext());
                         macroDetailModel.setCons_name(String.valueOf(constraints));
                     }
-
                     // cursor.moveToNext();
-
-                } while (cursor.moveToNext());
-
+               } while (cursor.moveToNext());
                 MacroItemsAdapter triggerItemsAdapters=new MacroItemsAdapter(getContext(),arralist);
                 LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext());
                 macrolist_recy.setLayoutManager(layoutManager2);
@@ -110,9 +101,6 @@ public class MacrosFragments extends Fragment {
                 macrolist_recy.setItemAnimator(new DefaultItemAnimator());
                 macrolist_recy.setAdapter(triggerItemsAdapters);
             }
-
-
-
      /*  Log.d("ljhfjkdhfjd","jdddd"+dbHelper.getAllDataMacro());
 
         arralist = new ArrayList<>();
@@ -146,7 +134,6 @@ public class MacrosFragments extends Fragment {
         // at last closing our cursor
         // and returning our array list.
         curse.close();*/
-
         return view;
     }
 }

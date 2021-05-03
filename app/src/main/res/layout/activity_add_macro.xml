@@ -257,7 +257,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/tv_dummy_action"
@@ -322,7 +322,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:id="@+id/text_dummyConstraints"

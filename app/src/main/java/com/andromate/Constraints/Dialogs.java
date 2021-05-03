@@ -64,6 +64,7 @@ public class Dialogs {
         RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_ins_type);
         TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        SharedPreferences sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
 
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +79,9 @@ public class Dialogs {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("appevent", rd_btn.getText().toString().trim());
+                    editor.commit();
                     dialog.dismiss();
                     dialogAppType(context, triggerlistmodel);
                 }
@@ -110,11 +114,11 @@ public class Dialogs {
                         progressDialog.setMessage("Loading Applications");
                         progressDialog.show();
                         dialog.dismiss();
-
                         showApplistDialog(context, triggerlistmodel);
                     } else {
                         String triggerdesc = rd_btn.getText().toString().trim();
                         triggerlistmodel.setTriggerdescrption(triggerdesc);
+
                         AddMacroActivity.triggerlist.add(triggerlistmodel);
                         dialog.dismiss();
                     }

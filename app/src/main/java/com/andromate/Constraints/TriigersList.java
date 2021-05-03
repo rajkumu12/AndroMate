@@ -85,35 +85,64 @@ import static xdroid.core.Global.getContext;
 
 public class TriigersList {
     public static String TAG = "TriigersList";
+
+    public static void check_appinstallUninstall(Context context, String message, DBHelper dbHelper) {
+        BroadcastReceiver mReceiver;
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+                Toast.makeText(context, "ejee"+action, Toast.LENGTH_SHORT).show();
+                Log.d("dkfjdslfhdsjhfjdsf","kfkfkf"+action);
+                if (intent.getAction() == "android.intent.action.PACKAGE_ADDED") {
+
+                } else if (intent.getAction() == "android.intent.action.PACKAGE_FULLY_REMOVED") {
+
+                }
+            }
+        };
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.PACKAGE_INSTALL");
+        intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+        intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+
+        context.registerReceiver(mReceiver, intentFilter);
+
+      /*  context.registerReceiver(mReceiver,
+                new IntentFilter("android.intent.action.PACKAGE_REMOVED"));
+*/
+
+    }
+
+
     //Gps trigger
+
     public static void ChecGps(ExampleJobService exampleJobService, String gps, DBHelper dbHelper) {
         LocationManager locationManager = (LocationManager) exampleJobService.getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (gps != null && gps.equals("GPS Enabled")) {
 
-                Cursor cursor=dbHelper.checktrigger(gps);
-
-
-                if (cursor!=null && cursor.moveToFirst()) {
+                Cursor cursor = dbHelper.checktrigger(gps);
+                if (cursor != null && cursor.moveToFirst()) {
                     do {
-                       String id=cursor.getString(1);
-                        Log.d("iiiiiiiiiiiii","uid"+id);
-                     dbHelper.updatemacro(Pemisssions.currenttime(),id);
+                        String id = cursor.getString(1);
+                        Log.d("iiiiiiiiiiiii", "uid" + id);
+                        dbHelper.updatemacro(Pemisssions.currenttime(), id);
 
-                    }while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
 
                 }
-             /*   addNotification(exampleJobService, "Gps Enable");*/
+                /*   addNotification(exampleJobService, "Gps Enable");*/
             }
         } else {
             if (gps != null && gps.equals("GPS Disabled")) {
-                Cursor cursor=dbHelper.checktrigger(gps);
-                if (cursor!=null && cursor.moveToFirst()) {
+                Cursor cursor = dbHelper.checktrigger(gps);
+                if (cursor != null && cursor.moveToFirst()) {
                     do {
-                        String id=cursor.getString(1);
-                        Log.d("iiiiiiiiiiiii","uid"+id);
-                        dbHelper.updatemacro(Pemisssions.currenttime(),id);
-                    }while (cursor.moveToNext());
+                        String id = cursor.getString(1);
+                        Log.d("iiiiiiiiiiiii", "uid" + id);
+                        dbHelper.updatemacro(Pemisssions.currenttime(), id);
+                    } while (cursor.moveToNext());
                 }
                 /*addNotification(exampleJobService, "Gps Disabled");*/
             }
@@ -158,7 +187,7 @@ public class TriigersList {
                 }
             }
 
-            if (currentApp!=null && currentApp.equals(selApp)) {
+            if (currentApp != null && currentApp.equals(selApp)) {
                 addNotification(ctx, nn);
             }
             /*  Log.e(TAG, "Current App in foreground is: " + currentApp);*/
@@ -511,13 +540,13 @@ public class TriigersList {
                     if (!message.isEmpty() && message.equals("Near")) {
                         addNotification(context, message);
                     }
-                }else {
+                } else {
                     if (!message.isEmpty() && message.equals("Far")) {
                         addNotification(context, message);
                     }
                 }
 
-                if (message.equals("")){
+                if (message.equals("")) {
                     mSensorManager.unregisterListener(this);
                 }
             }
@@ -582,24 +611,22 @@ public class TriigersList {
         return (float) tmp / p;
     }
 
-    public static void musicplayingcheck(Context context,String message) {
+    public static void musicplayingcheck(Context context, String message) {
 
-        Log.d("gggggggggg","iot"+message);
-        AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
-        if(manager.isMusicActive())
-        {
-          Log.d("gggggggggg","p");
-          if (!message.isEmpty() && message.equals("Started")){
-              addNotification(context,message);
-          }
-        }else {
-            Log.d("gggggggggg","s");
-            if (!message.isEmpty() && message.equals("Stopped")){
-                addNotification(context,message);
+        Log.d("gggggggggg", "iot" + message);
+        AudioManager manager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        if (manager.isMusicActive()) {
+            Log.d("gggggggggg", "p");
+            if (!message.isEmpty() && message.equals("Started")) {
+                addNotification(context, message);
+            }
+        } else {
+            Log.d("gggggggggg", "s");
+            if (!message.isEmpty() && message.equals("Stopped")) {
+                addNotification(context, message);
             }
         }
     }
-
 
 
     //
@@ -610,16 +637,15 @@ public class TriigersList {
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if(intent.getAction().equals("android.intent.action.PHONE_STATE")){
+                if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
 
                     String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
 
-                    if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)){
+                    if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
                         Log.e(TAG, "Inside EXTRA_STATE_RINGING");
                         String number = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                         Log.e(TAG, "incoming number : " + number);
-                    }
-                    else if(state.equals(TelephonyManager.EXTRA_STATE_IDLE)){
+                    } else if (state.equals(TelephonyManager.EXTRA_STATE_IDLE)) {
                         Log.d(TAG, "Inside EXTRA_STATE_IDLE");
                     }
                 }
@@ -630,9 +656,6 @@ public class TriigersList {
 
 
     }
-
-
-
 
 
     //Notifications

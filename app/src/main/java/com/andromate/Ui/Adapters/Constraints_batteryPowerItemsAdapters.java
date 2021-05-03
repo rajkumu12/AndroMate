@@ -49,11 +49,14 @@ public class Constraints_batteryPowerItemsAdapters extends RecyclerView.Adapter<
                 @Override
                 public void onClick(View v) {
                     if (holder.tv_title.getText().toString().equals("Battery Level")){
+                        constraintsListModelList.setConstraintsname(holder.tv_title.getText().toString());
                         ConstraintsType.showbatterydailog(context,constraintsListModelList);
                     }else if (holder.tv_title.getText().toString().equals("Battery Saver State")){
-
+                        constraintsListModelList.setConstraintsname(holder.tv_title.getText().toString());
+                        ConstraintsType.show_battery_state(context,constraintsListModelList);
                     }else if (holder.tv_title.getText().toString().equals("Battery Temperature")){
-
+                        constraintsListModelList.setConstraintsname(holder.tv_title.getText().toString());
+                        ConstraintsType.showbatterydailog(context,constraintsListModelList);
                     }else if (holder.tv_title.getText().toString().equals("Power Connected/\n" +
                             "Disconnected")){
 

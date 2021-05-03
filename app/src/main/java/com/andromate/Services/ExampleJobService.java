@@ -114,12 +114,17 @@ class LongRunningTask {
             public void run() {
                 int a = count++;
                 String selApp = sharedpreferences.getString("key", "");
+
                 retriveNewApp(exampleJobService, selApp);
                 String bs = sharedpreferences.getString("bs", "");
                 checkbattersavermode(exampleJobService,bs);
                 String gps = sharedpreferences.getString("gps", "");
                 Log.d("jfhdlkjfhdlkf", "gggg" + gps);
                 TriigersList.ChecGps(exampleJobService, gps,dbHelper);
+
+
+                String appevent = sharedpreferences.getString("appevent", "");
+                TriigersList.check_appinstallUninstall(exampleJobService, appevent,dbHelper);
 
 
                 String boot = sharedpreferences.getString("db", "");

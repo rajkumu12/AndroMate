@@ -47,7 +47,7 @@ public class DialogsActions {
     public static ApplicationlistAdapters_Action triggerItemsAdapters;
 
     //Region Action Application
-    public static void showactionApplication(Context context, ActionModelList triggerlistmodel) {
+    public static void showactionApplication(Context context, ActionModelList triggerlistmodel,String s) {
 
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_action_app_enb);
@@ -71,12 +71,12 @@ public class DialogsActions {
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Enabled")) {
                     triggerlistmodel.setActioname(rd_btn.getText().toString());
-                    LoadApplicainlist(context, triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel,s);
 
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Disabled")) {
                     triggerlistmodel.setActioname(rd_btn.getText().toString());
-                    LoadApplicainlist(context, triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel,s);
                     dialog.dismiss();
                 }
             }
@@ -87,7 +87,7 @@ public class DialogsActions {
         dialog.show();
     }
 
-    private static void LoadApplicainlist(Context context, ActionModelList triggerlistmodel) {
+    private static void LoadApplicainlist(Context context, ActionModelList triggerlistmodel,String s) {
 
         Dialog dialog = new Dialog(context);
         dialog.setCancelable(false);
@@ -113,16 +113,16 @@ public class DialogsActions {
 
         CheckBox checkBox = dialog.findViewById(R.id.checkbox_nonlaunchable);
 
-        getInstalledApps(false, recyclerView, context);
+        getInstalledApps(false, recyclerView, context,s);
 
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    getInstalledApps2(false, recyclerView, context);
+                    getInstalledApps2(false, recyclerView, context,s);
                 } else {
-                    getInstalledApps(false, recyclerView, context);
+                    getInstalledApps(false, recyclerView, context,s);
                 }
             }
         });
@@ -155,7 +155,7 @@ public class DialogsActions {
 
     }
 
-    public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, RecyclerView recyclerView, Context context) {
+    public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, RecyclerView recyclerView, Context context,String s) {
         ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
@@ -176,7 +176,7 @@ public class DialogsActions {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        triggerItemsAdapters = new ApplicationlistAdapters_Action(context, res);
+        triggerItemsAdapters = new ApplicationlistAdapters_Action(context, res,s);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -186,7 +186,7 @@ public class DialogsActions {
         return res;
     }
 
-    public static ArrayList<ApplicationsInfo> getInstalledApps2(boolean getSysPackages, RecyclerView recyclerView, Context context) {
+    public static ArrayList<ApplicationsInfo> getInstalledApps2(boolean getSysPackages, RecyclerView recyclerView, Context context,String s) {
         ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         ProgressDialog progressDialog = new ProgressDialog(context);
@@ -210,7 +210,7 @@ public class DialogsActions {
             }
         }
         progressDialog.dismiss();
-        triggerItemsAdapters = new ApplicationlistAdapters_Action(context, res);
+        triggerItemsAdapters = new ApplicationlistAdapters_Action(context, res,s);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -233,7 +233,7 @@ public class DialogsActions {
     }
 
 
-    public static void show_clear_data(Context context, ActionModelList triggerlistmodel) {
+    public static void show_clear_data(Context context, ActionModelList triggerlistmodel, String s) {
 
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_action_clear_app_data);
@@ -256,11 +256,11 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application")) {
-                    LoadApplicainlist(context, triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel,s);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
 
-                    showpackagedialog(context, triggerlistmodel);
+                    showpackagedialog(context, triggerlistmodel,s);
 
                 }
             }
@@ -272,7 +272,7 @@ public class DialogsActions {
     }
 
 
-    public static void showpackagedialog(Context context, ActionModelList triggerlistmodel) {
+    public static void showpackagedialog(Context context, ActionModelList triggerlistmodel,String s) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.enterpackagename);
         EditText et_package = dialog.findViewById(R.id.et_packagename);
@@ -394,7 +394,7 @@ public class DialogsActions {
     }
 
 
-    public static void show_kill_background(Context context, ActionModelList triggerlistmodel) {
+    public static void show_kill_background(Context context, ActionModelList triggerlistmodel,String s) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_action_kill_back_processes);
         dialog.setCancelable(false);
@@ -416,10 +416,10 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application")) {
-                    LoadApplicainlist(context, triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel,s);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
-                    showpackagedialog(context, triggerlistmodel);
+                    showpackagedialog(context, triggerlistmodel,s);
                 }
             }
         });
@@ -430,7 +430,7 @@ public class DialogsActions {
     }
 
 
-    public static void show_launch_option(Context context, ActionModelList triggerlistmodel) {
+    public static void show_launch_option(Context context, ActionModelList triggerlistmodel,String s) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.alert_launch_option);
         dialog.setCancelable(false);
@@ -452,10 +452,10 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application")) {
-                    LoadApplicainlist(context, triggerlistmodel);
+                    LoadApplicainlist(context, triggerlistmodel,s);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
-                    showpackagedialog(context, triggerlistmodel);
+                    showpackagedialog(context, triggerlistmodel,s);
                 }
             }
         });
@@ -606,10 +606,7 @@ public class DialogsActions {
                 dialog.dismiss();
             }
         });
-
         dialog.show();
-
-
     }
 
 

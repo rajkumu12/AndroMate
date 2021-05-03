@@ -265,7 +265,7 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         devicesettinglist.add(new TriggerItemModel("Font Scale", R.drawable.font_scale));
         devicesettinglist.add(new TriggerItemModel("Immersive Node", R.drawable.screen));
         devicesettinglist.add(new TriggerItemModel("Keyboard-Set\nDefault", R.drawable.keyboard));
-        devicesettinglist.add(new TriggerItemModel("Keyboard Prompt", R.drawable.keyboard));
+        devicesettinglist.add(new TriggerItemModel("Keyboard-Set\nDefault", R.drawable.keyboard));
         devicesettinglist.add(new TriggerItemModel("Secure Setting", R.drawable.ic_baseline_security_24));
         devicesettinglist.add(new TriggerItemModel("Set Quick Setting Tile State", R.drawable.setting_icon));
         devicesettinglist.add(new TriggerItemModel("Set Screen Lock", R.drawable.screen_unlock));

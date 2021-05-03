@@ -52,16 +52,15 @@ public class ActionApplicationsAdapters extends RecyclerView.Adapter<ActionAppli
                 @Override
                 public void onClick(View v) {
                     if (holder.tv_title.getText().toString().equals("App Enable/Disable")){
-                        DialogsActions.showactionApplication(context,triggerlistmodel);
-
+                        DialogsActions.showactionApplication(context,triggerlistmodel,holder.tv_title.getText().toString());
                     }else if (holder.tv_title.getText().toString().equals("Clear App Data")){
-                        DialogsActions.show_clear_data(context,triggerlistmodel);
+                        DialogsActions.show_clear_data(context,triggerlistmodel,holder.tv_title.getText().toString());
                     }else if (holder.tv_title.getText().toString().equals("Kill Application")){
                         Toast.makeText(context, "Work is in progress", Toast.LENGTH_SHORT).show();
                     }else if (holder.tv_title.getText().toString().equals("Kill Background\nProcess")){
-                        DialogsActions.show_kill_background(context,triggerlistmodel);
+                        DialogsActions.show_kill_background(context,triggerlistmodel,holder.tv_title.getText().toString());
                     }else if (holder.tv_title.getText().toString().equals("Launch Application")){
-                        DialogsActions.show_launch_option(context,triggerlistmodel);
+                        DialogsActions.show_launch_option(context,triggerlistmodel,holder.tv_title.getText().toString());
                     }else if (holder.tv_title.getText().toString().equals("Launch Shortcut")){
                         DialogsActions.loadApps_shortcut(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Launch and Press")){
