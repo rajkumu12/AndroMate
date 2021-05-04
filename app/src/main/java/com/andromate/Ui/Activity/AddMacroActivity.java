@@ -154,7 +154,6 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void loadConstraintsItems() {
-
         Constraintslists_items_Adapter triggelists_items_adapter = new Constraintslists_items_Adapter(this, constraintslist);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(AddMacroActivity.this);
         recyclerView_constraints.setLayoutManager(layoutManager2);
@@ -276,8 +275,6 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         if (macroname.isEmpty()) {
                             Toast.makeText(AddMacroActivity.this, "Enter macroname", Toast.LENGTH_SHORT).show();
-                        } else if (macrodesc.isEmpty()) {
-                            Toast.makeText(AddMacroActivity.this, "Enter description", Toast.LENGTH_SHORT).show();
                         } else {
                             if (triggerlist != null && triggerlist.size() != 0) {
 
@@ -302,7 +299,7 @@ public class AddMacroActivity extends AppCompatActivity implements View.OnClickL
                                     triggersname.append(triggerlistmodel.getConstraintsname()).append(",");
                                     mydb.insertConstraints(num, triggerlistmodel.getConstraintsname(), triggerlistmodel.getConstraintsDescription());
                                 }
-
+                                finish();
                            /* String commaseparatedlist = triggersname.toString();
                             Log.d(TAG,"ttt"+commaseparatedlist);*/
 

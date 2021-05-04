@@ -75,9 +75,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             app:menu="@menu/bottom_navigation_menu"
+            app:labelVisibilityMode="labeled"
+            app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
             app:itemBackground="@color/white"
             app:elevation="8dp"
-            app:itemTextAppearanceInactive="@style/tabtext"
             app:itemIconTint="@color/tb_selector"
             />
     </RelativeLayout>

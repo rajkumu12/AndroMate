@@ -165,16 +165,16 @@ public class Dialogs {
 
         CheckBox checkBox = dialog.findViewById(R.id.checkbox_nonlaunchable);
 
-        getInstalledApps(false, recyclerView, context);
+        getInstalledApps(false, recyclerView, context,triggerlistmodel);
 
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    getInstalledApps2(false, recyclerView, context);
+                    getInstalledApps2(false, recyclerView, context,triggerlistmodel);
                 } else {
-                    getInstalledApps(false, recyclerView, context);
+                    getInstalledApps(false, recyclerView, context,triggerlistmodel);
                 }
             }
         });
@@ -208,7 +208,7 @@ public class Dialogs {
     }
 
 
-    public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, RecyclerView recyclerView, Context context) {
+    public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, RecyclerView recyclerView, Context context,Triggerlistmodel triggerlistmodel) {
         ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
@@ -229,7 +229,7 @@ public class Dialogs {
         if (progressDialog != null) {
             progressDialog.dismiss();
         }
-        triggerItemsAdapters = new ApplicationlistAdapters(context, res);
+        triggerItemsAdapters = new ApplicationlistAdapters(context, res,triggerlistmodel);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -239,8 +239,8 @@ public class Dialogs {
         return res;
     }
 
-    public static ArrayList<ApplicationsInfo> getInstalledApps2(boolean getSysPackages, RecyclerView recyclerView, Context context) {
-        ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
+    public static List<ApplicationsInfo> getInstalledApps2(boolean getSysPackages, RecyclerView recyclerView, Context context,Triggerlistmodel triggerlistmodel) {
+        List<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
             PackageInfo p = packs.get(i);
@@ -258,7 +258,7 @@ public class Dialogs {
                 res.add(newInfo);
             }
         }
-        triggerItemsAdapters = new ApplicationlistAdapters(context, res);
+        triggerItemsAdapters = new ApplicationlistAdapters(context, res,triggerlistmodel);
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
@@ -311,8 +311,8 @@ public class Dialogs {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null && !rd_btn.getText().toString().equals("")) {
-                    showLaunchApplication(context, triggerlistmodel);
                     triggerlistmodel.setTriggername(rd_btn.getText().toString());
+                    showLaunchApplication(context, triggerlistmodel);
                     dialog.dismiss();
 
                 }
@@ -1393,7 +1393,6 @@ public class Dialogs {
         });
         dialog.show();
     }
-
 
     public static void showRoaming(Context context, Triggerlistmodel triggerlistmodel) {
         Dialog dialog = new Dialog(context);

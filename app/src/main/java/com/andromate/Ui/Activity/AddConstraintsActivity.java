@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.andromate.CustomColors;
 import com.andromate.Model.TriggerItemModel;
 import com.andromate.R;
+import com.andromate.Ui.Adapters.Constraints_ConnectivityItemsAdapters;
 import com.andromate.Ui.Adapters.Constraints_batteryPowerItemsAdapters;
 import com.andromate.Ui.Adapters.Constraints_datetime_ItemsAdapters;
 import com.andromate.Ui.Adapters.Constraints_devicestate_ItemsAdapters;
@@ -134,7 +135,7 @@ public class AddConstraintsActivity extends AppCompatActivity implements View.On
         connectivitylist.add(new TriggerItemModel("Wifi State",R.drawable.wifi_state_change));
 
 
-        TriggerItemsAdapters triggerItemsAdapters = new TriggerItemsAdapters(this, connectivitylist);
+        Constraints_ConnectivityItemsAdapters triggerItemsAdapters = new Constraints_ConnectivityItemsAdapters(this, connectivitylist);
         GridLayoutManager layoutManager2 = new GridLayoutManager(this, 2);
         recyclerView_connectivity.setLayoutManager(layoutManager2);
                             /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);

@@ -3,6 +3,7 @@ package com.andromate.Ui.Activity;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.andromate.Constraints.FServices.ForegroundService;
 import com.andromate.R;
 import com.andromate.Services.ExampleJobService;
 import com.andromate.Ui.Fragments.HomeFragments;
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 */
         setContentView(R.layout.activity_home);
+        startService();
         drawerLayout = findViewById(R.id.drawer);
         image_hamburger = findViewById(R.id.hamburger_icon);
         navigation = findViewById(R.id.bottom_navigation);
@@ -92,7 +95,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // Job Scheduler
-        final JobScheduler scheduler = (JobScheduler) getApplicationContext().getSystemService(JOB_SCHEDULER_SERVICE);
+      /*  final JobScheduler scheduler = (JobScheduler) getApplicationContext().getSystemService(JOB_SCHEDULER_SERVICE);
         ComponentName componentName = new ComponentName(this, ExampleJobService.class);
         JobInfo jobInfo = new JobInfo.Builder(1, componentName)
                 .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
@@ -105,7 +108,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     return;
             }
             scheduler.schedule(jobInfo);
-        }
+        }*/
     }
 
     @SuppressLint({"WrongConstant", "SetTextI18n"})
@@ -216,7 +219,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String packageName = getApplicationContext().getPackageName();
             PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
-            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            if(!pm.isIgnoringBatteryOptimizations(packageName)) {
                 Intent intent = new Intent();
                 intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                 intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
@@ -226,4 +229,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+
+    public void startService() {
+        Intent serviceIntent = new Intent(this, ForegroundService.class);
+        serviceIntent.putExtra("inputExtra", "Androidmate running in background");
+        ContextCompat.startForegroundService(this, serviceIntent);
+    }
 }

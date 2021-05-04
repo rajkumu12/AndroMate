@@ -33,17 +33,21 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
     private List<ApplicationsInfo> copylist;
     Triggerlistmodel triggerlistmodel;
     SharedPreferences sharedpreferences;
-    public ApplicationlistAdapters(Context context, List<ApplicationsInfo> arrayList) {
+    public ApplicationlistAdapters(Context context, List<ApplicationsInfo> arrayList,Triggerlistmodel triggerlistmodel) {
         this.context = context;
         this.arrayList = arrayList;
         this.copylist = arrayList;
+        this.triggerlistmodel=triggerlistmodel;
         sharedpreferences = context.getSharedPreferences("myapp", Context.MODE_PRIVATE);
     }
+
+
+
     @NonNull
     @Override
     public ApplicationlistAdapters.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.applist_ui, parent, false);
-        triggerlistmodel=new Triggerlistmodel();
+
         return new ApplicationlistAdapters.ViewHolder(v);
     }
 
@@ -61,7 +65,7 @@ public class ApplicationlistAdapters extends RecyclerView.Adapter<Applicationlis
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    triggerlistmodel.setTriggername(applicationsInfo.getAppname());
+                    triggerlistmodel.setTriggerdescrption(applicationsInfo.getAppname());
                     AddMacroActivity.triggerlist.add(triggerlistmodel);
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("key", applicationsInfo.getPname());

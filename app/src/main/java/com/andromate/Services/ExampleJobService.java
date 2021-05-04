@@ -115,7 +115,7 @@ class LongRunningTask {
                 int a = count++;
                 String selApp = sharedpreferences.getString("key", "");
 
-                retriveNewApp(exampleJobService, selApp);
+                retriveNewApp(exampleJobService, selApp,dbHelper);
                 String bs = sharedpreferences.getString("bs", "");
                 checkbattersavermode(exampleJobService,bs);
                 String gps = sharedpreferences.getString("gps", "");

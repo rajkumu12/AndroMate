@@ -34,8 +34,7 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="make_call">Make Call</string>
     <string name="stop_call">Stop Call</string>
-
-
+    <string name="shortcutname">shortcutbyandromate</string>
 
 
     <string-array name="type">

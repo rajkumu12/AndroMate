@@ -3,6 +3,7 @@ package com.andromate.Services;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 
+/*
 public class JobSchedulerService  extends JobService {
 
     @Override
@@ -15,4 +16,4 @@ public class JobSchedulerService  extends JobService {
     public boolean onStopJob(JobParameters params) {
         return false;
     }
-}
+}*/

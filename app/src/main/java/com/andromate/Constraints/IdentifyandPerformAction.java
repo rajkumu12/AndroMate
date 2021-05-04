@@ -1,31 +1,60 @@
 package com.andromate.Constraints;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.hardware.Camera;
+import android.os.Environment;
+import android.os.Parcelable;
+import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.CalendarView;
 import android.widget.Toast;
+
+import com.andromate.R;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Date;
+
+import static android.content.ContentValues.TAG;
 
 public class IdentifyandPerformAction {
 
-    public static void performAction(String actionname, String action_des, Context context) {
+    public static void performAction(String actionname, String action_des, Context context) throws IOException, InterruptedException {
         Log.d("fjdfhdjfhhf","jdjdjdjdj"+action_des);
         switch (actionname) {
             case "App Enable/Disable":
-                Toast.makeText(context, ""+actionname, Toast.LENGTH_SHORT).show();
+               appenabledisable(action_des);
                 break;
             case "Clear App Data":
                 cleardata(action_des);
                 break;
             case "Kill Application":
-
+                killApplication(action_des,context);
                 break;
             case "Kill Background\nProcess":
-
+              killbackground(action_des,context);
                 break;
             case "Launch Application":
-
+                    launchApplication(action_des,context);
                 break;
             case "Launch Shortcut":
-
+                lauchShortcutof_app(action_des,context);
                 break;
             case "Launch and Press":
 
@@ -50,10 +79,10 @@ public class IdentifyandPerformAction {
 
                 break;
             case "Take Picture":
-
+                takePicture(action_des,actionname,context);
                 break;
             case "Take Screenshot":
-
+                takeScreenshot(action_des,actionname,context);
                 break;
             case "Break From Loop":
 
@@ -346,19 +375,142 @@ public class IdentifyandPerformAction {
 
     }
 
+    private static void takeScreenshot(String action_des, String actionname, Context context) throws IOException, InterruptedException {
+        Process sh = Runtime.getRuntime().exec("su", null,null);
+
+        OutputStream os = sh.getOutputStream();
+        os.write(("/system/bin/screencap -p " + "/sdcard/img.png").getBytes("ASCII"));
+        os.flush();
+
+        os.close();
+        sh.waitFor();
+
+
+
+                Bitmap screen = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory()+ File.separator +"img.png");
+
+//my code for saving
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        screen.compress(Bitmap.CompressFormat.JPEG, 15, bytes);
+
+//you can create a new file name "test.jpg" in sdcard folder.
+
+        File f = new File(Environment.getExternalStorageDirectory()+ File.separator + "test.jpg");
+        f.createNewFile();
+//write the bytes in file
+        FileOutputStream fo = new FileOutputStream(f);
+        fo.write(bytes.toByteArray());
+// remember close de FileOutput
+
+        fo.close();
+        }
+
+
+    private static void takePicture(String action_des, String actionname, Context context) {
+        Camera camera= Camera.open();
+        camera.takePicture(null,null,mPicture);
+
+    }
+
+    public static Camera.PictureCallback mPicture = new Camera.PictureCallback() {
+
+        @Override
+        public void onPictureTaken(byte[] data, Camera camera) {
+            Log.v(TAG, "Getting output media file");
+            File pictureFile =getOutputMediaFile();
+            if (pictureFile == null) {
+                Log.v(TAG, "Error creating output file");
+                return;
+            }
+            try {
+                FileOutputStream fos = new FileOutputStream(pictureFile);
+                fos.write(data);
+                fos.close();
+            } catch (FileNotFoundException e) {
+                Log.v(TAG, e.getMessage());
+            } catch (IOException e) {
+                Log.v(TAG, e.getMessage());
+            }
+        }
+    };
+    private static File getOutputMediaFile() {
+        String state = Environment.getExternalStorageState();
+        if (!state.equals(Environment.MEDIA_MOUNTED)) {
+            return null;
+        }
+        else {
+            File folder_gui = new File(Environment.getExternalStorageDirectory() + File.separator + "GUI");
+            if (!folder_gui.exists()) {
+                Log.v(TAG, "Creating folder: " + folder_gui.getAbsolutePath());
+                folder_gui.mkdirs();
+            }
+            File outFile = new File(folder_gui, "temp.jpg");
+            Log.v(TAG, "Returnng file: " + outFile.getAbsolutePath());
+            return outFile;
+        }
+    }
+    private static void lauchShortcutof_app(String action_des, Context context) {
+
+            Intent shortcutintent = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
+            shortcutintent.putExtra("duplicate", false);
+            shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_NAME, context.getString(R.string.shortcutname));
+            Parcelable icon = Intent.ShortcutIconResource.fromContext(context, R.drawable.android_icon);
+            shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, icon);
+            shortcutintent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, new Intent(action_des));
+            context.sendBroadcast(shortcutintent);
+
+
+
+    }
+
+    private static void killApplication(String action_des, Context context) {
+        @SuppressLint("WrongConstant") ActivityManager am = (ActivityManager)context.getApplicationContext().getSystemService("activity");
+        Method forceStopPackage ;
+        try {
+            forceStopPackage =am.getClass().getDeclaredMethod("forceStopPackage",String.class);
+            forceStopPackage.setAccessible(true);
+            forceStopPackage.invoke(am, action_des);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void killbackground(String action_des, Context context) {
+        ActivityManager am = (ActivityManager) context.getSystemService(Activity.ACTIVITY_SERVICE);
+        am.killBackgroundProcesses(action_des);
+    }
+
+    private static void appenabledisable(String action_des) {
+
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            runtime.exec("pm disable "+action_des);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void cleardata(String action_des) {
         Log.d("jksdjksjdjd", "cleardata: "+action_des);
             try {
                 // clearing app data
                 String packageName = action_des;
                 Runtime runtime = Runtime.getRuntime();
-                runtime.exec("adb shell pm clear "+packageName);
-
+                runtime.exec("pm clear "+packageName);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
     }
 
+
+    public static void launchApplication(String apppakcge,Context context){
+         // or you can replace **'this'** with your **ActivityName.this**
+        context.startActivity(context.getPackageManager().getLaunchIntentForPackage(apppakcge));
+    }
 
 }

@@ -14,6 +14,8 @@ import com.andromate.Constraints.IdentifyandPerformAction;
 import com.andromate.Constraints.Pemisssions;
 import com.andromate.db.DBHelper;
 
+import java.io.IOException;
+
 public class PackageremovalReceiver  extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -22,7 +24,31 @@ public class PackageremovalReceiver  extends BroadcastReceiver {
         DBHelper dbHelper=new DBHelper(context);
         Toast.makeText(context, "iiiii"+intent.getAction(), Toast.LENGTH_SHORT).show();
         if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")){
-
+            if (!appevent.isEmpty() && appevent.equals("Application Removes")) {
+                Cursor cursor = dbHelper.checktrigger(appevent);
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        String id = cursor.getString(1);
+                        dbHelper.updatemacro(Pemisssions.currenttime(), id);
+                        dbHelper.getAction(id);
+                        Cursor cursor2 = dbHelper.getAction(id);
+                        if (cursor2 != null && cursor2.moveToFirst()) {
+                            do {
+                                String actionname = cursor2.getString(2);
+                                String actionname_des = cursor2.getString(3);
+                                Log.d("iiiiiiiiiiiii", "uid" + actionname_des);
+                                try {
+                                    IdentifyandPerformAction.performAction(actionname,actionname_des,context);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            } while (cursor2.moveToNext());
+                        }
+                    } while (cursor.moveToNext());
+                }
+            }
         }else if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")){
             if (!appevent.isEmpty() && appevent.equals("Application Installed")) {
                 Cursor cursor = dbHelper.checktrigger(appevent);
@@ -37,7 +63,13 @@ public class PackageremovalReceiver  extends BroadcastReceiver {
                                 String actionname = cursor2.getString(2);
                                 String actionname_des = cursor2.getString(3);
                                 Log.d("iiiiiiiiiiiii", "uid" + actionname_des);
-                                IdentifyandPerformAction.performAction(actionname,actionname_des,context);
+                                try {
+                                    IdentifyandPerformAction.performAction(actionname,actionname_des,context);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             } while (cursor2.moveToNext());
                         }
                     } while (cursor.moveToNext());

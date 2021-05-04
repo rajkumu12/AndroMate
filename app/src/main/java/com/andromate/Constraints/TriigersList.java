@@ -68,6 +68,7 @@ import com.andromate.Ui.Adapters.ApplicationlistAdapters;
 import com.andromate.Ui.Adapters.Call_SmsAdapter;
 import com.andromate.db.DBHelper;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +118,7 @@ public class TriigersList {
 
     //Gps trigger
 
-    public static void ChecGps(ExampleJobService exampleJobService, String gps, DBHelper dbHelper) {
+    public static void ChecGps(Context exampleJobService, String gps, DBHelper dbHelper) {
         LocationManager locationManager = (LocationManager) exampleJobService.getSystemService(Context.LOCATION_SERVICE);
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             if (gps != null && gps.equals("GPS Enabled")) {
@@ -169,7 +170,7 @@ public class TriigersList {
 
 
     //AppClose Open
-    public static String retriveNewApp(Context ctx, String selApp) {
+    public static String retriveNewApp(Context ctx, String selApp,DBHelper dbHelper) {
         if (Build.VERSION.SDK_INT >= 21) {
             String currentApp = null;
             String nn = null;
@@ -188,7 +189,31 @@ public class TriigersList {
             }
 
             if (currentApp != null && currentApp.equals(selApp)) {
-                addNotification(ctx, nn);
+                Cursor cursor = dbHelper.checktrigger("Application Launched");
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        String id = cursor.getString(1);
+                        Log.d("iiiiiiiiiiiii", "uid" + id);
+                        dbHelper.updatemacro(Pemisssions.currenttime(), id);
+                        Cursor cursor2 = dbHelper.getAction(id);
+                        if (cursor2 != null && cursor2.moveToFirst()) {
+                            do {
+                                String actionname = cursor2.getString(2);
+                                String actionname_des = cursor2.getString(3);
+                                Log.d("iiiiiiiiiiiii", "uid" + actionname_des);
+                                try {
+                                    IdentifyandPerformAction.performAction(actionname,actionname_des,ctx);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            } while (cursor2.moveToNext());
+                        }
+                    } while (cursor.moveToNext());
+
+                }
+                /*addNotification(ctx, nn);*/
             }
             /*  Log.e(TAG, "Current App in foreground is: " + currentApp);*/
             return currentApp;
@@ -198,7 +223,7 @@ public class TriigersList {
             String mm = (manager.getRunningTasks(1).get(0)).topActivity.getPackageName();
             String name = (manager.getRunningTasks(1).get(0)).topActivity.getClassName();
             if (mm.equals(selApp)) {
-                addNotification(ctx, name);
+             /*   addNotification(ctx, name);*/
                 /* Toast.makeText(context, ""+name+" is Running", Toast.LENGTH_SHORT).show();*/
             }
             Log.e(TAG, "Current App in foreground is: " + name);
@@ -207,7 +232,7 @@ public class TriigersList {
     }
 
     //Power Saving Mode
-    public static void checkbattersavermode(ExampleJobService exampleJobService, String bs) {
+    public static void checkbattersavermode(Context exampleJobService, String bs) {
 
 
         PowerManager powerManager = (PowerManager) exampleJobService.getSystemService(Context.POWER_SERVICE);
@@ -224,7 +249,7 @@ public class TriigersList {
 
     //Bluetooth trigger
 
-    public static void checkBlutooth_trigger(ExampleJobService exampleJobService, String message) {
+    public static void checkBlutooth_trigger(Context exampleJobService, String message) {
 
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

@@ -59,7 +59,7 @@ public class Constraints_batteryPowerItemsAdapters extends RecyclerView.Adapter<
                         ConstraintsType.showbatterydailog(context,constraintsListModelList);
                     }else if (holder.tv_title.getText().toString().equals("Power Connected/\n" +
                             "Disconnected")){
-
+                        ConstraintsType.show_powerConnected(context,constraintsListModelList);
                     }
                 }
             });
