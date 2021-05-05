@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="340dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp18"
+        android:text="@string/select_option"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp20" />
+
+    <RadioGroup
+        android:id="@+id/rg_app_ena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp20"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_app_select_Application"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_color"
+            android:paddingLeft="@dimen/dp8"
+            android:text="Enable Bluetooth"
+            android:textSize="@dimen/sp12" />
+
+        <RadioButton
+            android:id="@+id/rb_app_disable_bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_color"
+            android:paddingLeft="@dimen/dp8"
+            android:text="Disable Bluetooth"
+            android:textSize="@dimen/sp12" />
+        <RadioButton
+            android:id="@+id/rb_app_toggle_bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_color"
+            android:paddingLeft="@dimen/dp8"
+            android:text="Toogle bluetooth"
+            android:textSize="@dimen/sp12" />
+        <RadioButton
+            android:id="@+id/rb_app_audio_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_color"
+            android:paddingLeft="@dimen/dp8"
+            android:text="Connect Audio Device"
+            android:textSize="@dimen/sp12" />
+        <RadioButton
+            android:id="@+id/rb_app_disconnect_au_d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/theme_color"
+            android:paddingLeft="@dimen/dp8"
+            android:text="Disconnect Audio Device"
+            android:textSize="@dimen/sp12" />
+
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp8"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp20"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_app_in_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:paddingVertical="@dimen/dp8"
+                android:text="Cancel"
+                android:textColor="@color/theme_color" />
+
+            <TextView
+                android:id="@+id/tv_app_in_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/dp20"
+                android:paddingVertical="@dimen/dp8"
+                android:text="Ok"
+                android:textColor="@color/theme_color" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

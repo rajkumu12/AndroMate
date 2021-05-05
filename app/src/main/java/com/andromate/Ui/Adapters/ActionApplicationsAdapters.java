@@ -62,9 +62,8 @@ public class ActionApplicationsAdapters extends RecyclerView.Adapter<ActionAppli
                     }else if (holder.tv_title.getText().toString().equals("Launch Application")){
                         DialogsActions.show_launch_option(context,triggerlistmodel,holder.tv_title.getText().toString());
                     }else if (holder.tv_title.getText().toString().equals("Launch Shortcut")){
+                        triggerlistmodel.setActioname(holder.tv_title.getText().toString());
                         DialogsActions.loadApps_shortcut(context,triggerlistmodel);
-                    }else if (holder.tv_title.getText().toString().equals("Launch and Press")){
-                        Toast.makeText(context, "message: "+holder.tv_title.getText().toString(), Toast.LENGTH_SHORT).show();
                     }else if (holder.tv_title.getText().toString().equals("Locale/Tasker Plugin")){
                         DialogsActions.logAllTaskerTasks(context,triggerlistmodel);
                     }else if (holder.tv_title.getText().toString().equals("Open Website/HTTP\nGET")){
@@ -74,9 +73,6 @@ public class ActionApplicationsAdapters extends RecyclerView.Adapter<ActionAppli
                     }
                 }
             });
-
-
-
 
     }
     @Override

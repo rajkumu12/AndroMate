@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +56,27 @@ public class ActionConnectivityAdapters extends RecyclerView.Adapter<ActionConne
                 public void onClick(View v) {
                     if (holder.tv_title.getText().toString().equals("Airplane Mode On/Off")){
                         DialogsActions.shwo_action_airplane_mode(context,triggerlistmodel);
-                    }else if (holder.tv_title.getText().toString().equals("Auto Sync On/Off")){
+                    }else if (holder.tv_title.getText().toString().equals("Android Wear")){
+                        Toast.makeText(context, "Android wear is in progress", Toast.LENGTH_SHORT).show();
+                    } else if (holder.tv_title.getText().toString().equals("Auto Sync On/Off")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("Bluetooth Configure")){
+                        DialogsActions.showbluetoothConfiguration(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("Bluetooth tethering")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("Connectivity Check")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("HotSpot On/Off")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("Mobile Data On/Off")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("Send Intent")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("Sync Account")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("USB Tethering")){
+                        DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
+                    }else if (holder.tv_title.getText().toString().equals("USB Tethering")){
                         DialogsActions.shwo_action_airplane_mode_option(context,triggerlistmodel);
                     }
                 }

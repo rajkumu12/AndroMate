@@ -109,12 +109,9 @@ public class Dialogs {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
                 if (rd_btn != null) {
                     if (rd_btn.getText().toString().equals("Select Application(s)")) {
-                        progressDialog = new ProgressDialog(context);
-                        progressDialog.setCancelable(false);
-                        progressDialog.setMessage("Loading Applications");
-                        progressDialog.show();
                         dialog.dismiss();
-                        showApplistDialog(context, triggerlistmodel);
+                        getInstalledApps(false, context,triggerlistmodel);
+                        /*showApplistDialog(context, triggerlistmodel);*/
                     } else {
                         String triggerdesc = rd_btn.getText().toString().trim();
                         triggerlistmodel.setTriggerdescrption(triggerdesc);
@@ -139,8 +136,8 @@ public class Dialogs {
     }
 
 
-    public static void showApplistDialog(Context context, Triggerlistmodel triggerlistmodel) {
-
+    public static void showApplistDialog(Context context, Triggerlistmodel triggerlistmodel, ArrayList<ApplicationsInfo> res, ProgressDialog progressDialog) {
+        /*progressDialog.dismiss();*/
         Dialog dialog = new Dialog(context);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.alert_app_list_ui);
@@ -165,7 +162,13 @@ public class Dialogs {
 
         CheckBox checkBox = dialog.findViewById(R.id.checkbox_nonlaunchable);
 
-        getInstalledApps(false, recyclerView, context,triggerlistmodel);
+        triggerItemsAdapters = new ApplicationlistAdapters(context, res,triggerlistmodel);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager2);
+                            /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
+                                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(triggerItemsAdapters);
 
 
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -174,7 +177,7 @@ public class Dialogs {
                 if (isChecked) {
                     getInstalledApps2(false, recyclerView, context,triggerlistmodel);
                 } else {
-                    getInstalledApps(false, recyclerView, context,triggerlistmodel);
+                    getInstalledApps(false, context,triggerlistmodel);
                 }
             }
         });
@@ -208,7 +211,7 @@ public class Dialogs {
     }
 
 
-    public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, RecyclerView recyclerView, Context context,Triggerlistmodel triggerlistmodel) {
+    public static ArrayList<ApplicationsInfo> getInstalledApps(boolean getSysPackages, Context context,Triggerlistmodel triggerlistmodel) {
         ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
@@ -218,7 +221,6 @@ public class Dialogs {
             }
             ApplicationsInfo newInfo = new ApplicationsInfo();
             newInfo.setAppname(p.applicationInfo.loadLabel(context.getPackageManager()).toString());
-            ;
             newInfo.setPname(p.packageName);
             Log.d("jfdkfjdkfjkfjf", "jjjjj" + p.packageName);
             newInfo.setVersionName(p.versionName);
@@ -226,20 +228,13 @@ public class Dialogs {
             newInfo.setIcon(p.applicationInfo.loadIcon(context.getPackageManager()));
             res.add(newInfo);
         }
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
-        triggerItemsAdapters = new ApplicationlistAdapters(context, res,triggerlistmodel);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager2);
-                            /*  int spacingInPixels = Objects.requireNonNull(getContext()).getResources().getDimensionPixelSize(R.dimen.spacing);
-                                recyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));*/
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(triggerItemsAdapters);
+        showApplistDialog(context,triggerlistmodel,res,progressDialog);
+
         return res;
     }
 
     public static List<ApplicationsInfo> getInstalledApps2(boolean getSysPackages, RecyclerView recyclerView, Context context,Triggerlistmodel triggerlistmodel) {
+        Toast.makeText(context, "Wait while loading Apps", Toast.LENGTH_SHORT).show();
         List<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
@@ -351,7 +346,7 @@ public class Dialogs {
 
                 if (rd_btn != null && rd_btn.getText().toString().equals("Select Application(s)")) {
                     Log.d("lhfjfhhff", "ddkj");
-                    showApplistDialog(context, triggerlistmodel);
+                    getInstalledApps(false, context,triggerlistmodel);
                     dialog.dismiss();
                 } else if (rd_btn != null && rd_btn.getText().toString().equals("Enter Package Name")) {
                     Log.d("jkslkfjkflkfk", "kkkk");

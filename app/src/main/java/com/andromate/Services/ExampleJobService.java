@@ -113,6 +113,8 @@ class LongRunningTask {
             @Override
             public void run() {
                 int a = count++;
+                DBHelper dbHelper=new DBHelper(exampleJobService);
+                SharedPreferences sharedpreferences = exampleJobService.getSharedPreferences("myapp", Context.MODE_PRIVATE);
                 String selApp = sharedpreferences.getString("key", "");
 
                 retriveNewApp(exampleJobService, selApp,dbHelper);
@@ -130,18 +132,17 @@ class LongRunningTask {
                 String boot = sharedpreferences.getString("db", "");
                 TriigersList.device_boot(exampleJobService,boot);
 
-
                 String bt = sharedpreferences.getString("bt", "");
-
                 checkBlutooth_trigger(exampleJobService,bt);
+
+
                 String dataon = sharedpreferences.getString("data_on", "");
-
                 TriigersList.checkdataenble(exampleJobService,dataon);
+
                 String headphone = sharedpreferences.getString("head", "");
-
                 TriigersList.headphonesInserted(exampleJobService,headphone);
-                TriigersList.check_hot_spot(exampleJobService,headphone);
 
+                TriigersList.check_hot_spot(exampleJobService,headphone);
                 String mobile_service = sharedpreferences.getString("mob_ser", "");
 
                 TriigersList.newtVail(exampleJobService,mobile_service);
@@ -150,19 +151,15 @@ class LongRunningTask {
 
                 TriigersList.checkUsbstate(exampleJobService,usb);
 
-
                 String roaming = sharedpreferences.getString("roaming", "");
                 TriigersList.roamingcheck(exampleJobService,roaming);
-
 
                 String flip_sensor = sharedpreferences.getString("flip", "");
                 TriigersList.flipdevice(exampleJobService,flip_sensor);
 
-
                 String lightsensor = sharedpreferences.getString("light", "");
                 String point = sharedpreferences.getString("point", "");
                 TriigersList.showLightSensor(exampleJobService,lightsensor,point);
-
 
                 /*String proximity = sharedpreferences.getString("porximity", "");
                 TriigersList.proximity_sensor(exampleJobService,proximity);*/

@@ -5,7 +5,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -13,6 +16,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -21,6 +25,7 @@ import androidx.core.app.NotificationCompat;
 import com.andromate.Constraints.IdentifyandPerformAction;
 import com.andromate.Constraints.TriigersList;
 import com.andromate.R;
+import com.andromate.Services.ExampleJobService;
 import com.andromate.Ui.Activity.HomeActivity;
 import com.andromate.db.DBHelper;
 
@@ -53,81 +58,25 @@ public class ForegroundService extends Service {
         /*checkUsbstate(this,"jdjdjd");*/
         //do heavy work on a background thread
         //stopSelf();
-        DBHelper dbHelper=new DBHelper(this);
-        SharedPreferences sharedpreferences = this.getSharedPreferences("myapp", Context.MODE_PRIVATE);
-        String selApp = sharedpreferences.getString("key", "");
 
-        retriveNewApp(this, selApp,dbHelper);
-        String bs = sharedpreferences.getString("bs", "");
-        checkbattersavermode(this,bs);
-        String gps = sharedpreferences.getString("gps", "");
-        Log.d("jfhdlkjfhdlkf", "gggg" + gps);
-        TriigersList.ChecGps(this, gps,dbHelper);
+        final JobScheduler scheduler = (JobScheduler) getApplicationContext().getSystemService(JOB_SCHEDULER_SERVICE);
+        ComponentName componentName = new ComponentName(this, ExampleJobService.class);
+        JobInfo jobInfo = new JobInfo.Builder(1, componentName)
+                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .setPersisted(true)
+                .build();
+        if (scheduler != null) {
+            // Checking if job is already running
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (scheduler.getPendingJob(1) == jobInfo){
 
+                }
 
-        String appevent = sharedpreferences.getString("appevent", "");
-        TriigersList.check_appinstallUninstall(this, appevent,dbHelper);
+            }
+            scheduler.schedule(jobInfo);
+        }
 
-
-        String boot = sharedpreferences.getString("db", "");
-        TriigersList.device_boot(this,boot);
-
-
-        String bt = sharedpreferences.getString("bt", "");
-
-        checkBlutooth_trigger(this,bt);
-        String dataon = sharedpreferences.getString("data_on", "");
-
-        TriigersList.checkdataenble(this,dataon);
-        String headphone = sharedpreferences.getString("head", "");
-
-        TriigersList.headphonesInserted(this,headphone);
-        TriigersList.check_hot_spot(this,headphone);
-
-        String mobile_service = sharedpreferences.getString("mob_ser", "");
-
-        TriigersList.newtVail(this,mobile_service);
-
-        String usb = sharedpreferences.getString("usb", "");
-
-        TriigersList.checkUsbstate(this,usb);
-
-
-        String roaming = sharedpreferences.getString("roaming", "");
-        TriigersList.roamingcheck(this,roaming);
-
-
-        String flip_sensor = sharedpreferences.getString("flip", "");
-        TriigersList.flipdevice(this,flip_sensor);
-
-
-        String lightsensor = sharedpreferences.getString("light", "");
-        String point = sharedpreferences.getString("point", "");
-        TriigersList.showLightSensor(this,lightsensor,point);
-
-
-                /*String proximity = sharedpreferences.getString("porximity", "");
-                TriigersList.proximity_sensor(exampleJobService,proximity);*/
-
-        String orientation = sharedpreferences.getString("orientation", "");
-        TriigersList.show_orientation(this,orientation);
-
-        String shaking = sharedpreferences.getString("shaking", "");
-        TriigersList.shaking(this,shaking);
-
-        //music
-        String musicstate = sharedpreferences.getString("music", "");
-        TriigersList.musicplayingcheck(this,musicstate);
-
-        String callstate = sharedpreferences.getString("call", "");
-        String num = sharedpreferences.getString("call", "");
-        TriigersList.checkCallState(this,callstate);
-
-
-
-
-
-
+        IdentifyandPerformAction.airplanemode_on_of(this);
         return START_NOT_STICKY;
     }
     @Override
@@ -155,8 +104,6 @@ public class ForegroundService extends Service {
 
 
     public static void checkUsbstate(Context context, String message) {
-
-
         BroadcastReceiver mReceiver;
         mReceiver = new BroadcastReceiver() {
             @Override

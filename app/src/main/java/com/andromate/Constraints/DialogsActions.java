@@ -1,8 +1,14 @@
 package com.andromate.Constraints;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.net.Uri;
@@ -37,7 +43,9 @@ import com.andromate.Ui.On;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class DialogsActions {
 
@@ -46,7 +54,7 @@ public class DialogsActions {
     public static Triggerlistmodel triggerlistmodel1;
     public static ApplicationlistAdapters_Action triggerItemsAdapters;
 
-    //Region Action Application
+    //Region Action Applicationhor
     public static void showactionApplication(Context context, ActionModelList triggerlistmodel,String s) {
 
         Dialog dialog = new Dialog(context);
@@ -88,7 +96,6 @@ public class DialogsActions {
     }
 
     private static void LoadApplicainlist(Context context, ActionModelList triggerlistmodel,String s) {
-
         Dialog dialog = new Dialog(context);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.alert_app_list_ui);
@@ -96,14 +103,12 @@ public class DialogsActions {
         EditText et_search = dialog.findViewById(R.id.et_search);
         TextView tv_cancel = dialog.findViewById(R.id.tv_cancel_selapp);
         TextView tv_ok = dialog.findViewById(R.id.tv_ok_selapp);
-
         tv_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
         tv_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -475,7 +480,7 @@ public class DialogsActions {
         TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
 
 
-        ArrayList<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
+        List<ApplicationsInfo> res = new ArrayList<ApplicationsInfo>();
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
             PackageInfo p = packs.get(i);
@@ -520,7 +525,19 @@ public class DialogsActions {
                 RadioButton rd_btn = dialog.findViewById(selectedId);
 
                 if (rd_btn != null) {
-                    Toast.makeText(context, "" + rd_btn.getText().toString() + " Selected", Toast.LENGTH_SHORT).show();
+                    int id = 3;
+                    int position = -1;
+                    for (int i = 0; i < res.size(); i++) {
+                        ApplicationsInfo applicationsInfo=res.get(i);
+                        if (applicationsInfo.getAppname().equals(rd_btn.getText().toString())) {
+                            position = i;
+                            // break;  // uncomment to get the first instance
+                        }
+                    }
+                    ApplicationsInfo applicationsInfo=res.get(position);
+                    actionModelList.setActionDescription(applicationsInfo.getPname());
+                    AddMacroActivity.actionlist.add(actionModelList);
+                    dialog.dismiss();
                 } else {
                     Toast.makeText(context, "Select a shortcut", Toast.LENGTH_SHORT).show();
                 }
@@ -535,7 +552,9 @@ public class DialogsActions {
 
     }
 
-
+    public static  int getCategoryPos(String category,List<ApplicationsInfo> applicationsInfos) {
+        return applicationsInfos.indexOf(category);
+    }
     public static void logAllTaskerTasks(Context context, ActionModelList actionModelList) {
         Cursor c = context.getContentResolver().query(
                 Uri.parse("content://net.dinglisch.android.tasker/tasks"),
@@ -886,5 +905,141 @@ public class DialogsActions {
         dialog.show();
     }
 
+
+    public static void showbluetoothConfiguration(Context context,ActionModelList actionModelList){
+        Dialog dialog = new Dialog(context);
+        dialog.setContentView(R.layout.alert_action_bluetooth_configuration_data);
+        dialog.setCancelable(false);
+        TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+        TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+        RadioGroup radioGroup = dialog.findViewById(R.id.rg_app_ena);
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                RadioButton rd_btn = dialog.findViewById(selectedId);
+                if (rd_btn != null && rd_btn.getText().toString().equals("Enable Bluetooth")) {
+                    actionModelList.setActioname(rd_btn.getText().toString());
+                    AddMacroActivity.actionlist.add(actionModelList);
+                    dialog.dismiss();
+                }else  if (rd_btn != null && rd_btn.getText().toString().equals("Disable Bluetooth")) {
+                    actionModelList.setActioname(rd_btn.getText().toString());
+                    AddMacroActivity.actionlist.add(actionModelList);
+
+
+                    dialog.dismiss();
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Toogle bluetooth")) {
+                    actionModelList.setActioname(rd_btn.getText().toString());
+                    AddMacroActivity.actionlist.add(actionModelList);
+                    dialog.dismiss();
+
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Connect Audio Device")){
+                        loadBluthotDevices(context,actionModelList,rd_btn.getText().toString());
+                        dialog.dismiss();
+                }else if (rd_btn != null && rd_btn.getText().toString().equals("Disconnect Audio Device")){
+
+                }
+
+            }
+
+
+        });
+
+        dialog.show();
+    }
+    public static void loadBluthotDevices(Context context1, ActionModelList actionModelList1, String s) {
+        int REQUEST_ENABLE_BT = 1;
+        BluetoothAdapter btAdapter=BluetoothAdapter.getDefaultAdapter();
+
+        CheckBluetoothState(REQUEST_ENABLE_BT,context1,actionModelList1,btAdapter,s);
+
+    }
+    public static void CheckBluetoothState(int REQUEST_ENABLE_BT, Context context1, ActionModelList actionModelList1, BluetoothAdapter btAdapter, String s) {
+        // Checks for the Bluetooth support and then makes sure it is turned on
+        // If it isn't turned on, request to turn it on
+        // List paired devices
+        if(btAdapter==null) {
+            Toast.makeText(context1, "Bluetooth not Supported", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            if (btAdapter.isEnabled()) {
+                ProgressDialog progressDialog=new ProgressDialog(context1);
+                progressDialog.setCancelable(false);
+                progressDialog.setMessage("Loading devices");
+                progressDialog.show();
+                Toast.makeText(context1, "Bluetooth is enabled", Toast.LENGTH_SHORT).show();
+
+                ArrayList<String>bt_devicelist=new ArrayList<>();
+                Set<BluetoothDevice> devices = btAdapter.getBondedDevices();
+
+                for (BluetoothDevice device : devices) {
+                   /* textview1.append("\n  Device: " + device.getName() + ", " + device);*/
+                    Log.d("jfjfjjfjjjjj","dddd"+device.getName());
+                   bt_devicelist.add(device.getName());
+                }
+                progressDialog.dismiss();
+                btlist_device(bt_devicelist,context1,actionModelList1,s);
+            } else {
+                //Prompt user to turn on Bluetooth
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                ((Activity) context1).startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+            }
+        }
+    }
+
+
+    public static void btlist_device(ArrayList<String> bt_devicelist, Context context1, ActionModelList actionModelList1, String s){
+            Dialog dialog = new Dialog(context1);
+            dialog.setContentView(R.layout.alert_bt_devicelist);
+            dialog.setCancelable(false);
+            TextView tv_cancel = dialog.findViewById(R.id.tv_app_in_cancel);
+            TextView tv_ok = dialog.findViewById(R.id.tv_app_in_ok);
+           RadioGroup radioGroup=dialog.findViewById(R.id.lly_bt_device);
+      RadioButton rbn = null;
+        for (int i = 0; i < bt_devicelist.size(); i++) {
+                 rbn = new RadioButton(context1);
+                rbn.setId(View.generateViewId());
+                rbn.setText((CharSequence) bt_devicelist.get(i));
+                radioGroup.addView(rbn);
+            }
+
+
+
+            tv_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+
+        RadioButton finalRbn = rbn;
+        tv_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    actionModelList1.setActionDescription(s+"("+ finalRbn.getText().toString() +")");
+                    AddMacroActivity.actionlist.add(actionModelList1);
+                    ((Activity) context1).finish();
+                }
+            });
+
+            dialog.show();
+
+
+        }
+
+
+
+    }
     //end region
-}
+

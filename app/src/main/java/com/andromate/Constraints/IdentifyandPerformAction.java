@@ -3,14 +3,17 @@ package com.andromate.Constraints;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Environment;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
@@ -54,10 +57,7 @@ public class IdentifyandPerformAction {
                     launchApplication(action_des,context);
                 break;
             case "Launch Shortcut":
-                lauchShortcutof_app(action_des,context);
-                break;
-            case "Launch and Press":
-
+                launchApplication(action_des,context);
                 break;
             case "Locale/Tasker Plugin":
 
@@ -373,6 +373,32 @@ public class IdentifyandPerformAction {
         }
 
 
+    }
+
+
+    public static void airplanemode_on_of(Context context){
+
+        boolean isEnabled = Settings.System.getInt(
+                context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_ON, 0) == 1;
+
+        Log.d("dhfjdhfjhfdjfdjfhf","jdjdjdjd"+isEnabled);
+        Settings.System.putInt(
+                context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_ON, isEnabled ? 0 : 1);
+
+// Post an intent to reload.
+        Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        intent.putExtra("state", !isEnabled);
+        IntentFilter intentFilter = new IntentFilter("android.intent.action.SERVICE_STATE");
+
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("AirplaneMode", "Service state changed");
+            }
+        };
+        context.registerReceiver(receiver, intentFilter);
     }
 
     private static void takeScreenshot(String action_des, String actionname, Context context) throws IOException, InterruptedException {

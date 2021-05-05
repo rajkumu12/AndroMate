@@ -125,7 +125,6 @@ public class AddAction extends AppCompatActivity implements View.OnClickListener
         applicationlist.add(new TriggerItemModel("Kill Background\nProcess", R.drawable.ic_kill_process));
         applicationlist.add(new TriggerItemModel("Launch Application", R.drawable.recent_app_opened));
         applicationlist.add(new TriggerItemModel("Launch Shortcut", R.drawable.tasker_locator));
-        applicationlist.add(new TriggerItemModel("Launch and Press", R.drawable.tasker_locator));
         applicationlist.add(new TriggerItemModel("Locale/Tasker Plugin", R.drawable.suitcase));
         applicationlist.add(new TriggerItemModel("Open Website/HTTP\nGET", R.drawable.webhook));
         applicationlist.add(new TriggerItemModel("Shell Script", R.drawable.screen));

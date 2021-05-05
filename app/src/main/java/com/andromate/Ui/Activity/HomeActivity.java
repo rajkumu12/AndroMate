@@ -95,20 +95,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // Job Scheduler
-      /*  final JobScheduler scheduler = (JobScheduler) getApplicationContext().getSystemService(JOB_SCHEDULER_SERVICE);
-        ComponentName componentName = new ComponentName(this, ExampleJobService.class);
-        JobInfo jobInfo = new JobInfo.Builder(1, componentName)
-                .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                .setPersisted(true)
-                .build();
-        if (scheduler != null) {
-            // Checking if job is already running
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                if (scheduler.getPendingJob(1) == jobInfo)
-                    return;
-            }
-            scheduler.schedule(jobInfo);
-        }*/
+
     }
 
     @SuppressLint({"WrongConstant", "SetTextI18n"})
